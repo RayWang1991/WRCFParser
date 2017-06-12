@@ -1,0 +1,509 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1E9DF9D99BED077D904CA339E95EFAE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E110E3518E2D475577D0E2056C8B05D /* Foundation.framework */; };
+		26BC3929286421BEB5A325D2DEAD0FC5 /* WRParsingBasicLib.h in Headers */ = {isa = PBXBuildFile; fileRef = CE9C95B47EEF9A565EF0440F3E9437F4 /* WRParsingBasicLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		45C646C2C13FF37AF159EC37340E0FB5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6526E38143AA3C7320583E142AA64538 /* Cocoa.framework */; };
+		5AA32B6C541AD1B73544F571AD54D07F /* Pods-WREarleyParser-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D001F28FCCE64BC8A6A338780AABDB80 /* Pods-WREarleyParser-dummy.m */; };
+		6473D0380E48E6C7BEFEA73EBDB5FF6C /* WRRule.h in Headers */ = {isa = PBXBuildFile; fileRef = B1DCA522FD3909F04AF8BA26092862B2 /* WRRule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		67B3E85542E1EE2F7C0C0CAB1900D6E8 /* WRParsingBasic-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D74099C0DC27033F61B10BE909F24E /* WRParsingBasic-dummy.m */; };
+		68A6C1231AB3D0350FD5BA212B53ACD4 /* WRToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EC8D9E2EEC5EB061475512974945779F /* WRToken.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		DABA214B4DF0655605192C47A08674AB /* WRRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 207EE6E92078338A6DA574AA909AB618 /* WRRule.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		E4112614799E92730B7E1C0D522FB507 /* WRLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 224045E3EA2971061B7C55DC2DBD47E7 /* WRLanguage.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		E4B3B6770A3736846FCF6F5C84FE4987 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6526E38143AA3C7320583E142AA64538 /* Cocoa.framework */; };
+		F3DCFCF98772E72FFE9794FEFFAD3EBB /* WRLanguage.h in Headers */ = {isa = PBXBuildFile; fileRef = 45366DFE3FF0EDAF7FA6136BD25AD220 /* WRLanguage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F7D6FDD42EBC63CD43B5D0D0604613A7 /* WRToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BBB633F146200DB9B11A98FF5A84475 /* WRToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6E5F9DFF07FDF77D24708A169BF05A3F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47EBBF0EDA9717BFA6CFF88FA46582E9;
+			remoteInfo = WRParsingBasic;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1E110E3518E2D475577D0E2056C8B05D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		207EE6E92078338A6DA574AA909AB618 /* WRRule.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRRule.m; sourceTree = "<group>"; };
+		224045E3EA2971061B7C55DC2DBD47E7 /* WRLanguage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRLanguage.m; sourceTree = "<group>"; };
+		40C8A9667E49FED4C50C3118F8D342F6 /* Pods-WREarleyParser-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WREarleyParser-frameworks.sh"; sourceTree = "<group>"; };
+		45366DFE3FF0EDAF7FA6136BD25AD220 /* WRLanguage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRLanguage.h; sourceTree = "<group>"; };
+		4FFE21AA8D5B5F45DE2C78C647437ABF /* Pods-WREarleyParser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WREarleyParser.debug.xcconfig"; sourceTree = "<group>"; };
+		52D74099C0DC27033F61B10BE909F24E /* WRParsingBasic-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WRParsingBasic-dummy.m"; sourceTree = "<group>"; };
+		6526E38143AA3C7320583E142AA64538 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		65700A782C4680AAA7D94DEBCC805840 /* Pods-WREarleyParser-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WREarleyParser-acknowledgements.markdown"; sourceTree = "<group>"; };
+		6BBB633F146200DB9B11A98FF5A84475 /* WRToken.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRToken.h; sourceTree = "<group>"; };
+		83ADF900BAB569D951C1BB814DA13A77 /* WRParsingBasic.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WRParsingBasic.xcconfig; sourceTree = "<group>"; };
+		8B67423BA128D25CF6B0789EABF2BFFE /* WRParsingBasic-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WRParsingBasic-prefix.pch"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9C3EB291D635889E70B15834CC0CD89F /* Pods-WREarleyParser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WREarleyParser.release.xcconfig"; sourceTree = "<group>"; };
+		A17B77591D812C1213E5D4B3A754F810 /* Pods-WREarleyParser-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WREarleyParser-resources.sh"; sourceTree = "<group>"; };
+		A2CD0D78E1A154E30B23507039801852 /* libWRParsingBasic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libWRParsingBasic.a; path = libWRParsingBasic.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3B5E9994C06A018DB4CCCC51A7E339F /* Pods-WREarleyParser-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WREarleyParser-acknowledgements.plist"; sourceTree = "<group>"; };
+		B1DCA522FD3909F04AF8BA26092862B2 /* WRRule.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRRule.h; sourceTree = "<group>"; };
+		CE9C95B47EEF9A565EF0440F3E9437F4 /* WRParsingBasicLib.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRParsingBasicLib.h; sourceTree = "<group>"; };
+		D001F28FCCE64BC8A6A338780AABDB80 /* Pods-WREarleyParser-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WREarleyParser-dummy.m"; sourceTree = "<group>"; };
+		D34DE1D6CEAB42800D889AC0D0BB2D78 /* libPods-WREarleyParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-WREarleyParser.a"; path = "libPods-WREarleyParser.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC8D9E2EEC5EB061475512974945779F /* WRToken.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRToken.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		296A3D20E040899F763282CA43542CAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4B3B6770A3736846FCF6F5C84FE4987 /* Cocoa.framework in Frameworks */,
+				1E9DF9D99BED077D904CA339E95EFAE8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB383113474E271D57E97D33051DBD3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45C646C2C13FF37AF159EC37340E0FB5 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2F70BDE8DD0CAC5B41CBE3554AF07D11 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8C971C20B60FDD0C274287BF1F87F288 /* WRParsingBasic */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		4772DACE1B5EC91379A43569B3E8049E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D34DE1D6CEAB42800D889AC0D0BB2D78 /* libPods-WREarleyParser.a */,
+				A2CD0D78E1A154E30B23507039801852 /* libWRParsingBasic.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6605ACAFF49D2279CDC27E8B05228C9D /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				83ADF900BAB569D951C1BB814DA13A77 /* WRParsingBasic.xcconfig */,
+				52D74099C0DC27033F61B10BE909F24E /* WRParsingBasic-dummy.m */,
+				8B67423BA128D25CF6B0789EABF2BFFE /* WRParsingBasic-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../../EarleyParser/EarleyOC/WREarleyParser/Pods/Target Support Files/WRParsingBasic";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				2F70BDE8DD0CAC5B41CBE3554AF07D11 /* Development Pods */,
+				D648CE86F139C7CCFD55D5B8A03BE74B /* Frameworks */,
+				4772DACE1B5EC91379A43569B3E8049E /* Products */,
+				AE1A6F783BAC8DD1AB4B644074E5988C /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8A726FBD32CD7684C654FD7F242B2B11 /* Pods-WREarleyParser */ = {
+			isa = PBXGroup;
+			children = (
+				65700A782C4680AAA7D94DEBCC805840 /* Pods-WREarleyParser-acknowledgements.markdown */,
+				A3B5E9994C06A018DB4CCCC51A7E339F /* Pods-WREarleyParser-acknowledgements.plist */,
+				D001F28FCCE64BC8A6A338780AABDB80 /* Pods-WREarleyParser-dummy.m */,
+				40C8A9667E49FED4C50C3118F8D342F6 /* Pods-WREarleyParser-frameworks.sh */,
+				A17B77591D812C1213E5D4B3A754F810 /* Pods-WREarleyParser-resources.sh */,
+				4FFE21AA8D5B5F45DE2C78C647437ABF /* Pods-WREarleyParser.debug.xcconfig */,
+				9C3EB291D635889E70B15834CC0CD89F /* Pods-WREarleyParser.release.xcconfig */,
+			);
+			name = "Pods-WREarleyParser";
+			path = "Target Support Files/Pods-WREarleyParser";
+			sourceTree = "<group>";
+		};
+		8C971C20B60FDD0C274287BF1F87F288 /* WRParsingBasic */ = {
+			isa = PBXGroup;
+			children = (
+				B12DA7D9E770526E42FAB274AFA71421 /* Classes */,
+				6605ACAFF49D2279CDC27E8B05228C9D /* Support Files */,
+			);
+			name = WRParsingBasic;
+			path = ../../../../WRParsingComponent/WRParsingBasic;
+			sourceTree = "<group>";
+		};
+		92FC4590B3B6C6A2141FDC7D1DA8879E /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				6526E38143AA3C7320583E142AA64538 /* Cocoa.framework */,
+				1E110E3518E2D475577D0E2056C8B05D /* Foundation.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		AE1A6F783BAC8DD1AB4B644074E5988C /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8A726FBD32CD7684C654FD7F242B2B11 /* Pods-WREarleyParser */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		B12DA7D9E770526E42FAB274AFA71421 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				45366DFE3FF0EDAF7FA6136BD25AD220 /* WRLanguage.h */,
+				224045E3EA2971061B7C55DC2DBD47E7 /* WRLanguage.m */,
+				CE9C95B47EEF9A565EF0440F3E9437F4 /* WRParsingBasicLib.h */,
+				B1DCA522FD3909F04AF8BA26092862B2 /* WRRule.h */,
+				207EE6E92078338A6DA574AA909AB618 /* WRRule.m */,
+				6BBB633F146200DB9B11A98FF5A84475 /* WRToken.h */,
+				EC8D9E2EEC5EB061475512974945779F /* WRToken.m */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		D648CE86F139C7CCFD55D5B8A03BE74B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				92FC4590B3B6C6A2141FDC7D1DA8879E /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E0876DA6C72700093CCA61EED94A6DCD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3DCFCF98772E72FFE9794FEFFAD3EBB /* WRLanguage.h in Headers */,
+				26BC3929286421BEB5A325D2DEAD0FC5 /* WRParsingBasicLib.h in Headers */,
+				6473D0380E48E6C7BEFEA73EBDB5FF6C /* WRRule.h in Headers */,
+				F7D6FDD42EBC63CD43B5D0D0604613A7 /* WRToken.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		47EBBF0EDA9717BFA6CFF88FA46582E9 /* WRParsingBasic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FB32DF152CF5F7A8A37E327A55E77A0F /* Build configuration list for PBXNativeTarget "WRParsingBasic" */;
+			buildPhases = (
+				961CFFC3608518718EF427564B89A727 /* Sources */,
+				296A3D20E040899F763282CA43542CAD /* Frameworks */,
+				E0876DA6C72700093CCA61EED94A6DCD /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WRParsingBasic;
+			productName = WRParsingBasic;
+			productReference = A2CD0D78E1A154E30B23507039801852 /* libWRParsingBasic.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		509BDF96DD99EFFE690652C8797B5EDC /* Pods-WREarleyParser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6DFF7CED63ED0150D2B8B75412C637B /* Build configuration list for PBXNativeTarget "Pods-WREarleyParser" */;
+			buildPhases = (
+				390CB78407F1BB282A2C6552B7B34D9E /* Sources */,
+				EB383113474E271D57E97D33051DBD3E /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C429A4E6D6564CBDF223BBF466926876 /* PBXTargetDependency */,
+			);
+			name = "Pods-WREarleyParser";
+			productName = "Pods-WREarleyParser";
+			productReference = D34DE1D6CEAB42800D889AC0D0BB2D78 /* libPods-WREarleyParser.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 4772DACE1B5EC91379A43569B3E8049E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				509BDF96DD99EFFE690652C8797B5EDC /* Pods-WREarleyParser */,
+				47EBBF0EDA9717BFA6CFF88FA46582E9 /* WRParsingBasic */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		390CB78407F1BB282A2C6552B7B34D9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AA32B6C541AD1B73544F571AD54D07F /* Pods-WREarleyParser-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		961CFFC3608518718EF427564B89A727 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4112614799E92730B7E1C0D522FB507 /* WRLanguage.m in Sources */,
+				67B3E85542E1EE2F7C0C0CAB1900D6E8 /* WRParsingBasic-dummy.m in Sources */,
+				DABA214B4DF0655605192C47A08674AB /* WRRule.m in Sources */,
+				68A6C1231AB3D0350FD5BA212B53ACD4 /* WRToken.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C429A4E6D6564CBDF223BBF466926876 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WRParsingBasic;
+			target = 47EBBF0EDA9717BFA6CFF88FA46582E9 /* WRParsingBasic */;
+			targetProxy = 6E5F9DFF07FDF77D24708A169BF05A3F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		22F37BBC08A1A77CEF854D0BAA907357 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C3EB291D635889E70B15834CC0CD89F /* Pods-WREarleyParser.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		34342BBF37D3A9ED85FF2EB654934920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		5984368ECFEDB5F51B0563C8D77FE9BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83ADF900BAB569D951C1BB814DA13A77 /* WRParsingBasic.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/WRParsingBasic/WRParsingBasic-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		5C6D6868D387F99FDE5BC13CEEA69531 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FFE21AA8D5B5F45DE2C78C647437ABF /* Pods-WREarleyParser.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		682CE72A6E6A760123B0A926408F101F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83ADF900BAB569D951C1BB814DA13A77 /* WRParsingBasic.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/WRParsingBasic/WRParsingBasic-prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F6FC88CB717F413199C282718D2DC09F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34342BBF37D3A9ED85FF2EB654934920 /* Debug */,
+				F6FC88CB717F413199C282718D2DC09F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E6DFF7CED63ED0150D2B8B75412C637B /* Build configuration list for PBXNativeTarget "Pods-WREarleyParser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C6D6868D387F99FDE5BC13CEEA69531 /* Debug */,
+				22F37BBC08A1A77CEF854D0BAA907357 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FB32DF152CF5F7A8A37E327A55E77A0F /* Build configuration list for PBXNativeTarget "WRParsingBasic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5984368ECFEDB5F51B0563C8D77FE9BD /* Debug */,
+				682CE72A6E6A760123B0A926408F101F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

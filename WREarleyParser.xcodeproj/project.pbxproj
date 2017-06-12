@@ -1,0 +1,324 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		534F5CBAB4111C5F808D9196 /* libPods-WREarleyParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 800B01D05032CD399C22A97E /* libPods-WREarleyParser.a */; };
+		E129BE9C1EEA7AFA006B0DEE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E129BE9B1EEA7AFA006B0DEE /* main.m */; };
+		E129BEAC1EEC26B4006B0DEE /* WREarleyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E129BEAB1EEC26B4006B0DEE /* WREarleyParser.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E129BE961EEA7AFA006B0DEE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		800B01D05032CD399C22A97E /* libPods-WREarleyParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WREarleyParser.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F4099505BE60042B410C841 /* Pods-WREarleyParser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WREarleyParser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WREarleyParser/Pods-WREarleyParser.debug.xcconfig"; sourceTree = "<group>"; };
+		C65996546CF91BC66883A97D /* Pods-WREarleyParser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WREarleyParser.release.xcconfig"; path = "Pods/Target Support Files/Pods-WREarleyParser/Pods-WREarleyParser.release.xcconfig"; sourceTree = "<group>"; };
+		E129BE981EEA7AFA006B0DEE /* WREarleyParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WREarleyParser; sourceTree = BUILT_PRODUCTS_DIR; };
+		E129BE9B1EEA7AFA006B0DEE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E129BEAA1EEAE199006B0DEE /* WREarleyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WREarleyParser.h; sourceTree = "<group>"; };
+		E129BEAB1EEC26B4006B0DEE /* WREarleyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WREarleyParser.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E129BE951EEA7AFA006B0DEE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				534F5CBAB4111C5F808D9196 /* libPods-WREarleyParser.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7535BC8C66ADC3AF65BB210F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				800B01D05032CD399C22A97E /* libPods-WREarleyParser.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D97904CAC544C0DA9359DD0D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8F4099505BE60042B410C841 /* Pods-WREarleyParser.debug.xcconfig */,
+				C65996546CF91BC66883A97D /* Pods-WREarleyParser.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E129BE8F1EEA7AFA006B0DEE = {
+			isa = PBXGroup;
+			children = (
+				E129BE9A1EEA7AFA006B0DEE /* WREarleyParser */,
+				E129BE991EEA7AFA006B0DEE /* Products */,
+				D97904CAC544C0DA9359DD0D /* Pods */,
+				7535BC8C66ADC3AF65BB210F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E129BE991EEA7AFA006B0DEE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E129BE981EEA7AFA006B0DEE /* WREarleyParser */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E129BE9A1EEA7AFA006B0DEE /* WREarleyParser */ = {
+			isa = PBXGroup;
+			children = (
+				E129BEAA1EEAE199006B0DEE /* WREarleyParser.h */,
+				E129BEAB1EEC26B4006B0DEE /* WREarleyParser.m */,
+				E129BE9B1EEA7AFA006B0DEE /* main.m */,
+			);
+			path = WREarleyParser;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E129BE971EEA7AFA006B0DEE /* WREarleyParser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E129BE9F1EEA7AFA006B0DEE /* Build configuration list for PBXNativeTarget "WREarleyParser" */;
+			buildPhases = (
+				E3C30D586A69E547431D2776 /* [CP] Check Pods Manifest.lock */,
+				E129BE941EEA7AFA006B0DEE /* Sources */,
+				E129BE951EEA7AFA006B0DEE /* Frameworks */,
+				E129BE961EEA7AFA006B0DEE /* CopyFiles */,
+				45784B15587A8B93EB785D19 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WREarleyParser;
+			productName = WREarleyParser;
+			productReference = E129BE981EEA7AFA006B0DEE /* WREarleyParser */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E129BE901EEA7AFA006B0DEE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "ray wang";
+				TargetAttributes = {
+					E129BE971EEA7AFA006B0DEE = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = UA32J6S8F4;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = E129BE931EEA7AFA006B0DEE /* Build configuration list for PBXProject "WREarleyParser" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E129BE8F1EEA7AFA006B0DEE;
+			productRefGroup = E129BE991EEA7AFA006B0DEE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E129BE971EEA7AFA006B0DEE /* WREarleyParser */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		45784B15587A8B93EB785D19 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WREarleyParser/Pods-WREarleyParser-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3C30D586A69E547431D2776 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E129BE941EEA7AFA006B0DEE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E129BE9C1EEA7AFA006B0DEE /* main.m in Sources */,
+				E129BEAC1EEC26B4006B0DEE /* WREarleyParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		E129BE9D1EEA7AFA006B0DEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E129BE9E1EEA7AFA006B0DEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E129BEA01EEA7AFA006B0DEE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F4099505BE60042B410C841 /* Pods-WREarleyParser.debug.xcconfig */;
+			buildSettings = {
+				DEVELOPMENT_TEAM = UA32J6S8F4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E129BEA11EEA7AFA006B0DEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C65996546CF91BC66883A97D /* Pods-WREarleyParser.release.xcconfig */;
+			buildSettings = {
+				DEVELOPMENT_TEAM = UA32J6S8F4;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E129BE931EEA7AFA006B0DEE /* Build configuration list for PBXProject "WREarleyParser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E129BE9D1EEA7AFA006B0DEE /* Debug */,
+				E129BE9E1EEA7AFA006B0DEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E129BE9F1EEA7AFA006B0DEE /* Build configuration list for PBXNativeTarget "WREarleyParser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E129BEA01EEA7AFA006B0DEE /* Debug */,
+				E129BEA11EEA7AFA006B0DEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E129BE901EEA7AFA006B0DEE /* Project object */;
+}
