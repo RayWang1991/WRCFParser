@@ -8,14 +8,33 @@
 
 #import <Foundation/Foundation.h>
 #import "WRParsingBasicLib.h"
+#import "WREarleyParser.h"
 
 void test();
 
+
 int main(int argc, const char * argv[]) {
   @autoreleasepool {
-    // insert code here...
-    NSLog(@"Hello, World!");
-    test();
+    NSLog(@"Hello, Earley Parsing!");
+    
+    WRItem *item1 = [WRItem itemWithRuleStr:@"S -> A B C" dotPosition:0 andItemPosition:0];
+    WRItem *item2 = [WRItem itemWithRuleStr:@"S -> A B C" dotPosition:0 andItemPosition:0];
+    
+    NSMutableDictionary *set = [NSMutableDictionary dictionary];
+    [set setValue:item1 forKey:item1.description];
+    assert(set[item1.description] != nil);
+    assert(set[item2.description] != nil);
+    assert(item1 != item2);
+    
+    WREarlyParser *parser = [[WREarlyParser alloc]init];
+    WRScanner *scanner = [[WRScanner alloc]init];
+    scanner.inputStr = @"a-a+a";
+    WRLanguage *language = [WRLanguage CFGrammar7_8];
+    
+    parser.language = language;
+    parser.scanner = scanner;
+    [parser startParsing];
+    
   }
     return 0;
 }

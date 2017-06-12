@@ -65,8 +65,12 @@
                      andItemPosition:position];
 }
 
+- (NSString *)description{
+  return [NSString stringWithFormat:@"%@ @%ld",self.dotedRule, self.itemPos];
+}
+
 - (NSUInteger)hash{
-  return self.dotedRule.hash;
+  return self.description.hash;
 }
 
 - (BOOL)isComplete{
@@ -86,12 +90,12 @@
   [mutStr appendString:@"->"];
   for(NSUInteger i = 0; i < self.rightTokens.count; i++){
     if(i == _dotPos){
-      [mutStr appendString:@"."];
+      [mutStr appendString:@"·"];
     }
     [mutStr appendString:self.rightTokens[i].symbol];
   }
   if(self.rightTokens.count == _dotPos){
-    [mutStr appendString:@"."];
+    [mutStr appendString:@"·"];
   }
   return mutStr;
 }
@@ -110,11 +114,54 @@
 @end
 
 @implementation WRItemSet
+#pragma mark debug
+- (NSString *)description{
+  NSMutableString *string = [NSMutableString string];
+  // complete set
+  [string appendString:@"completed:\n"];
+  for(NSString *item in self.completeSet){
+    [string appendString:[NSString stringWithFormat:@"%@\n",item]];
+  }
+  
+  // active set
+  [string appendString:@"\nacitive:\n"];
+  for(NSString *item in self.activeSet){
+    [string appendString:[NSString stringWithFormat:@"%@\n",item]];
+  }
+  
+  return string;
+}
 
+- (NSMutableArray <WRItem *> *)itemList{
+  if(nil == _itemList){
+    _itemList = [NSMutableArray array];
+  }
+  return _itemList;
+}
+
+- (NSMutableDictionary <NSString *, WRItem *> *)completeSet{
+  if(nil == _completeSet){
+    _completeSet = [NSMutableDictionary dictionary];
+  }
+  return _completeSet;
+}
+
+- (NSMutableDictionary <NSString *, WRItem *> *)activeSet{
+  if(nil == _activeSet){
+    _activeSet = [NSMutableDictionary dictionary];
+  }
+  return _activeSet;
+}
+
+- (NSMutableDictionary <NSString *, NSMutableArray <WRItem *> *> *)askingDict{
+  if(nil == _askingDict){
+    _askingDict = [NSMutableDictionary dictionary];
+  }
+  return _askingDict;
+}
 @end
 
 @interface WRScanner ()
-@property(nonatomic, strong, readwrite)NSString *inputStr;
 @property(nonatomic, strong, readwrite)NSArray <WRToken *>*tokenArray;
 @property(nonatomic, assign, readwrite)NSInteger index;
 @end
@@ -179,9 +226,8 @@
   if([item isComplete]){
     return nil;
   }
-  if([item.nextAskingToken.symbol isEqualToString:token.symbol] ){
-    WRItem *nextItem = [WRItem itemWithItem:item andItemPosition:itemSetPos];
-    nextItem.dotPos = item.dotPos + 1;
+  if([item.nextAskingToken matchWith:token] ){
+    WRItem *nextItem = [WRItem itemWithRule:item dotPosition:item.dotPos + 1 andItemPosition:itemSetPos];
     return nextItem;
   } else{
     return nil;
@@ -218,7 +264,7 @@
   // initiation
   self.itemSetList = [NSMutableArray array];
   WRItemSet *itemSet0 = [[WRItemSet alloc]init];
-  NSMutableArray *workList = [NSMutableArray array];
+  NSMutableArray <WRItem *>*workList = itemSet0.itemList;
   for(WRRule *startRule in self.language.grammars[self.language.startSymbol]){
     [workList addObject:[WRItem itemWithRule:startRule
                                  dotPosition:0
@@ -228,10 +274,10 @@
   for(NSUInteger i = 0; i< workList.count; i++){
     WRItem *currentItem = workList[i];
     if([currentItem isComplete]){
-      if(![itemSet0.completeSet containsObject:currentItem]){
+      if(!itemSet0.completeSet[currentItem.description]){
         // scann item in complete position, using completed token
         // if the item has been proceeded, skip it
-        [itemSet0.completeSet addObject:currentItem];
+        [itemSet0.completeSet setValue:currentItem forKey:currentItem.description];
         NSInteger completeSetPos = currentItem.itemPos;
         NSMutableArray <WRItem *> *array = [NSMutableArray array];
         for(WRItem *activeItem in self.itemSetList[completeSetPos].activeSet){
@@ -242,21 +288,93 @@
             [array addObject:scannedItem];
           }
         }
+        // TODO bug
         [workList addObjectsFromArray:array];
       }
     } else{
-      if(![itemSet0.activeSet containsObject:currentItem]){
+      if(!itemSet0.activeSet[currentItem.description]){
         // predict
-        [itemSet0.activeSet addObject:currentItem];
+        [itemSet0.activeSet setValue:currentItem forKey:currentItem.description];
+        
         NSInteger activePos = 0;
-        if(
+        NSArray <WRItem *> *array = [self predictItem:currentItem withItemSetPosition:activePos];
+        [workList addObjectsFromArray:array];
       }
-      
+      NSMutableArray *array = itemSet0.askingDict[currentItem.description];
+      if(!array){
+        array = [NSMutableArray array];
+      }
+      [array addObject:currentItem];
     }
   }
   
- 
-  
+  [self.itemSetList addObject:itemSet0];
+  // work loop
+  WRToken *inputToken;
+  while(nil != (inputToken = [self.scanner nextToken])){
+    // scan the active set of last item set
+    // get work list
+    WRItemSet *lastItemSet = [self.itemSetList lastObject];
+    WRItemSet *currentItemSet = [[WRItemSet alloc]init];
+    [self.itemSetList addObject:currentItemSet];
+    [currentItemSet.itemList addObjectsFromArray:lastItemSet.activeSet.allValues];
+    
+    NSInteger currentPosition = self.itemSetList.count - 1;
+    workList = currentItemSet.itemList;
+    // scan items using input token
+    for(WRItem *item in lastItemSet.activeSet.allValues){
+      WRItem *scannedItem = nil;
+      if(nil != (scannedItem = [self scanItem:item withTokon:inputToken andItemSetPosition:currentPosition])){
+        [workList addObject:scannedItem];
+      }
+    }
+    
+    // work list loop
+    for(NSUInteger i = 0; i < workList.count; i++){
+      WRItem *currentItem = workList[i];
+      if([currentItem isComplete]){
+        // complete item
+        if(!currentItemSet.completeSet[currentItem.description]){
+          // scann item in complete position, using completed token
+          // if the item has been proceeded, skip it
+          [currentItemSet.completeSet setValue:currentItem
+                                        forKey:currentItem.description];
+          NSInteger completeSetPos = currentItem.itemPos;
+          NSMutableArray <WRItem *> *array = [NSMutableArray array];
+          for(WRItem *activeItem in self.itemSetList[completeSetPos].activeSet){
+            WRItem *scannedItem = [self scanItem:activeItem
+                                       withTokon:currentItem.leftToken
+                              andItemSetPosition:activeItem.itemPos];
+            if(scannedItem){
+              [array addObject:scannedItem];
+            }
+          }
+          [workList addObjectsFromArray:array];
+        }
+      } else{
+        // active item
+        if(!currentItemSet.activeSet[currentItem.description]){
+          // predict
+          [currentItemSet.activeSet setValue:currentItem
+                                      forKey:currentItem.description];
+          NSArray <WRItem *> *array = [self predictItem:currentItem withItemSetPosition:currentPosition];
+          [workList addObjectsFromArray:array];
+        }
+        NSMutableArray *array = currentItemSet.askingDict[currentItem.description];
+        if(!array){
+          array = [NSMutableArray array];
+        }
+        [array addObject:currentItem];
+      }
+    }
+  }
+  [self endParsing];
 }
 
+- (void)endParsing{
+  [self.itemSetList enumerateObjectsUsingBlock:^(WRItemSet * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    NSLog(@"Itemset%lu",idx);
+    NSLog(@"%@",obj);
+  }];
+}
 @end

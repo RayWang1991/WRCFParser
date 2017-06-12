@@ -15,8 +15,8 @@
 
 @interface WRNode : NSObject
 @property(nonatomic, strong, readwrite) WRToken *token;
-@property(nonatomic, assign, readwrite) NSInteger startPos; //inclusive -1 unknow
-@property(nonatomic, assign, readwrite) NSInteger endPos;   //inclusive -1 unknow
+@property(nonatomic, assign, readwrite) NSInteger startPos; //inclusive, -1 unknow
+@property(nonatomic, assign, readwrite) NSInteger endPos;   //inclusive, -1 unknow
 @property(nonatomic, strong, readwrite) NSArray *children;
 @end
 
@@ -57,7 +57,7 @@
 + (instancetype)itemWithItem:(WRItem *)item andItemPosition:(NSInteger)position;
 
 /**
- * Functionally Methods
+ * Functional Methods
  */
 
 - (BOOL)isComplete;
@@ -71,16 +71,16 @@
 
 @interface WRItemSet : NSObject
 @property(nonatomic, strong, readwrite)NSMutableArray <WRItem *> *itemList; // work list / item list
-@property(nonatomic, strong, readwrite)NSMutableSet <WRItem *> *completeSet; // complete set
-@property(nonatomic, strong, readwrite)NSMutableSet <WRItem *> *activeSet; // active/predict set
-@property(nonatomic, strong, readwrite)NSMutableDictionary <NSString *, NSArray <WRItem *> *>*askingDict; 
+@property(nonatomic, strong, readwrite)NSMutableDictionary <NSString *, WRItem *> *completeSet; // complete set
+@property(nonatomic, strong, readwrite)NSMutableDictionary <NSString *, WRItem *> *activeSet; // active/predict set
+@property(nonatomic, strong, readwrite)NSMutableDictionary <NSString *, NSMutableArray <WRItem *> *>*askingDict;
 
 @end
 
 //TODO simple scanner, complete later
 
 @interface WRScanner : NSObject
-@property(nonatomic, strong, readonly)NSString *inputStr;
+@property(nonatomic, strong, readwrite)NSString *inputStr;
 
 - (void)reset;
 
@@ -94,5 +94,7 @@
 @interface WREarlyParser : NSObject
 @property (nonatomic, strong, readwrite) NSMutableArray <WRItemSet *> *itemSetList;
 @property (nonatomic, strong, readwrite) WRLanguage *language;
+@property (nonatomic, strong, readwrite) WRScanner *scanner;
 
+- (void)startParsing;
 @end

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "452D3E0B474285A7A992356E050EAF6B494BC7D9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "452D3E0B474285A7A992356E050EAF6B494BC7D9" : 9223372036854775807,
+    "D796B4300D77DE85A72FC628975CA6C06FCC0F35" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E8ADC2D7-0D73-4244-B91F-370F74C811A8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "452D3E0B474285A7A992356E050EAF6B494BC7D9" : "WREarleyParser\/",
+    "D796B4300D77DE85A72FC628975CA6C06FCC0F35" : "..\/..\/WRParsingComponent\/WRParsingBasic"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "WREarleyParser",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "WREarleyParser.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/RayWang1991\/WREarleyPaser.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "452D3E0B474285A7A992356E050EAF6B494BC7D9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/RayWang1991\/WRParsingBasic.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D796B4300D77DE85A72FC628975CA6C06FCC0F35"
+    }
+  ]
+}
