@@ -28,8 +28,8 @@ int main(int argc, const char * argv[]) {
     
     WREarlyParser *parser = [[WREarlyParser alloc]init];
     WRScanner *scanner = [[WRScanner alloc]init];
-    scanner.inputStr = @"a-a+a";
-    WRLanguage *language = [WRLanguage CFGrammar7_8];
+    scanner.inputStr = @"aa/a";
+    WRLanguage *language = [WRLanguage CFGrammar7_17];
     
     parser.language = language;
     parser.scanner = scanner;
