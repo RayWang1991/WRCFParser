@@ -130,6 +130,11 @@
   }
   
   return string;
+  
+  // asking dict
+  for(NSString *key in self.askingDict){
+    [string appendString:[NSString stringWithFormat:@"    %@ %@\n",key, self.askingDict[key]]];
+  }
 }
 
 - (NSMutableArray <WRItem *> *)itemList{
@@ -273,7 +278,7 @@
                             dotPosition:0
                         andItemPosition:0];
     [workList addObject:item];
-    [workListRecorder setValue:@1
+    [workListRecorder setValue:@1 // whatever value here, we only need a set to record the item.description
                         forKey:item.description];
   }
   
@@ -286,8 +291,10 @@
         [itemSet0.completeSet setValue:currentItem
                                 forKey:currentItem.description];
         NSInteger completeSetPos = currentItem.itemPos;
+        // can only be itemSet0
         NSMutableArray <WRItem *> *array = [NSMutableArray array];
-        for(WRItem *activeItem in self.itemSetList[completeSetPos].activeSet){
+        for(WRItem *activeItem in itemSet0.askingDict[currentItem.leftToken.symbol]){
+          // +1 is OK
           WRItem *scannedItem = [self scanItem:activeItem
                                      withTokon:currentItem.leftToken
                             andItemSetPosition:activeItem.itemPos];
@@ -314,6 +321,15 @@
         [itemSet0.activeSet setValue:currentItem
                               forKey:currentItem.description];
         
+        // set asking dict, for scan use
+        NSMutableArray *askingArray = itemSet0.askingDict[currentItem.nextAskingToken.symbol];
+        if(!askingArray){
+          askingArray = [NSMutableArray arrayWithObject:currentItem];
+          [itemSet0.askingDict setValue:askingArray
+                                 forKey:currentItem.nextAskingToken.symbol];
+        } else{
+          [askingArray addObject:currentItem];
+        }
         NSInteger activePos = 0;
         NSArray <WRItem *> *array = [self predictItem:currentItem
                                   withItemSetPosition:activePos];
@@ -329,13 +345,6 @@
           }
         }
       }
-      
-      // asking dict for scanner use
-//      NSMutableArray *array = itemSet0.askingDict[currentItem.description];
-//      if(!array){
-//        array = [NSMutableArray array];
-//      }
-//      [array addObject:currentItem];
     }
   }
   
@@ -354,8 +363,8 @@
     workList = currentItemSet.itemList;
     // scan items using input token
     
-    // TODO asking dict
-    for(WRItem *item in lastItemSet.activeSet.allValues){
+    for(WRItem *item in lastItemSet.askingDict[inputToken.symbol]){
+      // can simply do dotPos + 1
       WRItem *scannedItem = nil;
       if(nil != (scannedItem = [self scanItem:item
                                     withTokon:inputToken
@@ -377,7 +386,8 @@
                                         forKey:currentItem.description];
           NSInteger completeSetPos = currentItem.itemPos;
           NSMutableArray <WRItem *> *array = [NSMutableArray array];
-          for(WRItem *activeItem in self.itemSetList[completeSetPos].activeSet.allValues){
+          for(WRItem *activeItem in self.itemSetList[completeSetPos].askingDict[currentItem.leftToken.symbol]){
+            // simplely add 1 to dotPos is OK
             WRItem *scannedItem = [self scanItem:activeItem
                                        withTokon:currentItem.leftToken
                               andItemSetPosition:activeItem.itemPos];
@@ -402,6 +412,16 @@
           // predict
           [currentItemSet.activeSet setValue:currentItem
                                       forKey:currentItem.description];
+          
+          NSMutableArray *askingArray = currentItemSet.askingDict[currentItem.nextAskingToken.symbol];
+          if(!askingArray){
+            askingArray = [NSMutableArray arrayWithObject:currentItem];
+            [currentItemSet.askingDict setValue:askingArray
+                                         forKey:currentItem.nextAskingToken.symbol];
+          } else{
+            [askingArray addObject:currentItem];
+          }
+          
           NSArray <WRItem *> *array = [self predictItem:currentItem
                                     withItemSetPosition:currentPosition];
           // notice, we should only add unproceeded item
@@ -415,12 +435,6 @@
             }
           }
         }
-        
-//        NSMutableArray *array = currentItemSet.askingDict[currentItem.description];
-//        if(!array){
-//          array = [NSMutableArray array];
-//        }
-//        [array addObject:currentItem];
       }
     }
   }
