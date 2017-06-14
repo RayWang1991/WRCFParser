@@ -77,19 +77,6 @@
 
 @end
 
-//TODO simple scanner, complete later
-
-@interface WRScanner : NSObject
-@property(nonatomic, strong, readwrite)NSString *inputStr;
-
-- (void)reset;
-
-- (WRToken *)nextToken;
-
-// token array for the whole input
-- (NSArray <WRToken *> *)tokenArray;
-
-@end
 
 @interface WREarlyParser : NSObject
 @property (nonatomic, strong, readwrite) NSMutableArray <WRItemSet *> *itemSetList;

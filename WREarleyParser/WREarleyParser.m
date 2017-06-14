@@ -166,57 +166,7 @@
 }
 @end
 
-@interface WRScanner ()
-@property(nonatomic, strong, readwrite)NSArray <WRToken *>*tokenArray;
-@property(nonatomic, assign, readwrite)NSInteger index;
-@end
 
-@implementation WRScanner
-- (instancetype)initWithInputStr:(NSString *)inputStr{
-  if(self = [super init]){
-    _inputStr = inputStr;
-    _index = 0;
-    _tokenArray = nil;
-  }
-  return self;
-}
-
-- (void)reset{
-  _index = 0;
-}
-
-- (void)setInputStr:(NSString *)inputStr{
-  _inputStr = inputStr;
-  _index = 0;
-  _tokenArray = nil;
-}
-
-- (WRToken *)nextToken{
-  return [self nextTokenWithIndex:_index++];
-}
-
-- (NSArray <WRToken *> *)tokenArray{
-  if(nil == _tokenArray){
-    NSMutableArray *array = [NSMutableArray array];
-    for(NSUInteger i = 0 ; i <= self.inputStr.length; i++){
-      [array addObject: [self nextTokenWithIndex:i]];
-    }
-    _tokenArray = array;
-  }
-  return _tokenArray;
-}
-
-// private
-- (WRToken *)nextTokenWithIndex:(NSInteger)index{
-  if(index >= self.inputStr.length) {
-    return nil;
-  } else{
-    WRToken *token =
-    [WRToken tokenWithSymbol:[self.inputStr substringWithRange:NSMakeRange(index, 1)]];
-    return token;
-  }
-}
-@end
 
 @interface WREarlyParser ()
 
@@ -443,8 +393,10 @@
 
 - (void)endParsing{
   [self.itemSetList enumerateObjectsUsingBlock:^(WRItemSet * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    printf("%s",[[NSString stringWithFormat:@"Itemset%lu:\n",idx]UTF8String]);
-    printf("%s",[[NSString stringWithFormat:@"%@\n",obj]UTF8String]);
+    printf("%s",[[NSString stringWithFormat:@"Itemset%lu:\n",idx] UTF8String]);
+    printf("%s",[[NSString stringWithFormat:@"%@\n",obj] UTF8String]);
   }];
 }
+
+
 @end

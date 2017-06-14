@@ -7,18 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00360FF66961A647CFF7220A44895F14 /* WRLanguage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F2F9DEFE5F8D94D2CD922D921189034 /* WRLanguage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E9DF9D99BED077D904CA339E95EFAE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E110E3518E2D475577D0E2056C8B05D /* Foundation.framework */; };
-		26BC3929286421BEB5A325D2DEAD0FC5 /* WRParsingBasicLib.h in Headers */ = {isa = PBXBuildFile; fileRef = CE9C95B47EEF9A565EF0440F3E9437F4 /* WRParsingBasicLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		31B9C1D3D783EAAD87D25E429869654F /* WRScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 25F5ABA01A66FDD5E200039D6F7D2046 /* WRScanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45C646C2C13FF37AF159EC37340E0FB5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6526E38143AA3C7320583E142AA64538 /* Cocoa.framework */; };
+		488F4BDB8B992A6F44350AC653A5865F /* WRLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 259E91D910F2C533C6076322123F4A13 /* WRLanguage.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		4BF0797F77344127FC33DA212BAC175C /* WRToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 81F5D4D77E105DC9798D5771370AD828 /* WRToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5AA32B6C541AD1B73544F571AD54D07F /* Pods-WREarleyParser-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D001F28FCCE64BC8A6A338780AABDB80 /* Pods-WREarleyParser-dummy.m */; };
-		6473D0380E48E6C7BEFEA73EBDB5FF6C /* WRRule.h in Headers */ = {isa = PBXBuildFile; fileRef = B1DCA522FD3909F04AF8BA26092862B2 /* WRRule.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		67B3E85542E1EE2F7C0C0CAB1900D6E8 /* WRParsingBasic-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D74099C0DC27033F61B10BE909F24E /* WRParsingBasic-dummy.m */; };
-		68A6C1231AB3D0350FD5BA212B53ACD4 /* WRToken.m in Sources */ = {isa = PBXBuildFile; fileRef = EC8D9E2EEC5EB061475512974945779F /* WRToken.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		DABA214B4DF0655605192C47A08674AB /* WRRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 207EE6E92078338A6DA574AA909AB618 /* WRRule.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E4112614799E92730B7E1C0D522FB507 /* WRLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 224045E3EA2971061B7C55DC2DBD47E7 /* WRLanguage.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		993AF5EB6CCD121E09154A0A6C9AA487 /* WRScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 57C4CFC3AD266AAE11C1C7F7FDD77357 /* WRScanner.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		9DCEF436F84AF8980236B01C9E17B208 /* WRToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 304135AE1B9E316340BAB3C72D43CD97 /* WRToken.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		BEC6C5B2D6A261EA52296FBC040FC309 /* WRParsingBasicLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 292ED08BC627DA99F546C66C6824EE3B /* WRParsingBasicLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C652AE3B1E6D94793C8A85D3B013070D /* WRParsingBasic-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D42211E450306F0E9E3D84E9F671D373 /* WRParsingBasic-dummy.m */; };
+		CE3FF105903757D06103B27B05B9BD2E /* WRRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 995C0C363515BE4E7F1CEAEE19AA46C8 /* WRRule.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		E4B3B6770A3736846FCF6F5C84FE4987 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6526E38143AA3C7320583E142AA64538 /* Cocoa.framework */; };
-		F3DCFCF98772E72FFE9794FEFFAD3EBB /* WRLanguage.h in Headers */ = {isa = PBXBuildFile; fileRef = 45366DFE3FF0EDAF7FA6136BD25AD220 /* WRLanguage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F7D6FDD42EBC63CD43B5D0D0604613A7 /* WRToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BBB633F146200DB9B11A98FF5A84475 /* WRToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EF98E8D3252831C70AF01450FA6865D1 /* WRRule.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E6C46645906303018EF195C8FF896CA /* WRRule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,27 +35,29 @@
 
 /* Begin PBXFileReference section */
 		1E110E3518E2D475577D0E2056C8B05D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		207EE6E92078338A6DA574AA909AB618 /* WRRule.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRRule.m; sourceTree = "<group>"; };
-		224045E3EA2971061B7C55DC2DBD47E7 /* WRLanguage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRLanguage.m; sourceTree = "<group>"; };
+		259E91D910F2C533C6076322123F4A13 /* WRLanguage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRLanguage.m; sourceTree = "<group>"; };
+		25F5ABA01A66FDD5E200039D6F7D2046 /* WRScanner.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRScanner.h; sourceTree = "<group>"; };
+		292ED08BC627DA99F546C66C6824EE3B /* WRParsingBasicLib.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRParsingBasicLib.h; sourceTree = "<group>"; };
+		304135AE1B9E316340BAB3C72D43CD97 /* WRToken.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRToken.m; sourceTree = "<group>"; };
+		3C81CF5F278219DE66FCE05863B897FF /* WRParsingBasic.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WRParsingBasic.xcconfig; sourceTree = "<group>"; };
+		3D5DAC349D38B1DB2DEB77F4AFC45894 /* WRParsingBasic-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WRParsingBasic-prefix.pch"; sourceTree = "<group>"; };
 		40C8A9667E49FED4C50C3118F8D342F6 /* Pods-WREarleyParser-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WREarleyParser-frameworks.sh"; sourceTree = "<group>"; };
-		45366DFE3FF0EDAF7FA6136BD25AD220 /* WRLanguage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRLanguage.h; sourceTree = "<group>"; };
+		4F2F9DEFE5F8D94D2CD922D921189034 /* WRLanguage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRLanguage.h; sourceTree = "<group>"; };
 		4FFE21AA8D5B5F45DE2C78C647437ABF /* Pods-WREarleyParser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WREarleyParser.debug.xcconfig"; sourceTree = "<group>"; };
-		52D74099C0DC27033F61B10BE909F24E /* WRParsingBasic-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WRParsingBasic-dummy.m"; sourceTree = "<group>"; };
+		57C4CFC3AD266AAE11C1C7F7FDD77357 /* WRScanner.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRScanner.m; sourceTree = "<group>"; };
 		6526E38143AA3C7320583E142AA64538 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		65700A782C4680AAA7D94DEBCC805840 /* Pods-WREarleyParser-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WREarleyParser-acknowledgements.markdown"; sourceTree = "<group>"; };
-		6BBB633F146200DB9B11A98FF5A84475 /* WRToken.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRToken.h; sourceTree = "<group>"; };
-		83ADF900BAB569D951C1BB814DA13A77 /* WRParsingBasic.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WRParsingBasic.xcconfig; sourceTree = "<group>"; };
-		8B67423BA128D25CF6B0789EABF2BFFE /* WRParsingBasic-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WRParsingBasic-prefix.pch"; sourceTree = "<group>"; };
+		7E6C46645906303018EF195C8FF896CA /* WRRule.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRRule.h; sourceTree = "<group>"; };
+		81F5D4D77E105DC9798D5771370AD828 /* WRToken.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRToken.h; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		995C0C363515BE4E7F1CEAEE19AA46C8 /* WRRule.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRRule.m; sourceTree = "<group>"; };
 		9C3EB291D635889E70B15834CC0CD89F /* Pods-WREarleyParser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WREarleyParser.release.xcconfig"; sourceTree = "<group>"; };
 		A17B77591D812C1213E5D4B3A754F810 /* Pods-WREarleyParser-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WREarleyParser-resources.sh"; sourceTree = "<group>"; };
 		A2CD0D78E1A154E30B23507039801852 /* libWRParsingBasic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libWRParsingBasic.a; path = libWRParsingBasic.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3B5E9994C06A018DB4CCCC51A7E339F /* Pods-WREarleyParser-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WREarleyParser-acknowledgements.plist"; sourceTree = "<group>"; };
-		B1DCA522FD3909F04AF8BA26092862B2 /* WRRule.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRRule.h; sourceTree = "<group>"; };
-		CE9C95B47EEF9A565EF0440F3E9437F4 /* WRParsingBasicLib.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRParsingBasicLib.h; sourceTree = "<group>"; };
 		D001F28FCCE64BC8A6A338780AABDB80 /* Pods-WREarleyParser-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WREarleyParser-dummy.m"; sourceTree = "<group>"; };
 		D34DE1D6CEAB42800D889AC0D0BB2D78 /* libPods-WREarleyParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-WREarleyParser.a"; path = "libPods-WREarleyParser.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC8D9E2EEC5EB061475512974945779F /* WRToken.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRToken.m; sourceTree = "<group>"; };
+		D42211E450306F0E9E3D84E9F671D373 /* WRParsingBasic-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WRParsingBasic-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +81,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1DDE1DAFC1D26DF5C33D545614A73E54 /* WRParsingBasic */ = {
+			isa = PBXGroup;
+			children = (
+				D58A984FD1476268CA33122F566BFD19 /* Classes */,
+				389D4D1A0E8B99DE101BB27DC83F0338 /* Support Files */,
+			);
+			name = WRParsingBasic;
+			path = ../../../../WRParsingComponent/WRParsingBasic;
+			sourceTree = "<group>";
+		};
 		2F70BDE8DD0CAC5B41CBE3554AF07D11 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8C971C20B60FDD0C274287BF1F87F288 /* WRParsingBasic */,
+				1DDE1DAFC1D26DF5C33D545614A73E54 /* WRParsingBasic */,
 			);
 			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		389D4D1A0E8B99DE101BB27DC83F0338 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				3C81CF5F278219DE66FCE05863B897FF /* WRParsingBasic.xcconfig */,
+				D42211E450306F0E9E3D84E9F671D373 /* WRParsingBasic-dummy.m */,
+				3D5DAC349D38B1DB2DEB77F4AFC45894 /* WRParsingBasic-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../../EarleyParser/EarleyOC/WREarleyParser/Pods/Target Support Files/WRParsingBasic";
 			sourceTree = "<group>";
 		};
 		4772DACE1B5EC91379A43569B3E8049E /* Products */ = {
@@ -92,17 +117,6 @@
 				A2CD0D78E1A154E30B23507039801852 /* libWRParsingBasic.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		6605ACAFF49D2279CDC27E8B05228C9D /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				83ADF900BAB569D951C1BB814DA13A77 /* WRParsingBasic.xcconfig */,
-				52D74099C0DC27033F61B10BE909F24E /* WRParsingBasic-dummy.m */,
-				8B67423BA128D25CF6B0789EABF2BFFE /* WRParsingBasic-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../../EarleyParser/EarleyOC/WREarleyParser/Pods/Target Support Files/WRParsingBasic";
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -131,16 +145,6 @@
 			path = "Target Support Files/Pods-WREarleyParser";
 			sourceTree = "<group>";
 		};
-		8C971C20B60FDD0C274287BF1F87F288 /* WRParsingBasic */ = {
-			isa = PBXGroup;
-			children = (
-				B12DA7D9E770526E42FAB274AFA71421 /* Classes */,
-				6605ACAFF49D2279CDC27E8B05228C9D /* Support Files */,
-			);
-			name = WRParsingBasic;
-			path = ../../../../WRParsingComponent/WRParsingBasic;
-			sourceTree = "<group>";
-		};
 		92FC4590B3B6C6A2141FDC7D1DA8879E /* OS X */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,16 +162,18 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		B12DA7D9E770526E42FAB274AFA71421 /* Classes */ = {
+		D58A984FD1476268CA33122F566BFD19 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				45366DFE3FF0EDAF7FA6136BD25AD220 /* WRLanguage.h */,
-				224045E3EA2971061B7C55DC2DBD47E7 /* WRLanguage.m */,
-				CE9C95B47EEF9A565EF0440F3E9437F4 /* WRParsingBasicLib.h */,
-				B1DCA522FD3909F04AF8BA26092862B2 /* WRRule.h */,
-				207EE6E92078338A6DA574AA909AB618 /* WRRule.m */,
-				6BBB633F146200DB9B11A98FF5A84475 /* WRToken.h */,
-				EC8D9E2EEC5EB061475512974945779F /* WRToken.m */,
+				4F2F9DEFE5F8D94D2CD922D921189034 /* WRLanguage.h */,
+				259E91D910F2C533C6076322123F4A13 /* WRLanguage.m */,
+				292ED08BC627DA99F546C66C6824EE3B /* WRParsingBasicLib.h */,
+				7E6C46645906303018EF195C8FF896CA /* WRRule.h */,
+				995C0C363515BE4E7F1CEAEE19AA46C8 /* WRRule.m */,
+				25F5ABA01A66FDD5E200039D6F7D2046 /* WRScanner.h */,
+				57C4CFC3AD266AAE11C1C7F7FDD77357 /* WRScanner.m */,
+				81F5D4D77E105DC9798D5771370AD828 /* WRToken.h */,
+				304135AE1B9E316340BAB3C72D43CD97 /* WRToken.m */,
 			);
 			name = Classes;
 			path = Classes;
@@ -184,14 +190,15 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		E0876DA6C72700093CCA61EED94A6DCD /* Headers */ = {
+		936DE2D7C88F0CD8CE90D27C3FD801F1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3DCFCF98772E72FFE9794FEFFAD3EBB /* WRLanguage.h in Headers */,
-				26BC3929286421BEB5A325D2DEAD0FC5 /* WRParsingBasicLib.h in Headers */,
-				6473D0380E48E6C7BEFEA73EBDB5FF6C /* WRRule.h in Headers */,
-				F7D6FDD42EBC63CD43B5D0D0604613A7 /* WRToken.h in Headers */,
+				00360FF66961A647CFF7220A44895F14 /* WRLanguage.h in Headers */,
+				BEC6C5B2D6A261EA52296FBC040FC309 /* WRParsingBasicLib.h in Headers */,
+				EF98E8D3252831C70AF01450FA6865D1 /* WRRule.h in Headers */,
+				31B9C1D3D783EAAD87D25E429869654F /* WRScanner.h in Headers */,
+				4BF0797F77344127FC33DA212BAC175C /* WRToken.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,9 +209,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FB32DF152CF5F7A8A37E327A55E77A0F /* Build configuration list for PBXNativeTarget "WRParsingBasic" */;
 			buildPhases = (
-				961CFFC3608518718EF427564B89A727 /* Sources */,
+				2FC0FC5CD1E249A8B10907503970AF0D /* Sources */,
 				296A3D20E040899F763282CA43542CAD /* Frameworks */,
-				E0876DA6C72700093CCA61EED94A6DCD /* Headers */,
+				936DE2D7C88F0CD8CE90D27C3FD801F1 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -260,22 +267,23 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2FC0FC5CD1E249A8B10907503970AF0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				488F4BDB8B992A6F44350AC653A5865F /* WRLanguage.m in Sources */,
+				C652AE3B1E6D94793C8A85D3B013070D /* WRParsingBasic-dummy.m in Sources */,
+				CE3FF105903757D06103B27B05B9BD2E /* WRRule.m in Sources */,
+				993AF5EB6CCD121E09154A0A6C9AA487 /* WRScanner.m in Sources */,
+				9DCEF436F84AF8980236B01C9E17B208 /* WRToken.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		390CB78407F1BB282A2C6552B7B34D9E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				5AA32B6C541AD1B73544F571AD54D07F /* Pods-WREarleyParser-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		961CFFC3608518718EF427564B89A727 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E4112614799E92730B7E1C0D522FB507 /* WRLanguage.m in Sources */,
-				67B3E85542E1EE2F7C0C0CAB1900D6E8 /* WRParsingBasic-dummy.m in Sources */,
-				DABA214B4DF0655605192C47A08674AB /* WRRule.m in Sources */,
-				68A6C1231AB3D0350FD5BA212B53ACD4 /* WRToken.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,7 +370,7 @@
 		};
 		5984368ECFEDB5F51B0563C8D77FE9BD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83ADF900BAB569D951C1BB814DA13A77 /* WRParsingBasic.xcconfig */;
+			baseConfigurationReference = 3C81CF5F278219DE66FCE05863B897FF /* WRParsingBasic.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -411,7 +419,7 @@
 		};
 		682CE72A6E6A760123B0A926408F101F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83ADF900BAB569D951C1BB814DA13A77 /* WRParsingBasic.xcconfig */;
+			baseConfigurationReference = 3C81CF5F278219DE66FCE05863B897FF /* WRParsingBasic.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
