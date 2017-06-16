@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WREarleyParser/main.m"
-            timestampString = "518971865.675094"
+            timestampString = "519281185.243805"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "ruleTest()"
             landmarkType = "9">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../WRParsingComponent/WRParsingBasic/Classes/WRLanguage.m"
-            timestampString = "519100934.065878"
+            timestampString = "519281298.757403"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "-disposeNullableToken"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../../WRParsingComponent/WRParsingBasic/Classes/WRLanguage.m"
-            timestampString = "519100934.065878"
+            timestampString = "519281298.757403"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "-disposeNullableToken"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WREarleyParser/WREarleyParser.m"
-            timestampString = "519039422.016156"
+            timestampString = "519278551.388668"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
             landmarkName = "-startParsing"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WREarleyParser/main.m"
-            timestampString = "518971865.675094"
+            timestampString = "519281185.243805"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
             landmarkName = "main()"
             landmarkType = "9">
          </BreakpointContent>
@@ -115,11 +115,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WREarleyParser/WREarleyParser.m"
-            timestampString = "519039422.016156"
+            timestampString = "519278551.388668"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "-startParsing"
             landmarkType = "7">
          </BreakpointContent>
@@ -131,11 +131,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WREarleyParser/WREarleyParser.m"
-            timestampString = "519039422.016156"
+            timestampString = "519278551.388668"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "-startParsing"
             landmarkType = "7">
          </BreakpointContent>
@@ -147,11 +147,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WREarleyParser/WREarleyParser.m"
-            timestampString = "519039422.016156"
+            timestampString = "519278551.388668"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "285"
-            endingLineNumber = "285"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "-startParsing"
             landmarkType = "7">
          </BreakpointContent>
@@ -163,11 +163,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WREarleyParser/WREarleyParser.m"
-            timestampString = "519039422.016156"
+            timestampString = "519278551.388668"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
             landmarkName = "-startParsing"
             landmarkType = "7">
          </BreakpointContent>
@@ -175,49 +175,81 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WREarleyParser/WREarleyParser.m"
-            timestampString = "519039422.016156"
+            timestampString = "519278551.388668"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
             landmarkName = "-endParsing"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[WREarlyParser endParsing]"
                   moduleName = "WREarleyParser"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/raywang/projects/PARSER/EarleyParser/EarleyOC/WREarleyParser/WREarleyParser/WREarleyParser.m"
-                  timestampString = "519038901.629736"
+                  timestampString = "519281186.667092"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "442"
-                  endingLineNumber = "442"
+                  startingLineNumber = "393"
+                  endingLineNumber = "393"
                   offsetFromSymbolStart = "16">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__27-[WREarlyParser endParsing]_block_invoke"
                   moduleName = "WREarleyParser"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/raywang/projects/PARSER/EarleyParser/EarleyOC/WREarleyParser/WREarleyParser/WREarleyParser.m"
-                  timestampString = "519038901.634496"
+                  timestampString = "519281186.669008"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "443"
-                  endingLineNumber = "443"
+                  startingLineNumber = "394"
+                  endingLineNumber = "394"
                   offsetFromSymbolStart = "75">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../WRParsingComponent/WRParsingBasic/Classes/WRRule.m"
+            timestampString = "519277958.2106"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "+rulesWithOrRuleStr:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../WRParsingComponent/WRParsingBasic/Classes/WRLanguage.m"
+            timestampString = "519281266.216428"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "+grammarWithRules:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

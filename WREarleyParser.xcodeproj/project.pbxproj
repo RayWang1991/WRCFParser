@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		534F5CBAB4111C5F808D9196 /* libPods-WREarleyParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 800B01D05032CD399C22A97E /* libPods-WREarleyParser.a */; };
+		750CB3CC29F3418E73941E61 /* libPods-WREarleyParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3618FE18746C9D0EE5AC7F4B /* libPods-WREarleyParser.a */; };
 		E129BE9C1EEA7AFA006B0DEE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E129BE9B1EEA7AFA006B0DEE /* main.m */; };
 		E129BEAC1EEC26B4006B0DEE /* WREarleyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E129BEAB1EEC26B4006B0DEE /* WREarleyParser.m */; };
 		E129BEBB1EF0DDE0006B0DEE /* WRUngerParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E129BEBA1EF0DDE0006B0DEE /* WRUngerParser.m */; };
@@ -26,15 +26,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		800B01D05032CD399C22A97E /* libPods-WREarleyParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WREarleyParser.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F4099505BE60042B410C841 /* Pods-WREarleyParser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WREarleyParser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WREarleyParser/Pods-WREarleyParser.debug.xcconfig"; sourceTree = "<group>"; };
-		C65996546CF91BC66883A97D /* Pods-WREarleyParser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WREarleyParser.release.xcconfig"; path = "Pods/Target Support Files/Pods-WREarleyParser/Pods-WREarleyParser.release.xcconfig"; sourceTree = "<group>"; };
+		3618FE18746C9D0EE5AC7F4B /* libPods-WREarleyParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WREarleyParser.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D68723AE3AB7B2C2BB83DB0 /* Pods-WREarleyParser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WREarleyParser.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WREarleyParser/Pods-WREarleyParser.debug.xcconfig"; sourceTree = "<group>"; };
 		E129BE981EEA7AFA006B0DEE /* WREarleyParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WREarleyParser; sourceTree = BUILT_PRODUCTS_DIR; };
 		E129BE9B1EEA7AFA006B0DEE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E129BEAA1EEAE199006B0DEE /* WREarleyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WREarleyParser.h; sourceTree = "<group>"; };
 		E129BEAB1EEC26B4006B0DEE /* WREarleyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WREarleyParser.m; sourceTree = "<group>"; };
 		E129BEB91EF0DDE0006B0DEE /* WRUngerParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WRUngerParser.h; sourceTree = "<group>"; };
 		E129BEBA1EF0DDE0006B0DEE /* WRUngerParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WRUngerParser.m; sourceTree = "<group>"; };
+		F6ECDE85417E5E622A28BC74 /* Pods-WREarleyParser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WREarleyParser.release.xcconfig"; path = "Pods/Target Support Files/Pods-WREarleyParser/Pods-WREarleyParser.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,26 +42,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				534F5CBAB4111C5F808D9196 /* libPods-WREarleyParser.a in Frameworks */,
+				750CB3CC29F3418E73941E61 /* libPods-WREarleyParser.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7535BC8C66ADC3AF65BB210F /* Frameworks */ = {
+		9CBC04203F1B42147607D79A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				800B01D05032CD399C22A97E /* libPods-WREarleyParser.a */,
+				3618FE18746C9D0EE5AC7F4B /* libPods-WREarleyParser.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D97904CAC544C0DA9359DD0D /* Pods */ = {
+		B9E0975EFAEA3DE38899A49A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8F4099505BE60042B410C841 /* Pods-WREarleyParser.debug.xcconfig */,
-				C65996546CF91BC66883A97D /* Pods-WREarleyParser.release.xcconfig */,
+				3D68723AE3AB7B2C2BB83DB0 /* Pods-WREarleyParser.debug.xcconfig */,
+				F6ECDE85417E5E622A28BC74 /* Pods-WREarleyParser.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -71,8 +71,8 @@
 			children = (
 				E129BE9A1EEA7AFA006B0DEE /* WREarleyParser */,
 				E129BE991EEA7AFA006B0DEE /* Products */,
-				D97904CAC544C0DA9359DD0D /* Pods */,
-				7535BC8C66ADC3AF65BB210F /* Frameworks */,
+				B9E0975EFAEA3DE38899A49A /* Pods */,
+				9CBC04203F1B42147607D79A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,11 +103,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E129BE9F1EEA7AFA006B0DEE /* Build configuration list for PBXNativeTarget "WREarleyParser" */;
 			buildPhases = (
-				E3C30D586A69E547431D2776 /* [CP] Check Pods Manifest.lock */,
+				46D03C6BD41D370B42443DD3 /* [CP] Check Pods Manifest.lock */,
 				E129BE941EEA7AFA006B0DEE /* Sources */,
 				E129BE951EEA7AFA006B0DEE /* Frameworks */,
 				E129BE961EEA7AFA006B0DEE /* CopyFiles */,
-				45784B15587A8B93EB785D19 /* [CP] Copy Pods Resources */,
+				89BD311B362D3D6ED714F794 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,22 +152,7 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		45784B15587A8B93EB785D19 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WREarleyParser/Pods-WREarleyParser-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E3C30D586A69E547431D2776 /* [CP] Check Pods Manifest.lock */ = {
+		46D03C6BD41D370B42443DD3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -180,6 +165,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		89BD311B362D3D6ED714F794 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WREarleyParser/Pods-WREarleyParser-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -287,7 +287,7 @@
 		};
 		E129BEA01EEA7AFA006B0DEE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F4099505BE60042B410C841 /* Pods-WREarleyParser.debug.xcconfig */;
+			baseConfigurationReference = 3D68723AE3AB7B2C2BB83DB0 /* Pods-WREarleyParser.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = UA32J6S8F4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -296,7 +296,7 @@
 		};
 		E129BEA11EEA7AFA006B0DEE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C65996546CF91BC66883A97D /* Pods-WREarleyParser.release.xcconfig */;
+			baseConfigurationReference = F6ECDE85417E5E622A28BC74 /* Pods-WREarleyParser.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = UA32J6S8F4;
 				PRODUCT_NAME = "$(TARGET_NAME)";

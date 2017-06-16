@@ -166,8 +166,6 @@
 }
 @end
 
-
-
 @interface WREarlyParser ()
 
 @end
@@ -397,6 +395,4 @@
     printf("%s",[[NSString stringWithFormat:@"%@\n",obj] UTF8String]);
   }];
 }
-
-
 @end
