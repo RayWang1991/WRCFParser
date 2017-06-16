@@ -19,8 +19,8 @@ int main(int argc, const char * argv[]) {
     
     WREarlyParser *parser = [[WREarlyParser alloc]init];
     WRScanner *scanner = [[WRScanner alloc]init];
-    scanner.inputStr = @"bbb";
-    WRLanguage *language = [WRLanguage CFGrammar_SPFER_2];
+    scanner.inputStr = @"abbb";
+    WRLanguage *language = [WRLanguage CFGrammar_SPFER_3];
     
     parser.language = language;
     parser.scanner = scanner;
