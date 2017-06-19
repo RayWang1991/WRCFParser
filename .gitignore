@@ -1,1 +1,3 @@
 .idea/
+### Xcode Patch ###
+*.xcodeproj/*
