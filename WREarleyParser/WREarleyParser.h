@@ -25,7 +25,6 @@
 // Earley Item
 @interface WRItem : WRRule
 
-@property (nonatomic, strong, readonly) NSString * dotedRule;
 @property (nonatomic, assign, readwrite) NSInteger dotPos;   // position of dot
 @property (nonatomic, assign, readwrite) NSInteger itemPos; // position in item set
 
@@ -56,6 +55,11 @@
 
 + (instancetype)itemWithItem:(WRItem *)item andItemPosition:(NSInteger)position;
 
+- (NSString *)descriptionForReductions;
+
+- (NSString *)descriptionForPredecessors;
+
+
 /**
  * Functional Methods
  */
@@ -64,8 +68,14 @@
 
 /* Right Hand Methods*/
 
-// The symbol right after the dot; asking, next symbol 
+// The token right after the dot;
 - (WRToken *)nextAskingToken;
+
+// The token right before the dot;
+- (WRToken *)justCompletedToken;
+
+// override methods
+- (NSString *)dotedRule;
 
 @end
 
@@ -78,10 +88,15 @@
 @end
 
 
-@interface WREarlyParser : NSObject
+@interface WREarleyParser : NSObject
 @property (nonatomic, strong, readwrite) NSMutableArray <WRItemSet *> *itemSetList;
 @property (nonatomic, strong, readwrite) WRLanguage *language;
 @property (nonatomic, strong, readwrite) WRScanner *scanner;
-
+// construct SPPF, TODO
+@property (nonatomic, strong, readwrite) NSMutableDictionary <NSString *, WRSPPFNode *> *nodeSet;
+@property (nonatomic, strong, readwrite) NSArray <NSMutableDictionary <NSString *, WRItem *> *> *processedSetList;
+@property (nonatomic, strong, readwrite) WRSPPFNode *parseForest;
 - (void)startParsing;
 @end
+
+

@@ -12,12 +12,11 @@
 
 void test();
 
-
 int main(int argc, const char * argv[]) {
   @autoreleasepool {
     NSLog(@"Hello, Earley Parsing!");
     
-    WREarlyParser *parser = [[WREarlyParser alloc]init];
+    WREarleyParser *parser = [[WREarleyParser alloc]init];
     WRScanner *scanner = [[WRScanner alloc]init];
     scanner.inputStr = @"abbb";
     WRLanguage *language = [WRLanguage CFGrammar_SPFER_3];
@@ -29,6 +28,29 @@ int main(int argc, const char * argv[]) {
   }
     return 0;
 }
+void testSPPNode(){
+  WRToken * token1 = [WRToken tokenWithSymbol:@"token"];
+  WRToken * token2 = [WRToken tokenWithSymbol:@"token"];
+  WRItem * item1 = [WRItem itemWithRuleStr:@"S ->a b" dotPosition:0 andItemPosition:3];
+  WRItem * item2 = [WRItem itemWithRuleStr:@"S-> a b" dotPosition:0 andItemPosition:3];
+  WRSPPFNode * v1 = [WRSPPFNode SPPFNodeWithContent:token1 leftExtent:3 andRightExtent:4];
+  WRSPPFNode * v2 = [WRSPPFNode SPPFNodeWithContent:item1 leftExtent:0 andRightExtent:3];
+  WRSPPFNode * w1 = [WRSPPFNode SPPFNodeWithContent:token2 leftExtent:3 andRightExtent:4];
+  WRSPPFNode * w2 = [WRSPPFNode SPPFNodeWithContent:item2 leftExtent:0 andRightExtent:3];
+  WRToken *startToken = [WRToken tokenWithSymbol:@"S"];
+  WRSPPFNode *root = [WRSPPFNode SPPFNodeWithContent:startToken leftExtent:0 andRightExtent:4];
+  [root.families addObject:@[v1,v2]];
+  
+  BOOL res1 = [root containsFamilly:@[w1,w2]];
+  BOOL res2 = [root containsFamilly:@[w2,w1]];
+  BOOL res3 = [root containsFamilly:@[w1]];
+  BOOL res4 = [root containsFamilly:@[w1,w1,w2]];
+  assert(res1);
+  assert(res2);
+  assert(!res3);
+  assert(!res4);
+}
+
 void testSet(){
   WRItem *item1 = [WRItem itemWithRuleStr:@"S -> A B C" dotPosition:0 andItemPosition:0];
   WRItem *item2 = [WRItem itemWithRuleStr:@"S -> A B C" dotPosition:0 andItemPosition:0];
