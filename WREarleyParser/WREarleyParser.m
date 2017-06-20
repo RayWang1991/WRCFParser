@@ -615,8 +615,8 @@
   } else if (item.dotPos == 1 && (item.justCompletedToken).type == nonTerminal) {
     // A->C·B,j form
     // C node
-    WRSPPFNode *v = [WRSPPFNode SPPFNodeWithContent:item.justCompletedToken
-                                         leftExtent:item.itemPos
+    WRSPPFNode *v = [WRSPPFNode SPPFNodeWithContent:item.justCompletedToken // j
+                                         leftExtent:item.itemPos // l
                                      andRightExtent:i];
     NSString *vStr = v.description;
     if (self.nodeSet[vStr] == nil) {

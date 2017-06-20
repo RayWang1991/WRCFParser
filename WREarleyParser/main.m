@@ -18,9 +18,10 @@ int main(int argc, const char * argv[]) {
     
     WREarleyParser *parser = [[WREarleyParser alloc]init];
     WRScanner *scanner = [[WRScanner alloc]init];
-    scanner.inputStr = @"abbb";
-    WRLanguage *language = [WRLanguage CFGrammar_SPFER_3];
-    
+//    scanner.inputStr = @"abbb";
+//    WRLanguage *language = [WRLanguage CFGrammar_SPFER_3];
+    WRLanguage *language = [WRLanguage CFGrammar_8_9];
+    scanner.inputStr = @"i+i";
     parser.language = language;
     parser.scanner = scanner;
     [parser startParsing];
@@ -28,6 +29,19 @@ int main(int argc, const char * argv[]) {
   }
     return 0;
 }
+
+void testString(){
+  NSString *strss = @"S S S";
+    NSRange range0 = NSMakeRange(0, 1);
+    NSRange range1 = NSMakeRange(2, 1);
+    NSRange range2 = NSMakeRange(4, 1);
+    NSString *s0 = [strss substringWithRange:range0];
+    NSString *s1 = [strss substringWithRange:range1];
+    NSString *s2 = [strss substringWithRange:range2];
+    assert(s0 == s1 && s1 == s2);
+
+}
+
 void testSPPNode(){
   WRToken * token1 = [WRToken tokenWithSymbol:@"token"];
   WRToken * token2 = [WRToken tokenWithSymbol:@"token"];
