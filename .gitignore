@@ -1,3 +1,7 @@
 .idea/
 ### Xcode Patch ###
-*.xcodeproj/*
+.xcodeproj/
+xcuserdata/
+*.xccheckout
+*.xcscmblueprint
+
