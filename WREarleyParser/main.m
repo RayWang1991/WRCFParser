@@ -10,6 +10,8 @@
 #import "WRParsingBasicLib.h"
 #import "WREarleyParser.h"
 
+#import "WRRELanguage.h"
+
 void test();
 
 int main(int argc, const char * argv[]) {
@@ -20,8 +22,8 @@ int main(int argc, const char * argv[]) {
     WRScanner *scanner = [[WRScanner alloc]init];
 //    scanner.inputStr = @"abbb";
 //    WRLanguage *language = [WRLanguage CFGrammar_SPFER_3];
-    WRLanguage *language = [WRLanguage CFGrammar_8_9];
-    scanner.inputStr = @"i+i";
+    WRLanguage *language = [WRRELanguage CFGrammar_RE_Basic];
+    scanner.inputStr = @"cc";
     parser.language = language;
     parser.scanner = scanner;
     [parser startParsing];
