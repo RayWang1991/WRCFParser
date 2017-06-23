@@ -585,14 +585,17 @@
     if (self.nodeSet[vStr] == nil) {
       [self.nodeSet setValue:v
                       forKey:vStr];
-      WRToken *epsilon = [WRToken tokenWithSymbol:@"epsilon"];
-      WRSPPFNode *vChlid = [WRSPPFNode SPPFNodeWithContent:epsilon
-                                                leftExtent:i
-                                            andRightExtent:i];
-      [v.families addObject:@[vChlid]];
+
     } else{
       v = self.nodeSet[vStr];
     }
+    
+    WRToken *epsilon = [WRToken tokenWithSymbol:@"epsilon"];
+    WRSPPFNode *vChlid = [WRSPPFNode SPPFNodeWithContent:epsilon
+                                              leftExtent:i
+                                          andRightExtent:i];
+    [v.families addObject:@[vChlid]];
+    
     if (![u containsFamilly:@[v]]) {
       [u.families addObject:@[v]];
     }
