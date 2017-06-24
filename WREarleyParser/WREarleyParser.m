@@ -578,28 +578,14 @@
                             forKey:item.description];
   if (item.rightTokens.count == 0) {
     // A->·,j form
-//    WRSPPFNode *v = [WRSPPFNode SPPFNodeWithContent:item.leftToken
-//                                         leftExtent:i
-//                                     andRightExtent:i];
-//    NSString *vStr = v.description;
-//    if (self.nodeSet[vStr] == nil) {
-//      [self.nodeSet setValue:v
-//                      forKey:vStr];
-      WRToken *epsilon = [WRToken tokenWithSymbol:@"epsilon"];
-      WRSPPFNode *vChlid = [WRSPPFNode SPPFNodeWithContent:epsilon
+   WRToken *epsilon = [WRToken tokenWithSymbol:@"epsilon"];
+   WRSPPFNode *vChlid = [WRSPPFNode SPPFNodeWithContent:epsilon
                                                 leftExtent:i
                                             andRightExtent:i];
-      
-//      if (![v containsFamilly:@[vChlid]]) {
-//        [v.families addObject:@[vChlid]];
-//      }
-//    } else{
-//      v = self.nodeSet[vStr];
-//    }
     
     if (![u containsFamilly:@[vChlid]]) {
       [u.families addObject:@[vChlid]];
-    }
+   }
   } else if (item.dotPos == 1 && ((item.justCompletedToken).type == terminal)) {
     // A->a·B,j form
     // a node
