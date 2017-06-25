@@ -477,8 +477,10 @@
     [array addObject:[NSMutableDictionary dictionary]];
   }
   [self constructItemPointers];
-  [self constructSharedPackedParseForest];
   [self endParsing];
+  // TODO may combine the Item pointer construction with the parsing progress
+  [self constructSharedPackedParseForest];
+  [self printAST];
 }
 
 #pragma mark post construct SPPF
@@ -760,8 +762,75 @@
                     inSet:n];
     }
   }
-  self.parseForest = nodeS;
-  NSLog(@"parse forest generated");
+  if(nodeS.families.count > 0){
+    self.parseForest = nodeS;
+    NSLog(@"parse forest generated");
+  } else{
+    NSLog(@"parse failed!");
+  }
+}
+
+
+#pragma mark AST Construction
+- (void)printAST{
+  WRSPPFNode *node = [self ambiguousNodeWithNode:self.parseForest];
+  BOOL isAmbiguous = node != nil;
+  if(isAmbiguous){
+    NSLog(@"The result is AMBIGUOUS, with the NODE: %@",node);
+    return ;
+  }
+  NSLog(@"The result is NOT ambiguous");
+  // print the whole SPPF
+  
+  WRTreeNode *rootNode = [self printNodeForNode:self.parseForest];
+  [WRTreeNode printTree:rootNode];
+}
+
+- (WRTreeNode *)printNodeForNode:(WRSPPFNode *)root{
+  if(root == nil){
+    return nil;
+  }
+  
+  WRTreeNode *node = [WRTreeNode treeNodeWithContent:root.description];
+  assert(root.families.count <= 1);
+  if(root.families.count == 0){
+    return node;
+  }
+  
+  assert(root.families[0].count > 0);
+  assert(root.families[0].count <= 2);
+  NSMutableArray *array = [NSMutableArray array];
+  node.children = array;
+  for(WRSPPFNode *child in root.families[0]){
+    WRTreeNode *childNode = [self printNodeForNode:child];
+    if(childNode){
+      [array addObject:childNode];
+    }
+  }
+  
+  return node;
+}
+
+
+// Test if the SPPF is an ambiguous one
+- (WRSPPFNode *)ambiguousNodeWithNode:(WRSPPFNode *)node{
+  if(node == nil){
+    return nil;
+  }
+  
+  if(node.families.count > 1){
+    return node;
+  }
+  WRSPPFNode *res = nil;
+  for(NSArray *family in node.families){
+    for(WRSPPFNode *child in family){
+      res = [self ambiguousNodeWithNode:child];
+      if(res){
+        return res;
+      }
+    }
+  }
+  return nil;
 }
 
 - (void)endParsing {

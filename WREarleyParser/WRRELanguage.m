@@ -11,10 +11,13 @@
 @implementation WRRELanguage
 
 + (WRLanguage *)CFGrammar_RE_Basic{
-  return [[super alloc] initWithRuleStrings:@[@"MidOp -> or | and | ",
+  return [[super alloc] initWithRuleStrings:@[@"MidOp -> o | a | ",
                                             @"PostOp -> + | *",
-                                            @"Fragment -> c| ( Fragment ) | Fragment PostOp | Fragment MidOp Fragment",
+                                            @"Chars -> Chars c | c",
+                                            @"Ranges -> Ranges c - c | c - c",
+                                            @"CharRange -> [ Chars ] | [ Chars Ranges ] | [ Ranges ] | [ Ranges Chars ]",
+                                            @"Fragment -> c | CharRange | ( Fragment ) | Fragment PostOp | Fragment MidOp Fragment",
                                             @"S -> Fragment"]
-                            andStartSymbol:@"S"];
+                             andStartSymbol:@"S"];
 }
 @end

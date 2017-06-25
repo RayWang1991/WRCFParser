@@ -23,7 +23,7 @@ int main(int argc, const char * argv[]) {
 //    scanner.inputStr = @"abbb";
 //    WRLanguage *language = [WRLanguage CFGrammar_SPFER_3];
     WRLanguage *language = [WRRELanguage CFGrammar_RE_Basic];
-    scanner.inputStr = @"cc";
+    scanner.inputStr = @"[c-cc]oc";
     parser.language = language;
     parser.scanner = scanner;
     [parser startParsing];
