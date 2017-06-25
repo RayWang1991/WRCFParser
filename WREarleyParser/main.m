@@ -18,6 +18,7 @@ int main(int argc, const char * argv[]) {
   @autoreleasepool {
     NSLog(@"Hello, Earley Parsing!");
     
+
     WREarleyParser *parser = [[WREarleyParser alloc]init];
     WRScanner *scanner = [[WRScanner alloc]init];
 //    scanner.inputStr = @"abbb";

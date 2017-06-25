@@ -772,6 +772,7 @@
 
 
 #pragma mark AST Construction
+//TODO
 - (void)printAST{
   WRSPPFNode *node = [self ambiguousNodeWithNode:self.parseForest];
   BOOL isAmbiguous = node != nil;
@@ -797,6 +798,7 @@
     return node;
   }
   
+  //TODO
   assert(root.families[0].count > 0);
   assert(root.families[0].count <= 2);
   NSMutableArray *array = [NSMutableArray array];
