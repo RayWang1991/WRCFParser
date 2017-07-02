@@ -10,6 +10,7 @@
 		750CB3CC29F3418E73941E61 /* libPods-WREarleyParser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3618FE18746C9D0EE5AC7F4B /* libPods-WREarleyParser.a */; };
 		E129BE9C1EEA7AFA006B0DEE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E129BE9B1EEA7AFA006B0DEE /* main.m */; };
 		E129BEAC1EEC26B4006B0DEE /* WREarleyParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E129BEAB1EEC26B4006B0DEE /* WREarleyParser.m */; };
+		E182BF3A1F069DFB0045DF62 /* WRLR0Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = E182BF391F069DFB0045DF62 /* WRLR0Parser.m */; };
 		E1A0F4F61EFD6A4100AF8E0F /* WRRELanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A0F4F51EFD6A4100AF8E0F /* WRRELanguage.m */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,8 @@
 		E129BE9B1EEA7AFA006B0DEE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E129BEAA1EEAE199006B0DEE /* WREarleyParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WREarleyParser.h; sourceTree = "<group>"; };
 		E129BEAB1EEC26B4006B0DEE /* WREarleyParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WREarleyParser.m; sourceTree = "<group>"; };
+		E182BF381F069DFB0045DF62 /* WRLR0Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WRLR0Parser.h; sourceTree = "<group>"; };
+		E182BF391F069DFB0045DF62 /* WRLR0Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WRLR0Parser.m; sourceTree = "<group>"; };
 		E1A0F4F41EFD6A4100AF8E0F /* WRRELanguage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WRRELanguage.h; sourceTree = "<group>"; };
 		E1A0F4F51EFD6A4100AF8E0F /* WRRELanguage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WRRELanguage.m; sourceTree = "<group>"; };
 		F6ECDE85417E5E622A28BC74 /* Pods-WREarleyParser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WREarleyParser.release.xcconfig"; path = "Pods/Target Support Files/Pods-WREarleyParser/Pods-WREarleyParser.release.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +92,8 @@
 			children = (
 				E129BEAA1EEAE199006B0DEE /* WREarleyParser.h */,
 				E129BEAB1EEC26B4006B0DEE /* WREarleyParser.m */,
+				E182BF381F069DFB0045DF62 /* WRLR0Parser.h */,
+				E182BF391F069DFB0045DF62 /* WRLR0Parser.m */,
 				E129BE9B1EEA7AFA006B0DEE /* main.m */,
 				E1A0F4F41EFD6A4100AF8E0F /* WRRELanguage.h */,
 				E1A0F4F51EFD6A4100AF8E0F /* WRRELanguage.m */,
@@ -190,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1A0F4F61EFD6A4100AF8E0F /* WRRELanguage.m in Sources */,
+				E182BF3A1F069DFB0045DF62 /* WRLR0Parser.m in Sources */,
 				E129BE9C1EEA7AFA006B0DEE /* main.m in Sources */,
 				E129BEAC1EEC26B4006B0DEE /* WREarleyParser.m in Sources */,
 			);

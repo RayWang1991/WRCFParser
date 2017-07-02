@@ -2,11 +2,6 @@
 
 #import "WREarleyParser.h"
 
-@implementation WRNode
-
-@end
-
-
 
 @implementation WRItemSet
 #pragma mark debug
