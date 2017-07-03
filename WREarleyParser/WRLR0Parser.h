@@ -55,11 +55,12 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionType){
 
 @interface WRLR0DFAState : NSObject <NSObject>
 
-@property(nonatomic, assign, readwrite) int stateId;
+@property(nonatomic, assign, readwrite) NSInteger stateId;
 @property(nonatomic, assign, readwrite) NSString *contentStr;
 @property(nonatomic, strong, readwrite) NSMutableSet<WRLR0NFAState *> *nfaStates;
 @property(nonatomic, assign, readwrite) WRLR0DFAActionType actionType;
 @property(nonatomic, strong, readwrite) NSString *reduceTokenSymbol;
+@property(nonatomic, assign, readwrite) NSInteger reduceRuleIndex;
 @property(nonatomic, strong, readwrite) NSMutableDictionary<NSString *, WRLR0DFAState *> *transitionDict;
 
 - (instancetype)initWithNFAStates:(NSMutableSet<WRLR0NFAState *> *)nfaStates;

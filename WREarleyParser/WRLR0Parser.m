@@ -385,8 +385,9 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
 - (WRLR0DFAState *)DFAStateWithNFAStates:(NSMutableSet *)nfaStates {
   assert(nfaStates.count);
   BOOL foundAction = NO;
-  WRLR0DFAActionType foundType;
-  NSString *foundReduceSymbol;
+  WRLR0DFAActionType foundType = WRLR0DFAActionTypeShift;
+  NSString *foundReduceSymbol = @"";
+  NSInteger foundReduceRuleIndex = 0;
   for (WRLR0NFAState *nfaState in nfaStates) {
     assert([nfaState.content isKindOfClass:[WRItem class]]);
     WRItem *item = nfaState.content;
@@ -400,7 +401,7 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
                                                code:WRLR0DFAActionErrorShiftReduceConflict
                                            userInfo:@{@"state": str}];
           [self.conflicts addObject:error];
-        } else if (![foundReduceSymbol isEqualToString:reduceSymbol]) {
+        } else if (![foundReduceSymbol isEqualToString:reduceSymbol] || foundReduceRuleIndex != item.ruleIndex) {
           NSString *str = [WRLR0DFAState contentStrForNFAStates:nfaStates];
           NSError *error = [NSError errorWithDomain:kWRLR0ParserErrorDomain
                                                code:WRLR0DFAActionErrorReduceReduceConflict
@@ -411,6 +412,7 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
         foundAction = YES;
         foundType = WRLR0DFAActionTypeReduce;
         foundReduceSymbol = reduceSymbol;
+        foundReduceRuleIndex = item.ruleIndex;
       }
     } else {
       if (foundAction) {
@@ -433,6 +435,7 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
   assert(foundAction);
   dfaState.actionType = foundType;
   dfaState.reduceTokenSymbol = foundReduceSymbol;
+  dfaState.reduceRuleIndex = foundReduceRuleIndex;
   return dfaState;
 }
 
@@ -440,9 +443,19 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
 - (void)printAllDFAStatesAndTransitions {
   printf("All DFA States and Transitions:\n");
   for (WRLR0DFAState *dfaState in self.DFARecordSet.allValues) {
-    printf("%d:\n%s", dfaState.stateId, dfaState.contentStr.UTF8String);
-    for(NSString *transitionTokenStr in dfaState.transitionDict){
-      printf("  -%s-> %d\n", transitionTokenStr.UTF8String, dfaState.transitionDict[transitionTokenStr].stateId);
+    NSString *stateStr = [WRUtils debugStrWithTabs:2 forString:dfaState.contentStr];
+    NSString *information = @"";
+    printf("state ID: %d ",dfaState.stateId);
+    if(dfaState.actionType == WRLR0DFAActionTypeShift){
+      printf("shift state\n");
+      printf("%s", stateStr.UTF8String);
+      for(NSString *transitionTokenStr in dfaState.transitionDict){
+        printf("    --\'%s\'--> %d\n", transitionTokenStr.UTF8String, dfaState.transitionDict[transitionTokenStr].stateId);
+      }
+    } else{
+      WRRule *reduceRule = self.language.grammars[dfaState.reduceTokenSymbol][dfaState.reduceRuleIndex];
+      printf("reduce state, using %s\n",reduceRule.description.UTF8String);
+      printf("%s", stateStr.UTF8String);
     }
   }
 }

@@ -1,10 +1,8 @@
-//
-//  main.m
-//  WREarleyParser
-//
-//  Created by ray wang on 2017/6/9.
-//  Copyright © 2017年 ray wang. All rights reserved.
-//
+/* Basic Earley Parser
+ * From 'Parsing Techniques' Chap 7.2
+ * Author: Ray Wang
+ * Date: 2017.6.7
+ */
 
 #import <Foundation/Foundation.h>
 #import "WRParsingBasicLib.h"
@@ -17,6 +15,7 @@ void test();
 void testLR0Parser();
 void testEarleyParser();
 void testLexer();
+void testString();
 
 int main(int argc, const char * argv[]) {
   @autoreleasepool {
@@ -53,6 +52,8 @@ void testLexer(){
 };
 
 void testString(){
+  NSString *tabString = [WRUtils debugStrWithTabs:6 forString:@"1\n2\n3\n"];
+  printf("%s",tabString.UTF8String);
   NSString *strss = @"S S S";
     NSRange range0 = NSMakeRange(0, 1);
     NSRange range1 = NSMakeRange(2, 1);

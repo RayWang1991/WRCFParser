@@ -1,10 +1,8 @@
-//
-//  WRRELanguage.h
-//  WREarleyParser
-//
-//  Created by ray wang on 2017/6/23.
-//  Copyright © 2017年 ray wang. All rights reserved.
-//
+/* Regular engine use
+ * test
+ * Author: Ray Wang
+ * Date: 2017.7.3
+ */
 
 #import "WRParsingBasicLib.h"
 
