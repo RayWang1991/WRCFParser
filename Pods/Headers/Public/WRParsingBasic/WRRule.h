@@ -1,1 +1,1 @@
-../../../../../../../WRParsingComponent/WRParsingBasic/Classes/WRRule.h
+../../../../../../../WRParsingComponent/WRParsingBasic/Classes/Rule/WRRule.h

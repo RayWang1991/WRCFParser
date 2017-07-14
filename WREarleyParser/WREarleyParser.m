@@ -8,7 +8,6 @@
 
 #import "WREarleyParser.h"
 
-
 @implementation WRItemSet
 #pragma mark debug
 - (NSString *)description {
@@ -51,12 +50,14 @@
 
   return string;
 
+  /*
   // asking dict
   for (NSString *key in self.askingDict) {
     [string appendString:[NSString stringWithFormat:@"    %@ %@\n",
                                                     key,
                                                     self.askingDict[key]]];
   }
+  */
 }
 
 - (NSMutableArray <WRItem *> *)itemList {
@@ -98,12 +99,12 @@
 // completer use the scanner, too
 // if succeed return new item, otherwise nil
 - (WRItem *)scanItem:(WRItem *)item
-           withTokon:(WRToken *)token
+           withTokon:(NSString *)token
   andItemSetPosition:(NSInteger)itemSetPos {
   if ([item isComplete]) {
     return nil;
   }
-  if ([item.nextAskingToken matchWith:token]) {
+  if ([token isEqualToString:item.nextAskingToken]) {
     WRItem *nextItem = [WRItem itemWithRule:item
                                 dotPosition:item.dotPos + 1
                             andItemPosition:itemSetPos];
@@ -117,11 +118,11 @@
 // return the predict items, nil if nothing to predict
 - (NSArray <WRItem *> *)predictItem:(WRItem *)item
                 withItemSetPosition:(NSInteger)pos {
-  WRToken *predictingToken = item.nextAskingToken;
+  NSString *predictingToken = item.nextAskingToken;
   if (nil == predictingToken) {
     return nil;
   }
-  NSArray <WRRule *> *grammarsForPredict = self.language.grammars[predictingToken.symbol];
+  NSArray <WRRule *> *grammarsForPredict = self.language.grammars[predictingToken];
   if (nil == grammarsForPredict) {
     return nil;
   }
@@ -161,14 +162,14 @@
     WRItem *currentItem = workList[i];
     if ([currentItem isComplete]) {
       if (!itemSet0.completeSet[currentItem.description]) {
-        // scann item in complete position, using completed token
+        // scan item in complete position, using completed token
         // if the item has been proceeded, skip it
         [itemSet0.completeSet setValue:currentItem
                                 forKey:currentItem.description];
         NSInteger completeSetPos = currentItem.itemPos;
         // can only be itemSet0
         NSMutableArray <WRItem *> *array = [NSMutableArray array];
-        for (WRItem *activeItem in itemSet0.askingDict[currentItem.leftToken.symbol]) {
+        for (WRItem *activeItem in itemSet0.askingDict[currentItem.leftToken]) {
           // +1 is OK
           WRItem *scannedItem = [self scanItem:activeItem
                                      withTokon:currentItem.leftToken
@@ -197,11 +198,11 @@
                               forKey:currentItem.description];
 
         // set asking dict, for scan use
-        NSMutableArray *askingArray = itemSet0.askingDict[currentItem.nextAskingToken.symbol];
+        NSMutableArray *askingArray = itemSet0.askingDict[currentItem.nextAskingToken];
         if (!askingArray) {
           askingArray = [NSMutableArray arrayWithObject:currentItem];
           [itemSet0.askingDict setValue:askingArray
-                                 forKey:currentItem.nextAskingToken.symbol];
+                                 forKey:currentItem.nextAskingToken];
         } else {
           [askingArray addObject:currentItem];
         }
@@ -222,10 +223,11 @@
       }
     }
   }
-
   [self.itemSetList addObject:itemSet0];
-  // work loop
-  WRToken *inputToken;
+
+
+  // ##### work loop #####
+  WRTerminal *inputToken;
   while (nil != (inputToken = [self.scanner nextToken])) {
     // scan the active set of last item set
     // get work list
@@ -242,7 +244,7 @@
       // can simply do dotPos + 1
       WRItem *scannedItem = nil;
       if (nil != (scannedItem = [self scanItem:item
-                                     withTokon:inputToken
+                                     withTokon:inputToken.symbol
                             andItemSetPosition:item.itemPos])) {
         [workList addObject:scannedItem];
       }
@@ -261,7 +263,7 @@
                                         forKey:currentItem.description];
           NSInteger completeSetPos = currentItem.itemPos;
           NSMutableArray <WRItem *> *array = [NSMutableArray array];
-          for (WRItem *activeItem in self.itemSetList[completeSetPos].askingDict[currentItem.leftToken.symbol]) {
+          for (WRItem *activeItem in self.itemSetList[completeSetPos].askingDict[currentItem.leftToken]) {
             // simplely add 1 to dotPos is OK
             WRItem *scannedItem = [self scanItem:activeItem
                                        withTokon:currentItem.leftToken
@@ -288,11 +290,11 @@
           [currentItemSet.activeSet setValue:currentItem
                                       forKey:currentItem.description];
 
-          NSMutableArray *askingArray = currentItemSet.askingDict[currentItem.nextAskingToken.symbol];
+          NSMutableArray *askingArray = currentItemSet.askingDict[currentItem.nextAskingToken];
           if (!askingArray) {
             askingArray = [NSMutableArray arrayWithObject:currentItem];
             [currentItemSet.askingDict setValue:askingArray
-                                         forKey:currentItem.nextAskingToken.symbol];
+                                         forKey:currentItem.nextAskingToken];
           } else {
             [askingArray addObject:currentItem];
           }
@@ -316,7 +318,7 @@
   self.nodeSet = [NSMutableDictionary dictionary];
   NSMutableArray *array = [NSMutableArray array];
   self.processedSetList = array;
-  for(NSUInteger i = 0 ;i< self.itemSetList.count; i++){
+  for (NSUInteger i = 0; i < self.itemSetList.count; i++) {
     [array addObject:[NSMutableDictionary dictionary]];
   }
   [self constructItemPointers];
@@ -334,10 +336,10 @@
   WRItemSet *currentSet = self.itemSetList[0];
   for (NSString *completeStr in currentSet.completeSet) {
     WRItem *completeItem = currentSet.completeSet[completeStr];
-    WRToken *completeToken = completeItem.leftToken;
-    NSUInteger askingItemPos = completeItem.itemPos;
+    NSString *completeToken = completeItem.leftToken;
+    NSInteger askingItemPos = completeItem.itemPos;
     WRItemSet *askingSet = self.itemSetList[askingItemPos];
-    for (WRItem *askingItem in askingSet.askingDict[completeToken.symbol]) {
+    for (WRItem *askingItem in askingSet.askingDict[completeToken]) {
       WRItem *successorItem = [self successorItemForItem:askingItem
                                                withToken:completeToken
                                       andItemSetPosition:0];
@@ -356,14 +358,14 @@
 
   // start from item set 0 (i-1)
   for (NSUInteger i = 0; i < self.itemSetList.count - 1; i++) {
-    WRToken *currentToken = _scanner.nextToken;
+    WRTerminal *currentToken = _scanner.nextToken;
     WRItemSet *previousSet = self.itemSetList[i];
     WRItemSet *currentSet = self.itemSetList[i + 1];
     assert(currentToken != nil);
     for (WRItem *predecessorItem in previousSet.askingDict[currentToken.symbol]) {
       if (predecessorItem.dotPos != 0) {
         WRItem *successorItem = [self successorItemForItem:predecessorItem
-                                                 withToken:currentToken
+                                                 withToken:currentToken.symbol
                                         andItemSetPosition:i + 1];
         WRPair *predePair = [WRPair pairWith:predecessorItem
                                          and:@(i)];
@@ -374,10 +376,10 @@
 
     for (NSString *completeStr in currentSet.completeSet) {
       WRItem *completeItem = currentSet.completeSet[completeStr];
-      WRToken *completeToken = completeItem.leftToken;
-      NSUInteger askingItemPos = completeItem.itemPos;
+      NSString *completeToken = completeItem.leftToken;
+      NSInteger askingItemPos = completeItem.itemPos;
       WRItemSet *askingSet = self.itemSetList[askingItemPos];
-      for (WRItem *askingItem in askingSet.askingDict[completeToken.symbol]) {
+      for (WRItem *askingItem in askingSet.askingDict[completeToken]) {
         WRItem *successorItem = [self successorItemForItem:askingItem
                                                  withToken:completeToken
                                         andItemSetPosition:i + 1];
@@ -399,7 +401,7 @@
 
 #pragma mark private constructItemPointer Use
 - (WRItem *)successorItemForItem:(WRItem *)item
-                       withToken:(WRToken *)token
+                       withToken:(NSString *)token
               andItemSetPosition:(NSUInteger)itemSetPos {
   WRItemSet *set = self.itemSetList[itemSetPos];
   WRItem *nextItem = [self scanItem:item
@@ -420,18 +422,17 @@
                 inSet:(NSUInteger)i {
   // no nodes for predicated items !!!
   [self.processedSetList[i] setValue:item
-                            forKey:item.description];
+                              forKey:item.description];
   if (item.rightTokens.count == 0) {
     // A->·,j form
-   WRToken *epsilon = [WRToken tokenWithSymbol:@"epsilon"];
-   WRSPPFNode *vChlid = [WRSPPFNode SPPFNodeWithContent:epsilon
-                                                leftExtent:i
-                                            andRightExtent:i];
-    
+    WRSPPFNode *vChlid = [WRSPPFNode SPPFNodeWithContent:WREpsilonTokenSymbol
+                                              leftExtent:i
+                                          andRightExtent:i];
+
     if (![u containsFamilly:@[vChlid]]) {
       [u.families addObject:@[vChlid]];
-   }
-  } else if (item.dotPos == 1 && ((item.justCompletedToken).type == terminal)) {
+    }
+  } else if (item.dotPos == 1 && ((item.justCompletedToken).tokenTypeForString == terminal)) {
     // A->a·B,j form
     // a node
     WRSPPFNode *v = [WRSPPFNode SPPFNodeWithContent:item.justCompletedToken
@@ -441,13 +442,13 @@
     if (self.nodeSet[vStr] == nil) {
       [self.nodeSet setValue:v
                       forKey:vStr];
-    } else{
+    } else {
       v = self.nodeSet[vStr];
     }
     if (![u containsFamilly:@[v]]) {
       [u.families addObject:@[v]];
     }
-  } else if (item.dotPos == 1 && (item.justCompletedToken).type == nonTerminal) {
+  } else if (item.dotPos == 1 && (item.justCompletedToken).tokenTypeForString == nonTerminal) {
     // A->C·B,j form
     // C node
     WRSPPFNode *v = [WRSPPFNode SPPFNodeWithContent:item.justCompletedToken // j
@@ -457,7 +458,7 @@
     if (self.nodeSet[vStr] == nil) {
       [self.nodeSet setValue:v
                       forKey:vStr];
-    } else{
+    } else {
       v = self.nodeSet[vStr];
     }
     for (WRPair *p in item.reductionList.allValues) {
@@ -471,10 +472,10 @@
         }
       }
     }
-    if(![u containsFamilly:@[v]]){
+    if (![u containsFamilly:@[v]]) {
       [u.families addObject:@[v]];
     }
-  } else if (item.dotPos > 1 && (item.justCompletedToken).type == terminal) {
+  } else if (item.dotPos > 1 && (item.justCompletedToken).tokenTypeForString == terminal) {
     // A->A'a·B,j form
     // a node
     WRSPPFNode *v = [WRSPPFNode SPPFNodeWithContent:item.justCompletedToken
@@ -484,7 +485,7 @@
     if (self.nodeSet[vStr] == nil) {
       [self.nodeSet setValue:v
                       forKey:vStr];
-    } else{
+    } else {
       v = self.nodeSet[vStr];
     }
     // A->A'·aB,j node
@@ -510,16 +511,7 @@
       WRItem *q = p.first;
       assert(l == i - 1);
       assert(q == preItem);
-//      WRSPPFNode *w = [WRSPPFNode SPPFNodeWithContent:q
-//                                           leftExtent:q.itemPos // j
-//                                       andRightExtent:l];
-//      NSString *wStr = w.description;
-//      if (self.nodeSet[wStr] == nil) {
-//        [self.nodeSet setValue:w
-//                        forKey:wStr];
-//      } else {
-//        w = self.nodeSet[wStr];
-//      }
+
       if (self.processedSetList[l][q.description] == nil) {
         [self buildTreeWith:w
                         and:q
@@ -536,19 +528,19 @@
       NSInteger l = [p.second integerValue];
 
       // C node ,l, i
-      WRToken *c = item.justCompletedToken;
+      NSString *c = item.justCompletedToken;
       WRSPPFNode *v = [WRSPPFNode SPPFNodeWithContent:c
                                            leftExtent:l
                                        andRightExtent:i];
       NSString *vStr = v.description;
-      if(self.nodeSet[vStr] == nil){
+      if (self.nodeSet[vStr] == nil) {
         [self.nodeSet setValue:v
                         forKey:vStr];
-      } else{
+      } else {
         v = self.nodeSet[vStr];
       }
-      
-      if(self.processedSetList[i][redItem.description] == nil){
+
+      if (self.processedSetList[i][redItem.description] == nil) {
         [self buildTreeWith:v
                         and:redItem
                       inSet:i];
@@ -569,7 +561,7 @@
       if (self.nodeSet[wStr] == nil) {
         [self.nodeSet setValue:w
                         forKey:wStr];
-      } else{
+      } else {
         w = self.nodeSet[wStr];
       }
 
@@ -593,84 +585,81 @@
 }
 
 - (void)constructSharedPackedParseForest {
-  WRToken *startToken = [WRToken tokenWithSymbol:self.language.startSymbol];
   NSInteger n = self.itemSetList.count - 1;
-  WRSPPFNode *nodeS = [WRSPPFNode SPPFNodeWithContent:startToken
+  WRSPPFNode *nodeS = [WRSPPFNode SPPFNodeWithContent:self.language.startSymbol
                                            leftExtent:0
                                        andRightExtent:n];
   for (WRItem *item in [self.itemSetList lastObject].completeSet.allValues) {
-    if ([item.leftToken.symbol isEqualToString:self.language.startSymbol] && item.itemPos == 0) {
+    if ([item.leftToken isEqualToString:self.language.startSymbol] && item.itemPos == 0) {
       [self buildTreeWith:nodeS
                       and:item
                     inSet:n];
     }
   }
-  if(nodeS.families.count > 0){
+  if (nodeS.families.count > 0) {
     self.parseForest = nodeS;
     NSLog(@"parse forest generated");
-  } else{
+  } else {
     NSLog(@"parse failed!");
   }
 }
 
-
 #pragma mark AST Construction
 //TODO
-- (void)printAST{
+- (void)printAST {
   WRSPPFNode *node = [self ambiguousNodeWithNode:self.parseForest];
   BOOL isAmbiguous = node != nil;
-  if(isAmbiguous){
-    NSLog(@"The result is AMBIGUOUS, with the NODE: %@",node);
-    return ;
+  if (isAmbiguous) {
+    NSLog(@"The result is AMBIGUOUS, with the NODE: %@", node);
+    return;
   }
   NSLog(@"The result is NOT ambiguous");
   // print the whole SPPF
-  
+
   WRTreeNode *rootNode = [self printNodeForNode:self.parseForest];
   [WRTreeNode printTree:rootNode];
 }
 
-- (WRTreeNode *)printNodeForNode:(WRSPPFNode *)root{
-  if(root == nil){
+- (WRTreeNode *)printNodeForNode:(WRSPPFNode *)root {
+  if (root == nil) {
     return nil;
   }
-  
+
   WRTreeNode *node = [WRTreeNode treeNodeWithContent:root.description];
   assert(root.families.count <= 1);
-  if(root.families.count == 0){
+  if (root.families.count == 0) {
     return node;
   }
-  
+
   //TODO
   assert(root.families[0].count > 0);
   assert(root.families[0].count <= 2);
   NSMutableArray *array = [NSMutableArray array];
   node.children = array;
-  for(WRSPPFNode *child in root.families[0]){
+  for (WRSPPFNode *child in root.families[0]) {
     WRTreeNode *childNode = [self printNodeForNode:child];
-    if(childNode){
+    if (childNode) {
       [array addObject:childNode];
     }
   }
-  
+
   return node;
 }
 
-
 // Test if the SPPF is an ambiguous one
-- (WRSPPFNode *)ambiguousNodeWithNode:(WRSPPFNode *)node{
-  if(node == nil){
+- (WRSPPFNode *)ambiguousNodeWithNode:(WRSPPFNode *)node {
+  if (node == nil) {
     return nil;
   }
-  
-  if(node.families.count > 1){
+
+  if (node.families.count > 1) {
     return node;
   }
   WRSPPFNode *res = nil;
-  for(NSArray *family in node.families){
-    for(WRSPPFNode *child in family){
+  for (NSArray *family in node.families) {
+    for (WRSPPFNode *child in family) {
       res = [self ambiguousNodeWithNode:child];
-      if(res){
+      if (res) {
         return res;
       }
     }

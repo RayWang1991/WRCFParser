@@ -44,8 +44,8 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
   }
 }
 
-- (NSMutableArray <WRLR0NFATransition *> *)transitionList{
-  if(nil == _transitionList){
+- (NSMutableArray <WRLR0NFATransition *> *)transitionList {
+  if (nil == _transitionList) {
     _transitionList = [NSMutableArray array];
   }
   return _transitionList;
@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
 
 + (instancetype)NFATransitionWithFromState:(WRLR0NFAState *)from
                                    toState:(WRLR0NFAState *)to
-                            andConsumption:(WRToken *)consumption {
+                            andConsumption:(NSString *)consumption {
   WRLR0NFATransitionType type = consumption ? WRLR0NFATransitionTypeNormal : WRLR0NFATransitionTypeEpsilon;
   WRLR0NFATransition *transition = [[WRLR0NFATransition alloc] init];
   transition.type = type;
@@ -149,7 +149,7 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
 @property (nonatomic, strong, readwrite) NSMutableArray <WRLR0DFAState *> *DFAWorkList;
 @end
 
-@interface WRLR0Parser()
+@interface WRLR0Parser ()
 // parsing runtime
 @property (nonatomic, strong, readwrite) NSMutableArray <WRToken *> *tokenStack;
 
@@ -184,7 +184,7 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
     assert(nontToken.type == nonTerminal);
 
     WRLR0NFAState *station = _NFAStateRecordSet[nontToken.symbol];
-    if(nil == station){
+    if (nil == station) {
       station = [WRLR0NFAState NFAStateWithContent:nontToken];
 
       [_NFAStateRecordSet setValue:station
@@ -222,7 +222,7 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
   // increase the chain, and ### by the way ### map the state to station
   WRLR0NFAState *nextState = nil;
   WRItem *nextItem = nil;
-  WRToken *consumptionToken = nil;
+  NSString *consumptionToken = nil;
   while (![item isComplete]) {
 
     consumptionToken = item.nextAskingToken;
@@ -242,12 +242,12 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
     [_NFATransitionRecordSet setValue:transition
                                forKey:transition.description];
 
-    if (consumptionToken.type == nonTerminal) {
-      station = _NFAStateRecordSet[consumptionToken.symbol];
+    if (consumptionToken.tokenTypeForString == nonTerminal) {
+      station = _NFAStateRecordSet[consumptionToken];
       if (nil == station) {
         station = [WRLR0NFAState NFAStateWithContent:consumptionToken];
         [_NFAStateRecordSet setValue:station
-                              forKey:consumptionToken.symbol];
+                              forKey:consumptionToken];
       }
       transition = [WRLR0NFATransition NFATransitionWithFromState:state
                                                           toState:station
@@ -314,7 +314,7 @@ static int stateId = 0;
         nextDFAState = [self DFAStateWithNFAStates:nextNFASet];
         [self.DFARecordSet setValue:nextDFAState
                              forKey:nfaContentStr];
-      // add to work list
+        // add to work list
         [self.DFAWorkList addObject:nextDFAState];
       }
       [toDoDFAState.transitionDict setValue:nextDFAState
@@ -395,8 +395,7 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
     assert([nfaState.content isKindOfClass:[WRItem class]]);
     WRItem *item = nfaState.content;
     if (item.isComplete) {
-      WRToken *token = item.leftToken;
-      NSString *reduceSymbol = token.symbol;
+      NSString *reduceSymbol = item.leftToken;
       if (foundAction) {
         if (foundType != WRLR0DFAActionTypeReduce) {
           NSString *str = [WRLR0DFAState contentStrForNFAStates:nfaStates];
@@ -446,18 +445,19 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
 - (void)printAllDFAStatesAndTransitions {
   printf("All DFA States and Transitions:\n");
   for (WRLR0DFAState *dfaState in self.DFARecordSet.allValues) {
-    NSString *stateStr = [WRUtils debugStrWithTabs:2 forString:dfaState.contentStr];
-    printf("state ID: %ld ",(long)dfaState.stateId);
-    if(dfaState.actionType == WRLR0DFAActionTypeShift){
+    NSString *stateStr = [WRUtils debugStrWithTabs:2
+                                         forString:dfaState.contentStr];
+    printf("state ID: %ld ", (long) dfaState.stateId);
+    if (dfaState.actionType == WRLR0DFAActionTypeShift) {
       printf("shift state\n");
       printf("%s", stateStr.UTF8String);
-      for(NSString *transitionTokenStr in dfaState.transitionDict){
+      for (NSString *transitionTokenStr in dfaState.transitionDict) {
         printf("    --\'%s\'--> %ld\n", transitionTokenStr.UTF8String,
-               (long)dfaState.transitionDict[transitionTokenStr].stateId);
+               (long) dfaState.transitionDict[transitionTokenStr].stateId);
       }
-    } else{
+    } else {
       WRRule *reduceRule = self.language.grammars[dfaState.reduceTokenSymbol][dfaState.reduceRuleIndex];
-      printf("reduce state, using %s\n",reduceRule.description.UTF8String);
+      printf("reduce state, using %s\n", reduceRule.description.UTF8String);
       printf("%s", stateStr.UTF8String);
     }
   }
@@ -484,6 +484,6 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
 //        break;
 //    }
 //  }
-  
+
 }
 @end

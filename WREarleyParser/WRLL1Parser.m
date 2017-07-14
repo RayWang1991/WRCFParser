@@ -8,16 +8,11 @@
 
 NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
 
-
-
 @interface WRLL1Parser ()
 
 // construct time
 @property (nonatomic, strong, readwrite) NSMutableArray <NSMutableArray <NSNumber *> *> *predictTable;
 @property (nonatomic, strong, readwrite) NSMutableArray <NSError *> *conflicts;
-@property (nonatomic, strong, readwrite) NSMutableDictionary <NSString *, NSNumber *> *tokenStr2IdMapper;
-@property (nonatomic, strong, readwrite) NSMutableArray <NSString *> *id2NonterminalMapper; // debug use
-@property (nonatomic, strong, readwrite) NSMutableArray <NSString *> *id2TerminalMapper; // debug use
 
 // parse time
 @property (nonatomic, strong, readwrite) NSMutableArray <NSString *> *tokenStack;
@@ -45,22 +40,7 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
   [self.language addEofToTerminals];
 
   //0 label the token
-  _tokenStr2IdMapper = [NSMutableDictionary dictionary];
 
-  _id2NonterminalMapper = [NSMutableArray array];
-  _id2TerminalMapper = [NSMutableArray array];
-  NSInteger i = 0;
-  for (NSString *tokenStr in self.language.nonterminals) {
-    [_tokenStr2IdMapper setValue:@(i++)
-                          forKey:tokenStr];
-    [_id2NonterminalMapper addObject:tokenStr];
-  }
-  i = 0;
-  for (NSString *tokenStr in self.language.terminals) {
-    [_tokenStr2IdMapper setValue:@(i++)
-                          forKey:tokenStr];
-    [_id2TerminalMapper addObject:tokenStr];
-  }
 
   //1.0 initiate for the prediction table
   NSInteger n = self.language.nonterminals.count;
@@ -86,12 +66,12 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
 
   //1.4 fill the prediction table
   for (NSString *nontString in self.language.grammars.allKeys) {
-    NSInteger nontId = self.tokenStr2IdMapper[nontString].integerValue;
+    NSInteger nontId = self.language.token2IdMapper[nontString].integerValue;
     for (WRRule *rule in self.language.grammars[nontString]) {
       NSInteger ruleId = rule.ruleIndex;
-      for (NSString *terminalStr in [self.language firstPlusSetForTokenSymbol:nontString
-                                                                 andRuleIndex:ruleId]) {
-        NSInteger termId = self.tokenStr2IdMapper[terminalStr].integerValue;
+      for (NSString *terminalStr in [self.language firstPlusSetForToken:nontString
+                                                           andRuleIndex:ruleId]) {
+        NSInteger termId = self.language.token2IdMapper[terminalStr].integerValue;
         if (self.predictTable[nontId][termId].integerValue >= 0) {
           // already set a rule index
           WRRule *alreadyRule = self.language.grammars[nontString][self.predictTable[nontId][termId].integerValue];
@@ -126,7 +106,7 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
   // print header
   NSInteger maxNontLen = 0;
   for (NSInteger i = 0; i < n; i++) {
-    maxNontLen = MAX(maxNontLen, self.id2NonterminalMapper[i].length);
+    maxNontLen = MAX(maxNontLen, self.language.nonterminalList[i].length);
   }
   NSInteger kMargin = 2;
 
@@ -137,13 +117,13 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
   printf(appendFormat.UTF8String, @" ".UTF8String);
 
   for (NSInteger j = 0; j < m; j++) {
-    NSString *terminal = self.id2TerminalMapper[j];
+    NSString *terminal = self.language.terminalList[j];
     printf(appendFormat.UTF8String, terminal.UTF8String);
   }
   printf("\n");
 
   for (NSInteger i = 0; i < n; i++) {
-    NSString *nont = self.id2NonterminalMapper[i];
+    NSString *nont = self.language.nonterminalList[i];
     printf(appendFormat.UTF8String, nont.UTF8String);
     for (NSInteger j = 0; j < m; j++) {
       NSInteger transition = self.predictTable[i][j].integerValue;
@@ -172,7 +152,7 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
 }
 
 #pragma mark run the parser
-- (void)setInputStr:(NSString *)inputStr{
+- (void)setInputStr:(NSString *)inputStr {
   [self.scanner setInputStr:inputStr];
 }
 
@@ -180,8 +160,9 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
   [self.scanner reset];
   [self.scanner startScan];
   [self.scanner scanToEnd];
-  
-  _tokenStack = [NSMutableArray arrayWithObjects:WREndOfFileTokenSymbol,self.language.startSymbol,nil];
+
+  _tokenStack = [NSMutableArray arrayWithObjects:WREndOfFileTokenSymbol,
+                                                 self.language.startSymbol, nil];
   WRToken *currentInputToken = self.scanner.nextToken;
 
   // TODO
@@ -216,37 +197,39 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
 }
 
 + (NSError *)errorOnCode:(WRLL1ParsingError)type
-          withInputToken:(WRToken *)inputToken
-        andExpectedToken:(NSString *)expectedTokenSymbol{
+          withInputToken:(WRTerminal *)inputToken
+        andExpectedToken:(NSString *)expectedTokenSymbol {
 
   NSString *content = @"";
-  switch (type){
+  switch (type) {
     // this case should not happen, caz the eof token
-    case WRLL1ParsingErrorTypeRunOutOfToken:{
-      content = [NSString stringWithFormat:@"run out of token on expecting: %@", expectedTokenSymbol];
+    case WRLL1ParsingErrorTypeRunOutOfToken: {
+      content = [NSString stringWithFormat:@"run out of token on expecting: %@",
+                                           expectedTokenSymbol];
       break;
     }
-    case WRLL1ParsingErrorTypeMismatchTokens:{
+    case WRLL1ParsingErrorTypeMismatchTokens: {
       content = [NSString stringWithFormat:@"mismatch tokens on input:%@ and expecting: %@ at line%ld, column%ld",
-                 inputToken.symbol,
-                 expectedTokenSymbol,
-                 inputToken.contentInfo.line,
-                 inputToken.contentInfo.column];
+                                           inputToken.symbol,
+                                           expectedTokenSymbol,
+                                           inputToken.contentInfo.line,
+                                           inputToken.contentInfo.column];
       break;
     }
-    case WRLL1ParsingErrorTypeUnsupportedTransition:{
-      content = [NSString stringWithFormat:@"unsupported transition on input:%@ and current nonterminal: %@ at line%ld, column%ld",
-                 inputToken.symbol,
-                 expectedTokenSymbol,
-                 inputToken.contentInfo.line,
-                 inputToken.contentInfo.column];
+    case WRLL1ParsingErrorTypeUnsupportedTransition: {
+      content =
+        [NSString stringWithFormat:@"unsupported transition on input:%@ and current nonterminal: %@ at line%ld, column%ld",
+                                   inputToken.symbol,
+                                   expectedTokenSymbol,
+                                   inputToken.contentInfo.line,
+                                   inputToken.contentInfo.column];
       break;
     }
     default: break;
   }
   NSError *error = [NSError errorWithDomain:kWRLL1ParserErrorDomain
                                        code:type
-                                   userInfo:@{@"content":content}];
+                                   userInfo:@{@"content": content}];
   return error;
 }
 @end

@@ -13,6 +13,7 @@
 #import "WRRELanguage.h"
 
 void test();
+void ruleTest();
 void testEarleyParser();
 void testLR0Parser();
 void testLL1Parser();
@@ -22,7 +23,7 @@ void testString();
 
 int main(int argc, const char * argv[]) {
   @autoreleasepool {
-    testWordScanner();
+    testLL1Parser();
   }
     return 0;
 }
@@ -35,7 +36,7 @@ void testWordScanner(){
 void testLL1Parser(){
   WRLL1Parser *parser = [[WRLL1Parser alloc]init];
   WRWordScanner *scanner = [[WRWordScanner alloc]init];
-  WRLanguage *language = [WRRELanguage CFGrammar_RE_Basic1];
+  WRLanguage *language = [WRLanguage CFGrammar_EAC_3_4_RR];
   scanner.inputStr = @"[c-cc]oc";
   parser.language = language;
   parser.scanner = scanner;
@@ -48,7 +49,7 @@ void testEarleyParser(){
 //    scanner.inputStr = @"abbb";
 //    WRLanguage *language = [WRLanguage CFGrammar_SPFER_3];
   WRLanguage *language = [WRRELanguage CFGrammar_RE_Basic1];
-  scanner.inputStr = @"char char or char";
+  scanner.inputStr = @"char ( char or char char ) or char";
   [scanner startScan];
   parser.language = language;
   parser.scanner = scanner;
@@ -128,14 +129,14 @@ void tokenTest(){
 
 void ruleTest(){
   WRRule *rule1 = [WRRule ruleWithRuleStr:@"S  -> A B C   "];
-  assert([rule1.leftToken.symbol isEqualToString:@"S"]);
-  NSArray <WRToken *>*rightTokens = rule1.rightTokens;
-  assert([rightTokens[0].symbol isEqualToString:@"A"]);
-  assert([rightTokens[1].symbol isEqualToString:@"B"]);
-  assert([rightTokens[2].symbol isEqualToString:@"C"]);
+  assert([rule1.leftToken isEqualToString:@"S"]);
+  NSArray <NSString *>*rightTokens = rule1.rightTokens;
+  assert([rightTokens[0] isEqualToString:@"A"]);
+  assert([rightTokens[1] isEqualToString:@"B"]);
+  assert([rightTokens[2] isEqualToString:@"C"]);
   
   rule1 = [WRRule ruleWithRuleStr:@"S->   "];
-  assert([rule1.leftToken.symbol isEqualToString:@"S"]);
+  assert([rule1.leftToken isEqualToString:@"S"]);
   rightTokens = rule1.rightTokens;
   assert(rightTokens.count == 0);
 }
@@ -153,26 +154,16 @@ void languageTest(){
                                                                     @"C->c"]
                                                   andStartSymbol:@"S"];
   
-  WRToken *S = [WRToken tokenWithSymbol:@"S"];
-  WRToken *A = [WRToken tokenWithSymbol:@"A"];
-  WRToken *B = [WRToken tokenWithSymbol:@"B"];
-  WRToken *C = [WRToken tokenWithSymbol:@"C"];
-  WRToken *D = [WRToken tokenWithSymbol:@"D"];
-  WRToken *E = [WRToken tokenWithSymbol:@"E"];
-  WRToken *a = [WRToken tokenWithSymbol:@"a"];
-  WRToken *b = [WRToken tokenWithSymbol:@"b"];
-  WRToken *c = [WRToken tokenWithSymbol:@"c"];
-  WRToken *d = [WRToken tokenWithSymbol:@"d"];
-  assert([language isTokenNullable:S]);
-  assert([language isTokenNullable:A]);
-  assert([language isTokenNullable:B]);
-  assert([language isTokenNullable:C]);
-  assert(![language isTokenNullable:D]);
-  assert([language isTokenNullable:E]);
-  assert(![language isTokenNullable:a]);
-  assert(![language isTokenNullable:b]);
-  assert(![language isTokenNullable:c]);
-  assert(![language isTokenNullable:d]);
+  assert([language isTokenNullable:@"S"]);
+  assert([language isTokenNullable:@"A"]);
+  assert([language isTokenNullable:@"B"]);
+  assert([language isTokenNullable:@"C"]);
+  assert(![language isTokenNullable:@"D"]);
+  assert([language isTokenNullable:@"E"]);
+  assert(![language isTokenNullable:@"a"]);
+  assert(![language isTokenNullable:@"b"]);
+  assert(![language isTokenNullable:@"c"]);
+  assert(![language isTokenNullable:@"d"]);
 }
 
 void test(){

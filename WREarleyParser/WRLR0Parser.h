@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, WRLR0NFATransitionType){
 
 + (instancetype)NFATransitionWithFromState:(WRLR0NFAState *)from
                                    toState:(WRLR0NFAState *)to
-                            andConsumption:(WRToken * )consumption;
+                            andConsumption:(NSString * )consumption;
 
 @end
 
@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionType){
 
 @interface WRLR0Parser : NSObject
 @property (nonatomic, strong, readwrite) WRLanguage *language;
-@property (nonatomic, strong, readwrite) WRScanner *scanner; // TODO test use
+@property (nonatomic, strong, readwrite) WRWordScanner *scanner; // TODO test use
 @property (nonatomic, strong, readwrite) WRSPPFNode * parseTree; // TODO here is only parse tree, not forest
 
 - (void)prepare;

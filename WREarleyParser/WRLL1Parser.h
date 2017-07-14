@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, WRLL1ParsingError){
 @interface WRLL1Parser : NSObject
 @property (nonatomic, strong, readwrite) WRLanguage *language;
 @property (nonatomic, strong, readwrite) WRWordScanner *scanner;
-@property (nonatomic, strong, readwrite) WRToken *parseTree;
+@property (nonatomic, strong, readwrite) WRNonterminal *parseTree;
 
 - (void)prepare;
 
