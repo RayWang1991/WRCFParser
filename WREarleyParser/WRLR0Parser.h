@@ -1,5 +1,5 @@
-/* Basic Earley Parser
- * From 'Parsing Techniques' Chap 7.2
+/* Basic LR(0) Parser Generator
+ * Ref: 'Parsing Techniques' Chap 9.5
  * Author: Ray Wang
  * Date: 2017.6.30
  */

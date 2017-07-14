@@ -1,1 +1,1 @@
-../../../../../../../WRParsingComponent/WRParsingBasic/Classes/WRScanner.h
+../../../../../../../WRParsingComponent/WRParsingBasic/Classes/Scanner/WRScanner.h

@@ -1,4 +1,10 @@
-
+/* Basic Earley Parser Generator
+ * Ref 'Parsing Techniques' Chap 7.2,
+ * Elizabeth Scott, 'SPPF-Style Parsing From Earley Recognisers',
+ * Electronic Notes in Theoretical Computer Science 203 (2008) 53–67
+ * Author: Ray Wang
+ * Date: 2017.6.7
+ */
 
 #import "WREarleyParser.h"
 
@@ -323,7 +329,7 @@
 #pragma mark post construct SPPF
 // post construct shared packed parse forest (SPPF)
 - (void)constructItemPointers {
-  [_scanner reset];
+  [self.scanner reset];
   // dispose item set 0
   WRItemSet *currentSet = self.itemSetList[0];
   for (NSString *completeStr in currentSet.completeSet) {

@@ -1,12 +1,12 @@
-/* Basic Earley Parser
- * From 'Parsing Techniques' Chap 7.2
+/* Basic LR(0) Parser Generator
+ * Ref: 'Parsing Techniques' Chap 9.5
  * Author: Ray Wang
  * Date: 2017.6.30
  */
 
 #import "WRLR0Parser.h"
 #pragma mark error for LR0
-NSString *const kWRLR0ParserErrorDomain = @"erorr.Parser.WRLR0";
+NSString *const kWRLR0ParserErrorDomain = @"erorr.Parser.LR0";
 
 typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
   WRLR0DFAActionErrorShiftReduceConflict,
@@ -142,16 +142,21 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
 @end
 
 @interface WRLR0Parser ()
-//DFA
+// DFA
 @property (nonatomic, strong, readwrite) WRLR0DFAState *DFAStartState;
 @property (nonatomic, strong, readwrite) NSMutableDictionary <NSString *, WRLR0DFAState *> *DFARecordSet;
 @property (nonatomic, strong, readwrite) NSMutableArray <NSError *> *conflicts;
 @property (nonatomic, strong, readwrite) NSMutableArray <WRLR0DFAState *> *DFAWorkList;
 @end
 
+@interface WRLR0Parser()
+// parsing runtime
+@property (nonatomic, strong, readwrite) NSMutableArray <WRToken *> *tokenStack;
+
+@end
 @implementation WRLR0Parser
-- (void)startParsing {
-}
+
+#pragma mark - pre construction
 
 - (void)prepare {
   assert(_language);
@@ -250,9 +255,7 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
       [state addTransition:transition];
       [_NFATransitionRecordSet setValue:transition
                                  forKey:transition.description];
-
     }
-
     item = nextItem;
     state = nextState;
   }
@@ -324,7 +327,7 @@ static int stateId = 0;
 #pragma mark transition token helper
 - (NSMutableDictionary <NSString *, NSMutableArray <WRLR0NFATransition *> *> *)
 transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
-  NSMutableDictionary <NSString *, NSMutableArray *> *dict = [NSMutableDictionary dictionary];
+  NSMutableDictionary <NSString *, NSMutableArray <WRLR0NFATransition *> *> *dict = [NSMutableDictionary dictionary];
   for (WRLR0NFAState *nfaState in nfaStates) {
     for (WRLR0NFATransition *transition in nfaState.transitionList) {
       if (transition.type == WRLR0NFATransitionTypeNormal) {
@@ -359,7 +362,7 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
     }
     currentCount = set.count;
   }
-  // remove all station(token content NFA state)
+  // remove all station(token content NFA state), just for convenience
   NSMutableArray *array = [NSMutableArray array];
   for (WRLR0NFAState *state in set) {
     if (state.type == WRLR0NFAStateTypeToken) {
@@ -423,7 +426,7 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
                                            userInfo:@{@"state": str}];
           [self.conflicts addObject:error];
         }
-        // can not be a shift/shift conflict
+        // can not be a shift/shift conflict due to the subset construction
       } else {
         foundAction = YES;
         foundType = WRLR0DFAActionTypeShift;
@@ -444,13 +447,13 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
   printf("All DFA States and Transitions:\n");
   for (WRLR0DFAState *dfaState in self.DFARecordSet.allValues) {
     NSString *stateStr = [WRUtils debugStrWithTabs:2 forString:dfaState.contentStr];
-    NSString *information = @"";
-    printf("state ID: %d ",dfaState.stateId);
+    printf("state ID: %ld ",(long)dfaState.stateId);
     if(dfaState.actionType == WRLR0DFAActionTypeShift){
       printf("shift state\n");
       printf("%s", stateStr.UTF8String);
       for(NSString *transitionTokenStr in dfaState.transitionDict){
-        printf("    --\'%s\'--> %d\n", transitionTokenStr.UTF8String, dfaState.transitionDict[transitionTokenStr].stateId);
+        printf("    --\'%s\'--> %ld\n", transitionTokenStr.UTF8String,
+               (long)dfaState.transitionDict[transitionTokenStr].stateId);
       }
     } else{
       WRRule *reduceRule = self.language.grammars[dfaState.reduceTokenSymbol][dfaState.reduceRuleIndex];
@@ -458,5 +461,29 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
       printf("%s", stateStr.UTF8String);
     }
   }
+}
+
+#pragma mark - run DFA parser
+- (void)startParsing {
+  // construct the parse tree at run time
+  [self.scanner reset];
+  [self.scanner scanToEnd];
+  _tokenStack = [NSMutableArray arrayWithArray:self.scanner.tokens];
+  assert(_tokenStack.count > 0);
+  WRToken *token = nil;
+  WRLR0DFAState *state = self.DFAStartState;
+  // TODO
+//  while((_tokenStack.count == 1 && _tokenStack[0].symbol isEqualToString:self.language.startSymbol)){
+//    switch (state.actionType) {
+//      case WRLR0DFAActionTypeReduce:{
+//        
+//        break;
+//      }
+//        
+//      default:
+//        break;
+//    }
+//  }
+  
 }
 @end

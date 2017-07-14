@@ -8,39 +8,48 @@
 #import "WRParsingBasicLib.h"
 #import "WREarleyParser.h"
 #import "WRLR0Parser.h"
+#import "WRLL1Parser.h"
 
 #import "WRRELanguage.h"
 
 void test();
-void testLR0Parser();
 void testEarleyParser();
+void testLR0Parser();
+void testLL1Parser();
+void testWordScanner();
 void testLexer();
 void testString();
 
 int main(int argc, const char * argv[]) {
   @autoreleasepool {
-    testLR0Parser();
+    testWordScanner();
   }
     return 0;
 }
-void testLR0Parser(){
-  WRLR0Parser *parser = [[WRLR0Parser alloc]init];
-  WRScanner *scanner = [[WRScanner alloc]init];
-  WRLanguage *language = [WRLanguage CFGrammar_9_14];
+
+void testWordScanner(){
+  WRWordScanner *scanner = [[WRWordScanner alloc]init];
+  [scanner test];
+}
+
+void testLL1Parser(){
+  WRLL1Parser *parser = [[WRLL1Parser alloc]init];
+  WRWordScanner *scanner = [[WRWordScanner alloc]init];
+  WRLanguage *language = [WRRELanguage CFGrammar_RE_Basic1];
   scanner.inputStr = @"[c-cc]oc";
   parser.language = language;
   parser.scanner = scanner;
   [parser prepare];
-
 }
 
 void testEarleyParser(){
   WREarleyParser *parser = [[WREarleyParser alloc]init];
-  WRScanner *scanner = [[WRScanner alloc]init];
+  WRWordScanner *scanner = [[WRWordScanner alloc]init];
 //    scanner.inputStr = @"abbb";
 //    WRLanguage *language = [WRLanguage CFGrammar_SPFER_3];
-  WRLanguage *language = [WRRELanguage CFGrammar_RE_Basic];
-  scanner.inputStr = @"[c-cc]oc";
+  WRLanguage *language = [WRRELanguage CFGrammar_RE_Basic1];
+  scanner.inputStr = @"char char or char";
+  [scanner startScan];
   parser.language = language;
   parser.scanner = scanner;
   [parser startParsing];

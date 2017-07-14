@@ -8,7 +8,7 @@
 
 @implementation WRRELanguage
 
-+ (WRLanguage *)CFGrammar_RE_Basic{
++ (WRLanguage *)CFGrammar_RE_Basic0{
   return [[super alloc] initWithRuleStrings:@[@"MidOp -> o | a | ",
                                             @"PostOp -> + | *",
                                             @"Chars -> Chars c | c",
@@ -18,4 +18,16 @@
                                             @"S -> Fragment"]
                              andStartSymbol:@"S"];
 }
+
++ (WRLanguage *)CFGrammar_RE_Basic1{
+  return [[super alloc] initWithRuleStrings:@[
+                                              @"S -> Frag",
+                                              @"Frag -> Frag or Seq | Seq ", // here the '|' is used
+                                              @"Seq -> Seq Unit | Unit ",
+                                              @"Unit -> char | char PostOp | ( Frag )",
+                                              @"PostOp -> + | * | ? ",
+                                              ]
+                             andStartSymbol:@"S"];
+}
+
 @end

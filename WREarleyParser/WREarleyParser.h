@@ -1,5 +1,7 @@
-/* Basic Earley Parser
- * From 'Parsing Techniques' Chap 7.2
+/* Basic Earley Parser Generator
+ * Ref 'Parsing Techniques' Chap 7.2,
+ * Elizabeth Scott, 'SPPF-Style Parsing From Earley Recognisers',
+ * Electronic Notes in Theoretical Computer Science 203 (2008) 53–67
  * Author: Ray Wang
  * Date: 2017.6.7
  */
@@ -21,7 +23,7 @@
 @interface WREarleyParser : NSObject
 @property (nonatomic, strong, readwrite) NSMutableArray <WRItemSet *> *itemSetList;
 @property (nonatomic, strong, readwrite) WRLanguage *language;
-@property (nonatomic, strong, readwrite) WRScanner *scanner; // TODO test use
+@property (nonatomic, strong, readwrite) WRWordScanner *scanner; // TODO test use
 // construct SPPF, TODO
 @property (nonatomic, strong, readwrite) NSMutableDictionary <NSString *, WRSPPFNode *> *nodeSet;
 @property (nonatomic, strong, readwrite) NSArray <NSMutableDictionary <NSString *, WRItem *> *> *processedSetList;
