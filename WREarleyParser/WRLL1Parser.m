@@ -157,10 +157,12 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
 }
 
 - (void)startParsing {
+  [self.scanner setNumOfEof:1];
   [self.scanner reset];
   [self.scanner startScan];
   [self.scanner scanToEnd];
 
+  _errors = [NSMutableArray array];
   _parseTree = [WRNonterminal tokenWithSymbol:self.language.startSymbol];
   _tokenStack = [NSMutableArray arrayWithObjects:[WRTerminal tokenWithSymbol:WREndOfFileTokenSymbol],
                                                  _parseTree, nil];
@@ -190,15 +192,19 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
         } else {
           currentNonterminal.ruleIndex = ruleIndex;
           WRRule *usingRule = self.language.grammars[currentFocus.symbol][ruleIndex];
-          NSArray <WRToken *> *children = usingRule.getRightTokenArray;
+          NSMutableArray <WRToken *> *children = [usingRule getRightTokenArrayUsingOrder:NSEnumerationConcurrent];
           currentNonterminal.children = children;
-          [self.tokenStack addObjectsFromArray:children];
+          [children enumerateObjectsWithOptions:NSEnumerationReverse
+                                     usingBlock:^(WRToken * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                       [self.tokenStack addObject:obj];
+                                     }];
         }
       } else {
         // terminal
         WRTerminal *currentTerminal = (WRTerminal *)currentFocus;
         if([currentTerminal matchWithToken:currentInputToken]){
           [currentTerminal copyWithTerminal:currentInputToken];
+          currentInputToken = self.scanner.nextToken;
         } else{
           [self.errors addObject:[self errorOnCode:WRLL1ParsingErrorTypeMismatchTokens
                                     withInputToken:currentInputToken
@@ -234,11 +240,14 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
       assert(expectedTokenSymbol.tokenTypeForString == nonTerminal);
       NSInteger indexForNonterminal = self.language.token2IdMapper[expectedTokenSymbol].integerValue;
       NSMutableString *validStr = [NSMutableString stringWithString:@"do you mean:"];
-      for (NSNumber *index in self.predictTable[indexForNonterminal]) {
-        NSString *terminal = self.language.terminalList[index.integerValue];
-        [validStr appendFormat:@" %@",
-                               terminal];
-      }
+       [self.predictTable[indexForNonterminal] enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSInteger i = obj.integerValue;
+        if(i >= 0){
+          NSString *terminal = self.language.terminalList[idx];
+          [validStr appendFormat:@" %@",
+                                 terminal];
+        }
+       }];
       [validStr appendString:@"?"];
       content =
         [NSString stringWithFormat:@"unsupported transition on input:%@ at line%ld, column%ld, %@",

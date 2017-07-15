@@ -37,10 +37,15 @@ void testLL1Parser(){
   WRLL1Parser *parser = [[WRLL1Parser alloc]init];
   WRWordScanner *scanner = [[WRWordScanner alloc]init];
   WRLanguage *language = [WRLanguage CFGrammar_EAC_3_4_RR];
-  scanner.inputStr = @"[c-cc]oc";
+//  scanner.inputStr = @"[c-cc]oc";
+  scanner.inputStr = @"num + num";
   parser.language = language;
   parser.scanner = scanner;
   [parser prepare];
+  [parser startParsing];
+  WRTreeHorizontalDashStylePrinter *printer = [[WRTreeHorizontalDashStylePrinter alloc]init];
+  [parser.parseTree accept:printer];
+  [printer print];
 }
 
 void testEarleyParser(){
