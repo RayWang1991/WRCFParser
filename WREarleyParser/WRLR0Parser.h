@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, WRLR0NFATransitionType){
 @property(nonatomic, assign, readwrite) WRLR0NFATransitionType type;
 @property(nonatomic, weak, readwrite) WRLR0NFAState *from;
 @property(nonatomic, strong, readwrite) WRLR0NFAState *to;
-@property(nonatomic, strong, readwrite) WRToken *consumption;
+@property(nonatomic, strong, readwrite) NSString *consumption;
 
 + (instancetype)NFATransitionWithFromState:(WRLR0NFAState *)from
                                    toState:(WRLR0NFAState *)to

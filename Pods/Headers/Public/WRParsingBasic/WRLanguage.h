@@ -1,1 +1,1 @@
-../../../../../../../WRParsingComponent/WRParsingBasic/Classes/WRLanguage.h
+../../../../../../../WRParsingComponent/WRParsingBasic/Classes/Language/WRLanguage.h

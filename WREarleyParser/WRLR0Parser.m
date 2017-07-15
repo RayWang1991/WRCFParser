@@ -331,7 +331,7 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
   for (WRLR0NFAState *nfaState in nfaStates) {
     for (WRLR0NFATransition *transition in nfaState.transitionList) {
       if (transition.type == WRLR0NFATransitionTypeNormal) {
-        NSString *symbol = transition.consumption.symbol;
+        NSString *symbol = transition.consumption;
         if (nil == dict[symbol]) {
           [dict setValue:[NSMutableArray arrayWithObject:transition]
                   forKey:symbol];
