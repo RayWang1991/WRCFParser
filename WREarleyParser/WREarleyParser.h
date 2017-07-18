@@ -28,6 +28,7 @@
 @property (nonatomic, strong, readwrite) NSMutableDictionary <NSString *, WRSPPFNode *> *nodeSet;
 @property (nonatomic, strong, readwrite) NSArray <NSMutableDictionary <NSString *, WRItem *> *> *processedSetList;
 @property (nonatomic, strong, readwrite) WRSPPFNode *parseForest; // TODO verify use
+@property (nonatomic, strong, readwrite) WRNonterminal *parseTree;  
 
 - (void)startParsing;
 

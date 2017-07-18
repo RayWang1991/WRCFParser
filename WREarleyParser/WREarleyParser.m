@@ -325,7 +325,8 @@
   [self endParsing];
   // TODO may combine the Item pointer construction with the parsing progress
   [self constructSharedPackedParseForest];
-  [self printAST];
+//  [self constructPaseTreeIfNeeded];
+  [self printSPPF];
 }
 
 #pragma mark post construct SPPF
@@ -586,6 +587,7 @@
 
 - (void)constructSharedPackedParseForest {
   NSInteger n = self.itemSetList.count - 1;
+
   WRSPPFNode *nodeS = [WRSPPFNode SPPFNodeWithContent:self.language.startSymbol
                                            leftExtent:0
                                        andRightExtent:n];
@@ -606,7 +608,7 @@
 
 #pragma mark AST Construction
 //TODO
-- (void)printAST {
+- (void)printSPPF {
   WRSPPFNode *node = [self ambiguousNodeWithNode:self.parseForest];
   BOOL isAmbiguous = node != nil;
   if (isAmbiguous) {
@@ -616,10 +618,14 @@
   NSLog(@"The result is NOT ambiguous");
   // print the whole SPPF
 
-  WRTreeNode *rootNode = [self printNodeForNode:self.parseForest];
-  [WRTreeNode printTree:rootNode];
+  WRTreeHorizontalDashStylePrinter *printer = [[WRTreeHorizontalDashStylePrinter alloc]init];
+  [self.parseForest accept:printer];
+  [printer print];
+//  WRTreeNode *rootNode = [self printNodeForNode:self.parseForest];
+//  [WRTreeNode printTree:rootNode];
 }
 
+// deprecated
 - (WRTreeNode *)printNodeForNode:(WRSPPFNode *)root {
   if (root == nil) {
     return nil;
@@ -631,7 +637,6 @@
     return node;
   }
 
-  //TODO
   assert(root.families[0].count > 0);
   assert(root.families[0].count <= 2);
   NSMutableArray *array = [NSMutableArray array];
@@ -677,4 +682,30 @@
                                        obj] UTF8String]);
   }];
 }
+
+//- (WRToken *)tokenFromSPPF:(WRSPPFNode *)node {
+//  if (node == nil) {
+//    return nil;
+//  }
+//  assert(node.families.count <= 1);
+//  if (node.families.count == 0) {
+//    // node must be a terminal
+//    if (node.leftExtent == node.rightExtent) {
+//      // epsilon
+//      return nil;
+//    } else {
+//      assert(node.rightExtent - node.leftExtent == 1);
+//      WRTerminal *terminal = [self.scanner tokenAtIndex:node.leftExtent];
+//      return terminal;
+//    }
+//  } else {
+//    switch (node.type) {
+//      case WRSPPFNodeTypeToken: {
+//        // must be a nonterminal
+//        // find using rule ?
+//      }
+//    }
+//
+//  }
+//}
 @end

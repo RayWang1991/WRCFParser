@@ -20,6 +20,7 @@ void testLL1Parser();
 void testWordScanner();
 void testLexer();
 void testString();
+void testTreePattern();
 
 int main(int argc, const char * argv[]) {
   @autoreleasepool {
@@ -37,15 +38,28 @@ void testLL1Parser(){
   WRLL1Parser *parser = [[WRLL1Parser alloc]init];
   WRWordScanner *scanner = [[WRWordScanner alloc]init];
   WRLanguage *language = [WRLanguage CFGrammar_EAC_3_4_RR];
-//  scanner.inputStr = @"[c-cc]oc";
-  scanner.inputStr = @"num + num";
+
+  scanner.inputStr = @"( name - num ) × ( num ÷ name )";
+//  scanner.inputStr = @" name - num ";
+//  scanner.inputStr = @" name × num ";
+  scanner.language = language;
   parser.language = language;
   parser.scanner = scanner;
   [parser prepare];
   [parser startParsing];
-  WRTreeHorizontalDashStylePrinter *printer = [[WRTreeHorizontalDashStylePrinter alloc]init];
-  [parser.parseTree accept:printer];
-  [printer print];
+  // print parse tree
+  WRTreeHorizontalDashStylePrinter *hdPrinter = [[WRTreeHorizontalDashStylePrinter alloc]init];
+  WRTreeLispStylePrinter *lispPrinter = [[WRTreeLispStylePrinter alloc]init];
+  [parser.parseTree accept:hdPrinter];
+  [parser.parseTree accept:lispPrinter];
+  [hdPrinter print];
+  [lispPrinter print];
+
+  // print AST
+  WRAST *ast = [language astNodeForToken:parser.parseTree];
+  hdPrinter = [[WRTreeHorizontalDashStylePrinter alloc]init];
+  [ast accept:hdPrinter];
+  [hdPrinter print];
 }
 
 void testEarleyParser(){
@@ -169,6 +183,41 @@ void languageTest(){
   assert(![language isTokenNullable:@"b"]);
   assert(![language isTokenNullable:@"c"]);
   assert(![language isTokenNullable:@"d"]);
+}
+
+void testTreePattern(){
+  WRTreePattern *pattern = [WRTreePattern treePatternWithString:@"( abc def ghi )"];
+  assert(pattern.actions.count == 5);
+  assert(pattern.actions[0].type == WRTreePatternMatchActionMatch);
+  assert(pattern.actions[1].type == WRTreePatternMatchActionGoDown);
+  assert(pattern.actions[2].type == WRTreePatternMatchActionMatch);
+  assert(pattern.actions[3].type == WRTreePatternMatchActionMatch);
+  assert(pattern.actions[4].type == WRTreePatternMatchActionGoUp);
+  assert([((WRTreePatternMatchAction *) pattern.actions[0]).symbol isEqualToString:@"abc"]);
+  assert([((WRTreePatternMatchAction *) pattern.actions[2]).symbol isEqualToString:@"def"]);
+  assert([((WRTreePatternMatchAction *) pattern.actions[3]).symbol isEqualToString:@"ghi"]);
+
+  pattern = [WRTreePattern treePatternWithString:@"(abc def ghi)"];
+  assert(pattern.actions.count == 5);
+  assert(pattern.actions[0].type == WRTreePatternMatchActionMatch);
+  assert(pattern.actions[1].type == WRTreePatternMatchActionGoDown);
+  assert(pattern.actions[2].type == WRTreePatternMatchActionMatch);
+  assert(pattern.actions[3].type == WRTreePatternMatchActionMatch);
+  assert(pattern.actions[4].type == WRTreePatternMatchActionGoUp);
+  assert([((WRTreePatternMatchAction *) pattern.actions[0]).symbol isEqualToString:@"abc"]);
+  assert([((WRTreePatternMatchAction *) pattern.actions[2]).symbol isEqualToString:@"def"]);
+  assert([((WRTreePatternMatchAction *) pattern.actions[3]).symbol isEqualToString:@"ghi"]);
+
+  pattern = [WRTreePattern treePatternWithString:@"(\\(abc\\) \\(def ghi\\))"];
+  assert(pattern.actions.count == 5);
+  assert(pattern.actions[0].type == WRTreePatternMatchActionMatch);
+  assert(pattern.actions[1].type == WRTreePatternMatchActionGoDown);
+  assert(pattern.actions[2].type == WRTreePatternMatchActionMatch);
+  assert(pattern.actions[3].type == WRTreePatternMatchActionMatch);
+  assert(pattern.actions[4].type == WRTreePatternMatchActionGoUp);
+  assert([((WRTreePatternMatchAction *) pattern.actions[0]).symbol isEqualToString:@"(abc)"]);
+  assert([((WRTreePatternMatchAction *) pattern.actions[2]).symbol isEqualToString:@"(def"]);
+  assert([((WRTreePatternMatchAction *) pattern.actions[3]).symbol isEqualToString:@"ghi)"]);
 }
 
 void test(){
