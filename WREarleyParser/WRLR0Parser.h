@@ -8,7 +8,7 @@
 
 extern NSString *const kWRLR0ParserErrorDomain;
 
-typedef NS_ENUM(NSInteger, WRLR0NFAStateType){
+typedef NS_ENUM(NSInteger, WRLR0NFAStateType) {
   WRLR0NFAStateTypeToken,
   WRLR0NFAStateTypeItem,
 };
@@ -22,7 +22,9 @@ typedef NS_ENUM(NSInteger, WRLR0NFAStateType){
 @property (nonatomic, strong, readwrite) id content;
 @property (nonatomic, strong, readwrite) NSMutableArray <WRLR0NFATransition *> *transitionList;
 
-+ (instancetype)NFAStateWithSymbol:(NSString *)symbol type:(WRLR0NFAStateType )type andContent:(id)content;
++ (instancetype)NFAStateWithSymbol:(NSString *)symbol
+                              type:(WRLR0NFAStateType)type
+                        andContent:(id)content;
 
 + (instancetype)NFAStateWithContent:(id)content;
 
@@ -31,37 +33,37 @@ typedef NS_ENUM(NSInteger, WRLR0NFAStateType){
 @end
 
 // NFA Transition
-typedef NS_ENUM(NSInteger, WRLR0NFATransitionType){
+typedef NS_ENUM(NSInteger, WRLR0NFATransitionType) {
   WRLR0NFATransitionTypeEpsilon,
   WRLR0NFATransitionTypeNormal,
 };
 @interface WRLR0NFATransition : NSObject<NSObject>
 
-@property(nonatomic, assign, readwrite) WRLR0NFATransitionType type;
-@property(nonatomic, weak, readwrite) WRLR0NFAState *from;
-@property(nonatomic, strong, readwrite) WRLR0NFAState *to;
-@property(nonatomic, strong, readwrite) NSString *consumption;
+@property (nonatomic, assign, readwrite) WRLR0NFATransitionType type;
+@property (nonatomic, weak, readwrite) WRLR0NFAState *from;
+@property (nonatomic, strong, readwrite) WRLR0NFAState *to;
+@property (nonatomic, strong, readwrite) NSString *consumption;
 
 + (instancetype)NFATransitionWithFromState:(WRLR0NFAState *)from
                                    toState:(WRLR0NFAState *)to
-                            andConsumption:(NSString * )consumption;
+                            andConsumption:(NSString *)consumption;
 
 @end
 
-typedef NS_ENUM(NSInteger, WRLR0DFAActionType){
+typedef NS_ENUM(NSInteger, WRLR0DFAActionType) {
   WRLR0DFAActionTypeReduce,
   WRLR0DFAActionTypeShift,
 };
 
-@interface WRLR0DFAState : NSObject <NSObject>
+@interface WRLR0DFAState : NSObject<NSObject>
 
-@property(nonatomic, assign, readwrite) NSInteger stateId;
-@property(nonatomic, assign, readwrite) NSString *contentStr;
-@property(nonatomic, strong, readwrite) NSMutableSet<WRLR0NFAState *> *nfaStates;
-@property(nonatomic, assign, readwrite) WRLR0DFAActionType actionType;
-@property(nonatomic, strong, readwrite) NSString *reduceTokenSymbol;
-@property(nonatomic, assign, readwrite) NSInteger reduceRuleIndex;
-@property(nonatomic, strong, readwrite) NSMutableDictionary<NSString *, WRLR0DFAState *> *transitionDict;
+@property (nonatomic, assign, readwrite) NSInteger stateId;
+@property (nonatomic, assign, readwrite) NSString *contentStr;
+@property (nonatomic, strong, readwrite) NSMutableSet<WRLR0NFAState *> *nfaStates;
+@property (nonatomic, assign, readwrite) WRLR0DFAActionType actionType;
+@property (nonatomic, strong, readwrite) NSString *reduceTokenSymbol;
+@property (nonatomic, assign, readwrite) NSInteger reduceRuleIndex;
+@property (nonatomic, strong, readwrite) NSMutableDictionary<NSString *, WRLR0DFAState *> *transitionDict;
 
 - (instancetype)initWithNFAStates:(NSMutableSet<WRLR0NFAState *> *)nfaStates;
 + (instancetype)DFAStateWithNFAStates:(NSMutableSet <WRLR0NFAState *> *)nfaStates;
@@ -72,7 +74,7 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionType){
 @interface WRLR0Parser : NSObject
 @property (nonatomic, strong, readwrite) WRLanguage *language;
 @property (nonatomic, strong, readwrite) WRWordScanner *scanner; // TODO test use
-@property (nonatomic, strong, readwrite) WRSPPFNode * parseTree; // TODO here is only parse tree, not forest
+@property (nonatomic, strong, readwrite) WRSPPFNode *parseTree; // TODO here is only parse tree, not forest
 
 - (void)prepare;
 - (void)startParsing;

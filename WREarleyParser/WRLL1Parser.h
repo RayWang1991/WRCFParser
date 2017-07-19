@@ -12,7 +12,7 @@ typedef NS_ENUM(NSInteger, WRLL1ConflictError) {
   WRLL1ErrorTypeFirstPlusFirstPlusConflict
 };
 // parsing error
-typedef NS_ENUM(NSInteger, WRLL1ParsingError){
+typedef NS_ENUM(NSInteger, WRLL1ParsingError) {
   WRLL1ParsingErrorTypeRunOutOfToken,
   WRLL1ParsingErrorTypeMismatchTokens,
   WRLL1ParsingErrorTypeUnsupportedTransition,

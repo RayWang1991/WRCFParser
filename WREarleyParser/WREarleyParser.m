@@ -325,7 +325,7 @@
 }
 
 #pragma mark post construct SPPF
-- (void)constructSPPF{
+- (void)constructSPPF {
   // TODO may combine the Item pointer construction with the parsing progress
   [self constructItemPointers];
   [self buildSharedPackedParseForest];
@@ -703,7 +703,7 @@
            withRightExtent:n];
 
   printf("\nParseTree:\n");
-  WRTreeHorizontalDashStylePrinter *hdPrinter = [[WRTreeHorizontalDashStylePrinter alloc]init];
+  WRTreeHorizontalDashStylePrinter *hdPrinter = [[WRTreeHorizontalDashStylePrinter alloc] init];
   [self.parseTree accept:hdPrinter];
   [hdPrinter print];
 }

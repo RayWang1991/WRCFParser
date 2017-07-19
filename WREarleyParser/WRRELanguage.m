@@ -41,7 +41,7 @@ NSString *const WRRELanguageVirtualConcatenate = @"cat";
 - (WRAST *)astNodeForToken:(WRToken *)token {
   WRRELanguageRE_BASIC_1_ASTBuilder *builder =
     [[WRRELanguageRE_BASIC_1_ASTBuilder alloc] initWithStartToken:token
-                                                       andLanguage:self];
+                                                      andLanguage:self];
   [token accept:builder];
   return builder.ast;
 }
@@ -132,13 +132,13 @@ NSString *const WRRELanguageVirtualConcatenate = @"cat";
       }
       case 3: {
         // Unit
-        switch (nonterminal.ruleIndex){
-          case 0:{
+        switch (nonterminal.ruleIndex) {
+          case 0: {
             // Unit -> char
             nonterminal.synAttr = [[WRAST alloc] initWithWRTerminal:children[0]];
             break;
           }
-          case 1:{
+          case 1: {
             // Unit -> char PostOp
             WRTerminal *char1 = children[0];
             WRToken *postOp = children[1];
@@ -148,7 +148,7 @@ NSString *const WRRELanguageVirtualConcatenate = @"cat";
             nonterminal.synAttr = ast;
             break;
           }
-          case 2:{
+          case 2: {
             // Unit -> ( Frag )
             WRToken *frag = children[1];
             [frag accept:self];
