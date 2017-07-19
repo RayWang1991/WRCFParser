@@ -321,15 +321,17 @@
   for (NSUInteger i = 0; i < self.itemSetList.count; i++) {
     [array addObject:[NSMutableDictionary dictionary]];
   }
-  [self constructItemPointers];
-  [self endParsing];
-  // TODO may combine the Item pointer construction with the parsing progress
-  [self constructSharedPackedParseForest];
-//  [self constructPaseTreeIfNeeded];
-  [self printSPPF];
+  [self printItemSets];
 }
 
 #pragma mark post construct SPPF
+- (void)constructSPPF{
+  // TODO may combine the Item pointer construction with the parsing progress
+  [self constructItemPointers];
+  [self buildSharedPackedParseForest];
+  [self printSPPF];
+}
+
 // post construct shared packed parse forest (SPPF)
 - (void)constructItemPointers {
   [self.scanner reset];
@@ -433,7 +435,7 @@
     if (![u containsFamilly:@[vChlid]]) {
       [u.families addObject:@[vChlid]];
     }
-  } else if (item.dotPos == 1 && ((item.justCompletedToken).tokenTypeForString == terminal)) {
+  } else if (item.dotPos == 1 && ((item.justCompletedToken).tokenTypeForString == WRTokenTypeTerminal)) {
     // A->a·B,j form
     // a node
     WRSPPFNode *v = [WRSPPFNode SPPFNodeWithContent:item.justCompletedToken
@@ -449,7 +451,7 @@
     if (![u containsFamilly:@[v]]) {
       [u.families addObject:@[v]];
     }
-  } else if (item.dotPos == 1 && (item.justCompletedToken).tokenTypeForString == nonTerminal) {
+  } else if (item.dotPos == 1 && (item.justCompletedToken).tokenTypeForString == WRTokenTypeNonterminal) {
     // A->C·B,j form
     // C node
     WRSPPFNode *v = [WRSPPFNode SPPFNodeWithContent:item.justCompletedToken // j
@@ -476,7 +478,7 @@
     if (![u containsFamilly:@[v]]) {
       [u.families addObject:@[v]];
     }
-  } else if (item.dotPos > 1 && (item.justCompletedToken).tokenTypeForString == terminal) {
+  } else if (item.dotPos > 1 && (item.justCompletedToken).tokenTypeForString == WRTokenTypeTerminal) {
     // A->A'a·B,j form
     // a node
     WRSPPFNode *v = [WRSPPFNode SPPFNodeWithContent:item.justCompletedToken
@@ -585,7 +587,7 @@
   }
 }
 
-- (void)constructSharedPackedParseForest {
+- (void)buildSharedPackedParseForest {
   NSInteger n = self.itemSetList.count - 1;
 
   WRSPPFNode *nodeS = [WRSPPFNode SPPFNodeWithContent:self.language.startSymbol
@@ -596,6 +598,7 @@
       [self buildTreeWith:nodeS
                       and:item
                     inSet:n];
+      break;
     }
   }
   if (nodeS.families.count > 0) {
@@ -606,8 +609,8 @@
   }
 }
 
-#pragma mark AST Construction
-//TODO
+#pragma mark SPPF Functions
+
 - (void)printSPPF {
   WRSPPFNode *node = [self ambiguousNodeWithNode:self.parseForest];
   BOOL isAmbiguous = node != nil;
@@ -618,11 +621,10 @@
   NSLog(@"The result is NOT ambiguous");
   // print the whole SPPF
 
-  WRTreeHorizontalDashStylePrinter *printer = [[WRTreeHorizontalDashStylePrinter alloc]init];
+  printf("\nSPPF:\n");
+  WRTreeHorizontalDashStylePrinter *printer = [[WRTreeHorizontalDashStylePrinter alloc] init];
   [self.parseForest accept:printer];
   [printer print];
-//  WRTreeNode *rootNode = [self printNodeForNode:self.parseForest];
-//  [WRTreeNode printTree:rootNode];
 }
 
 // deprecated
@@ -672,7 +674,7 @@
   return nil;
 }
 
-- (void)endParsing {
+- (void)printItemSets {
   [self.itemSetList enumerateObjectsUsingBlock:^(WRItemSet *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
     printf("%s",
            [[NSString stringWithFormat:@"Itemset%lu:\n",
@@ -683,29 +685,65 @@
   }];
 }
 
-//- (WRToken *)tokenFromSPPF:(WRSPPFNode *)node {
-//  if (node == nil) {
-//    return nil;
-//  }
-//  assert(node.families.count <= 1);
-//  if (node.families.count == 0) {
-//    // node must be a terminal
-//    if (node.leftExtent == node.rightExtent) {
-//      // epsilon
-//      return nil;
-//    } else {
-//      assert(node.rightExtent - node.leftExtent == 1);
-//      WRTerminal *terminal = [self.scanner tokenAtIndex:node.leftExtent];
-//      return terminal;
-//    }
-//  } else {
-//    switch (node.type) {
-//      case WRSPPFNodeTypeToken: {
-//        // must be a nonterminal
-//        // find using rule ?
-//      }
-//    }
-//
-//  }
-//}
+#pragma mark Parse Tree Building
+// be sure that the parsing forest is just a tree, or...
+- (void)constructParseTree {
+  NSInteger n = self.itemSetList.count - 1;
+
+  self.parseTree = [WRNonterminal tokenWithSymbol:self.language.startSymbol];
+
+  for (WRItem *item in [self.itemSetList lastObject].completeSet.allValues) {
+    if ([item.leftToken isEqualToString:self.language.startSymbol] && item.itemPos == 0) {
+      // this must happens
+      self.parseTree.ruleIndex = item.ruleIndex;
+      break;
+    }
+  }
+  [self leftExtentForToken:self.parseTree
+           withRightExtent:n];
+
+  printf("\nParseTree:\n");
+  WRTreeHorizontalDashStylePrinter *hdPrinter = [[WRTreeHorizontalDashStylePrinter alloc]init];
+  [self.parseTree accept:hdPrinter];
+  [hdPrinter print];
+}
+
+- (NSInteger)leftExtentForToken:(WRToken *)token
+                withRightExtent:(NSInteger)rightExtent {
+  if (token.type == WRTokenTypeTerminal) {
+    return rightExtent - 1;
+  }
+
+  WRNonterminal *nonterminal = (WRNonterminal *) token;
+
+  // find the terminal in item set, find the item, and label
+  WRItem *item = nil;
+  for (WRItem *searchItem in self.itemSetList[rightExtent].completeSet.allValues) {
+    if ([searchItem.leftToken isEqualToString:nonterminal.description]) {
+      // found item
+      item = searchItem;
+      break;
+    }
+  }
+  assert(item);
+  nonterminal.ruleIndex = item.ruleIndex;
+  NSInteger leftExtent = item.itemPos;
+
+  if (item.rightTokens.count == 0) {
+    WRTerminal *epsilonTerminal = [WRTerminal tokenWithSymbol:WREpsilonTokenSymbol];
+    nonterminal.children = @[epsilonTerminal];
+    return rightExtent;
+  }
+
+  __block NSInteger tempExtent = rightExtent;
+  nonterminal.children = [item getRightTokenArrayUsingOrder:WRArrayOrderNormal];
+  [nonterminal.children
+    enumerateObjectsWithOptions:NSEnumerationReverse
+                     usingBlock:^(WRToken *child, NSUInteger idx, BOOL *stop) {
+                       tempExtent = [self leftExtentForToken:child
+                                             withRightExtent:tempExtent];
+                     }];
+
+  return leftExtent;
+}
 @end

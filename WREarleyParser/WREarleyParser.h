@@ -32,6 +32,10 @@
 
 - (void)startParsing;
 
+- (void)constructSPPF;
+
+- (void)constructParseTree;
+
 @end
 
 

@@ -6,10 +6,9 @@
 
 #import "WRParsingBasicLib.h"
 
-@interface WRRELanguage : WRLanguage
+extern NSString *const WRRELanguageVirtualConcatenate;
 
-// @override
-//- (instancetype)initWithRuleStrings:(NSArray <NSString *>*)rules andStartSymbol:(NSString *)startSymbol;
+@interface WRRELanguage : WRLanguage
 
 + (WRLanguage *)CFGrammar_RE_Basic0; // Left Recursive
 

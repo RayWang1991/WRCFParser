@@ -181,7 +181,7 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
   for (NSString *nontStr in self.language.grammars.allKeys) {
     // add station
     WRToken *nontToken = [WRToken tokenWithSymbol:nontStr];
-    assert(nontToken.type == nonTerminal);
+    assert(nontToken.type == WRTokenTypeNonterminal);
 
     WRLR0NFAState *station = _NFAStateRecordSet[nontToken.symbol];
     if (nil == station) {
@@ -242,7 +242,7 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
     [_NFATransitionRecordSet setValue:transition
                                forKey:transition.description];
 
-    if (consumptionToken.tokenTypeForString == nonTerminal) {
+    if (consumptionToken.tokenTypeForString == WRTokenTypeNonterminal) {
       station = _NFAStateRecordSet[consumptionToken];
       if (nil == station) {
         station = [WRLR0NFAState NFAStateWithContent:consumptionToken];

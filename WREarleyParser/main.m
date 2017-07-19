@@ -22,21 +22,21 @@ void testLexer();
 void testString();
 void testTreePattern();
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[]) {
   @autoreleasepool {
-    testLL1Parser();
+    testEarleyParser();
   }
-    return 0;
+  return 0;
 }
 
-void testWordScanner(){
-  WRWordScanner *scanner = [[WRWordScanner alloc]init];
+void testWordScanner() {
+  WRWordScanner *scanner = [[WRWordScanner alloc] init];
   [scanner test];
 }
 
-void testLL1Parser(){
-  WRLL1Parser *parser = [[WRLL1Parser alloc]init];
-  WRWordScanner *scanner = [[WRWordScanner alloc]init];
+void testLL1Parser() {
+  WRLL1Parser *parser = [[WRLL1Parser alloc] init];
+  WRWordScanner *scanner = [[WRWordScanner alloc] init];
   WRLanguage *language = [WRLanguage CFGrammar_EAC_3_4_RR];
 
   scanner.inputStr = @"( name - num ) × ( num ÷ name )";
@@ -48,8 +48,8 @@ void testLL1Parser(){
   [parser prepare];
   [parser startParsing];
   // print parse tree
-  WRTreeHorizontalDashStylePrinter *hdPrinter = [[WRTreeHorizontalDashStylePrinter alloc]init];
-  WRTreeLispStylePrinter *lispPrinter = [[WRTreeLispStylePrinter alloc]init];
+  WRTreeHorizontalDashStylePrinter *hdPrinter = [[WRTreeHorizontalDashStylePrinter alloc] init];
+  WRTreeLispStylePrinter *lispPrinter = [[WRTreeLispStylePrinter alloc] init];
   [parser.parseTree accept:hdPrinter];
   [parser.parseTree accept:lispPrinter];
   [hdPrinter print];
@@ -57,122 +57,152 @@ void testLL1Parser(){
 
   // print AST
   WRAST *ast = [language astNodeForToken:parser.parseTree];
-  hdPrinter = [[WRTreeHorizontalDashStylePrinter alloc]init];
+  hdPrinter = [[WRTreeHorizontalDashStylePrinter alloc] init];
   [ast accept:hdPrinter];
   [hdPrinter print];
 }
 
-void testEarleyParser(){
-  WREarleyParser *parser = [[WREarleyParser alloc]init];
-  WRWordScanner *scanner = [[WRWordScanner alloc]init];
+void testEarleyParser() {
+  WREarleyParser *parser = [[WREarleyParser alloc] init];
+  WRWordScanner *scanner = [[WRWordScanner alloc] init];
 //    scanner.inputStr = @"abbb";
 //    WRLanguage *language = [WRLanguage CFGrammar_SPFER_3];
   WRLanguage *language = [WRRELanguage CFGrammar_RE_Basic1];
-  scanner.inputStr = @"char ( char or char char ) or char";
+  scanner.inputStr = @"char ( char ? char or char char * ) or char";
+//  language = [WRLanguage CFGrammar7_19];
+//  scanner.inputStr = @"x";
   [scanner startScan];
   parser.language = language;
   parser.scanner = scanner;
   [parser startParsing];
+  [parser constructSPPF];
+  [parser constructParseTree];
+
+  // ast
+  WRAST *ast = [language astNodeForToken:parser.parseTree];
+  WRTreeHorizontalDashStylePrinter *hdPrinter = [[WRTreeHorizontalDashStylePrinter alloc] init];
+  [ast accept:hdPrinter];
+  [hdPrinter print];
 }
 
-void testLexer(){
-  WRLexer *lexer = [[WRLexer alloc]init];
+void testLexer() {
+  WRLexer *lexer = [[WRLexer alloc] init];
   [lexer test];
 };
 
-void testString(){
-  NSString *tabString = [WRUtils debugStrWithTabs:6 forString:@"1\n2\n3\n"];
-  printf("%s",tabString.UTF8String);
+void testString() {
+  NSString *tabString = [WRUtils debugStrWithTabs:6
+                                        forString:@"1\n2\n3\n"];
+  printf("%s", tabString.UTF8String);
   NSString *strss = @"S S S";
-    NSRange range0 = NSMakeRange(0, 1);
-    NSRange range1 = NSMakeRange(2, 1);
-    NSRange range2 = NSMakeRange(4, 1);
-    NSString *s0 = [strss substringWithRange:range0];
-    NSString *s1 = [strss substringWithRange:range1];
-    NSString *s2 = [strss substringWithRange:range2];
-    assert(s0 == s1 && s1 == s2);
+  NSRange range0 = NSMakeRange(0, 1);
+  NSRange range1 = NSMakeRange(2, 1);
+  NSRange range2 = NSMakeRange(4, 1);
+  NSString *s0 = [strss substringWithRange:range0];
+  NSString *s1 = [strss substringWithRange:range1];
+  NSString *s2 = [strss substringWithRange:range2];
+  assert(s0 == s1 && s1 == s2);
 
 }
 
-void testSPPNode(){
-  WRToken * token1 = [WRToken tokenWithSymbol:@"token"];
-  WRToken * token2 = [WRToken tokenWithSymbol:@"token"];
-  WRItem * item1 = [WRItem itemWithRuleStr:@"S ->a b" dotPosition:0 andItemPosition:3];
-  WRItem * item2 = [WRItem itemWithRuleStr:@"S-> a b" dotPosition:0 andItemPosition:3];
-  WRSPPFNode * v1 = [WRSPPFNode SPPFNodeWithContent:token1 leftExtent:3 andRightExtent:4];
-  WRSPPFNode * v2 = [WRSPPFNode SPPFNodeWithContent:item1 leftExtent:0 andRightExtent:3];
-  WRSPPFNode * w1 = [WRSPPFNode SPPFNodeWithContent:token2 leftExtent:3 andRightExtent:4];
-  WRSPPFNode * w2 = [WRSPPFNode SPPFNodeWithContent:item2 leftExtent:0 andRightExtent:3];
+void testSPPNode() {
+  WRToken *token1 = [WRToken tokenWithSymbol:@"token"];
+  WRToken *token2 = [WRToken tokenWithSymbol:@"token"];
+  WRItem *item1 = [WRItem itemWithRuleStr:@"S ->a b"
+                              dotPosition:0
+                          andItemPosition:3];
+  WRItem *item2 = [WRItem itemWithRuleStr:@"S-> a b"
+                              dotPosition:0
+                          andItemPosition:3];
+  WRSPPFNode *v1 = [WRSPPFNode SPPFNodeWithContent:token1
+                                        leftExtent:3
+                                    andRightExtent:4];
+  WRSPPFNode *v2 = [WRSPPFNode SPPFNodeWithContent:item1
+                                        leftExtent:0
+                                    andRightExtent:3];
+  WRSPPFNode *w1 = [WRSPPFNode SPPFNodeWithContent:token2
+                                        leftExtent:3
+                                    andRightExtent:4];
+  WRSPPFNode *w2 = [WRSPPFNode SPPFNodeWithContent:item2
+                                        leftExtent:0
+                                    andRightExtent:3];
   WRToken *startToken = [WRToken tokenWithSymbol:@"S"];
-  WRSPPFNode *root = [WRSPPFNode SPPFNodeWithContent:startToken leftExtent:0 andRightExtent:4];
-  [root.families addObject:@[v1,v2]];
-  
-  BOOL res1 = [root containsFamilly:@[w1,w2]];
-  BOOL res2 = [root containsFamilly:@[w2,w1]];
+  WRSPPFNode *root = [WRSPPFNode SPPFNodeWithContent:startToken
+                                          leftExtent:0
+                                      andRightExtent:4];
+  [root.families addObject:@[v1, v2]];
+
+  BOOL res1 = [root containsFamilly:@[w1, w2]];
+  BOOL res2 = [root containsFamilly:@[w2, w1]];
   BOOL res3 = [root containsFamilly:@[w1]];
-  BOOL res4 = [root containsFamilly:@[w1,w1,w2]];
+  BOOL res4 = [root containsFamilly:@[w1, w1, w2]];
   assert(res1);
   assert(res2);
   assert(!res3);
   assert(!res4);
 }
 
-void testSet(){
-  WRItem *item1 = [WRItem itemWithRuleStr:@"S -> A B C" dotPosition:0 andItemPosition:0];
-  WRItem *item2 = [WRItem itemWithRuleStr:@"S -> A B C" dotPosition:0 andItemPosition:0];
-  
+void testSet() {
+  WRItem *item1 = [WRItem itemWithRuleStr:@"S -> A B C"
+                              dotPosition:0
+                          andItemPosition:0];
+  WRItem *item2 = [WRItem itemWithRuleStr:@"S -> A B C"
+                              dotPosition:0
+                          andItemPosition:0];
+
   NSMutableDictionary *set = [NSMutableDictionary dictionary];
-  [set setValue:item1 forKey:item1.description];
+  [set setValue:item1
+         forKey:item1.description];
   assert(set[item1.description] != nil);
   assert(set[item2.description] != nil);
   assert(item1 != item2);
 }
 
-void tokenTest(){
+void tokenTest() {
   NSString *A = @"A";
   NSString *a = @"a";
-  WRToken *tokenA1 = [[WRToken alloc]initWithSymbol:A];
+  WRToken *tokenA1 = [[WRToken alloc] initWithSymbol:A];
   WRToken *tokenA2 = [WRToken tokenWithSymbol:A];
-  WRToken *tokena1 = [[WRToken alloc]initWithSymbol:a];
+  WRToken *tokena1 = [[WRToken alloc] initWithSymbol:a];
   WRToken *tokena2 = [WRToken tokenWithSymbol:a];
-  
+
   assert([tokenA1.symbol isEqualToString:A]);
-  assert(tokenA1.type == nonTerminal);
+  assert(tokenA1.type == WRTokenTypeNonterminal);
   assert([tokenA2.symbol isEqualToString:A]);
-  assert(tokenA2.type == nonTerminal);
+  assert(tokenA2.type == WRTokenTypeNonterminal);
   assert([tokena1.symbol isEqualToString:a]);
-  assert(tokena1.type == terminal);
+  assert(tokena1.type == WRTokenTypeTerminal);
   assert([tokena2.symbol isEqualToString:a]);
-  assert(tokena2.type == terminal);
+  assert(tokena2.type == WRTokenTypeTerminal);
 }
 
-void ruleTest(){
+void ruleTest() {
   WRRule *rule1 = [WRRule ruleWithRuleStr:@"S  -> A B C   "];
   assert([rule1.leftToken isEqualToString:@"S"]);
-  NSArray <NSString *>*rightTokens = rule1.rightTokens;
+  NSArray <NSString *> *rightTokens = rule1.rightTokens;
   assert([rightTokens[0] isEqualToString:@"A"]);
   assert([rightTokens[1] isEqualToString:@"B"]);
   assert([rightTokens[2] isEqualToString:@"C"]);
-  
+
   rule1 = [WRRule ruleWithRuleStr:@"S->   "];
   assert([rule1.leftToken isEqualToString:@"S"]);
   rightTokens = rule1.rightTokens;
   assert(rightTokens.count == 0);
 }
 
-void languageTest(){
-  WRLanguage *language = [[WRLanguage alloc] initWithRuleStrings: @[@"S -> A a",
-                                                                    @"S ->A B C",
-                                                                    @"D -> d",
-                                                                    @"E -> S A B",
-                                                                    @"A ->a",
-                                                                    @"A ->",
-                                                                    @"B ->C A",
-                                                                    @"B->b",
-                                                                    @"C->",
-                                                                    @"C->c"]
+void languageTest() {
+  WRLanguage *language = [[WRLanguage alloc] initWithRuleStrings:@[@"S -> A a",
+      @"S ->A B C",
+      @"D -> d",
+      @"E -> S A B",
+      @"A ->a",
+      @"A ->",
+      @"B ->C A",
+      @"B->b",
+      @"C->",
+      @"C->c"]
                                                   andStartSymbol:@"S"];
-  
+
   assert([language isTokenNullable:@"S"]);
   assert([language isTokenNullable:@"A"]);
   assert([language isTokenNullable:@"B"]);
@@ -185,7 +215,7 @@ void languageTest(){
   assert(![language isTokenNullable:@"d"]);
 }
 
-void testTreePattern(){
+void testTreePattern() {
   WRTreePattern *pattern = [WRTreePattern treePatternWithString:@"( abc def ghi )"];
   assert(pattern.actions.count == 5);
   assert(pattern.actions[0].type == WRTreePatternMatchActionMatch);
@@ -220,6 +250,6 @@ void testTreePattern(){
   assert([((WRTreePatternMatchAction *) pattern.actions[3]).symbol isEqualToString:@"ghi)"]);
 }
 
-void test(){
+void test() {
   languageTest();
 }

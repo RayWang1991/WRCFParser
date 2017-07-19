@@ -177,7 +177,7 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
     } else {
       WRToken *currentFocus = [self.tokenStack lastObject];
       [self.tokenStack removeLastObject];
-      if (currentFocus.type == nonTerminal) {
+      if (currentFocus.type == WRTokenTypeNonterminal) {
         // nonterminal
         WRNonterminal *currentNonterminal = (WRNonterminal *)currentFocus;
         NSInteger i = self.language.token2IdMapper[currentFocus.symbol].integerValue;
@@ -192,7 +192,7 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
         } else {
           currentNonterminal.ruleIndex = ruleIndex;
           WRRule *usingRule = self.language.grammars[currentFocus.symbol][ruleIndex];
-          NSMutableArray <WRToken *> *children = [usingRule getRightTokenArrayUsingOrder:NSEnumerationConcurrent];
+          NSMutableArray <WRToken *> *children = [usingRule getRightTokenArrayUsingOrder:WRArrayOrderNormal];
           currentNonterminal.children = children;
           [children enumerateObjectsWithOptions:NSEnumerationReverse
                                      usingBlock:^(WRToken * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -237,7 +237,7 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
       break;
     }
     case WRLL1ParsingErrorTypeUnsupportedTransition: {
-      assert(expectedTokenSymbol.tokenTypeForString == nonTerminal);
+      assert(expectedTokenSymbol.tokenTypeForString == WRTokenTypeNonterminal);
       NSInteger indexForNonterminal = self.language.token2IdMapper[expectedTokenSymbol].integerValue;
       NSMutableString *validStr = [NSMutableString stringWithString:@"do you mean:"];
        [self.predictTable[indexForNonterminal] enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -245,7 +245,7 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
         if(i >= 0){
           NSString *terminal = self.language.terminalList[idx];
           [validStr appendFormat:@" %@",
-                                 terminal];
+                                 WRTokenTypeTerminal];
         }
        }];
       [validStr appendString:@"?"];
