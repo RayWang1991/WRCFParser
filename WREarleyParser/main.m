@@ -68,7 +68,9 @@ void testEarleyParser() {
 //    scanner.inputStr = @"abbb";
 //    WRLanguage *language = [WRLanguage CFGrammar_SPFER_3];
   WRLanguage *language = [WRRELanguage CFGrammar_RE_Basic1];
+//  WRLanguage *language = [WRRELanguage CFGrammar_EAC_3_4_RR];
   scanner.inputStr = @"char ( char ? char or char char * ) or char";
+//  scanner.inputStr = @"num + ( name ÷ name - num )";
 //  language = [WRLanguage CFGrammar7_19];
 //  scanner.inputStr = @"x";
   [scanner startScan];
@@ -110,10 +112,10 @@ void testSPPNode() {
   WRToken *token2 = [WRToken tokenWithSymbol:@"token"];
   WRItem *item1 = [WRItem itemWithRuleStr:@"S ->a b"
                               dotPosition:0
-                          andItemPosition:3];
+                           askingPosition:3];
   WRItem *item2 = [WRItem itemWithRuleStr:@"S-> a b"
                               dotPosition:0
-                          andItemPosition:3];
+                           askingPosition:3];
   WRSPPFNode *v1 = [WRSPPFNode SPPFNodeWithContent:token1
                                         leftExtent:3
                                     andRightExtent:4];
@@ -145,10 +147,10 @@ void testSPPNode() {
 void testSet() {
   WRItem *item1 = [WRItem itemWithRuleStr:@"S -> A B C"
                               dotPosition:0
-                          andItemPosition:0];
+                           askingPosition:0];
   WRItem *item2 = [WRItem itemWithRuleStr:@"S -> A B C"
                               dotPosition:0
-                          andItemPosition:0];
+                           askingPosition:0];
 
   NSMutableDictionary *set = [NSMutableDictionary dictionary];
   [set setValue:item1

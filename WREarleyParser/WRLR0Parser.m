@@ -207,7 +207,7 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
   // add first state to station
   WRItem *item = [WRItem itemWithRule:rule
                           dotPosition:0
-                      andItemPosition:-1];
+                       askingPosition:-1];
   WRLR0NFAState *state = [WRLR0NFAState NFAStateWithContent:item];
   [_NFAStateRecordSet setValue:state
                         forKey:state.symbol];
@@ -229,7 +229,7 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
 
     nextItem = [WRItem itemWithRule:item
                         dotPosition:item.dotPos + 1
-                    andItemPosition:-1];
+                     askingPosition:-1];
 
     nextState = [WRLR0NFAState NFAStateWithContent:nextItem];
     [_NFAStateRecordSet setValue:nextState

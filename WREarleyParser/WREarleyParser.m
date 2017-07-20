@@ -107,7 +107,7 @@
   if ([token isEqualToString:item.nextAskingToken]) {
     WRItem *nextItem = [WRItem itemWithRule:item
                                 dotPosition:item.dotPos + 1
-                            andItemPosition:itemSetPos];
+                             askingPosition:itemSetPos];
     return nextItem;
   } else {
     return nil;
@@ -130,14 +130,14 @@
   for (WRRule *rule in grammarsForPredict) {
     [array addObject:[WRItem itemWithRule:rule
                               dotPosition:0
-                          andItemPosition:pos]];
+                           askingPosition:pos]];
   }
 
   // Aycock and Horspool. Pratical Earley Parsing Computer J., 45(6): 620-630, 2002
   if ([self.language isTokenNullable:predictingToken]) {
     [array addObject:[WRItem itemWithRule:item
                               dotPosition:item.dotPos + 1
-                          andItemPosition:item.itemPos]];
+                           askingPosition:item.askPos]];
   }
   return array;
 }
@@ -152,7 +152,7 @@
   for (WRRule *startRule in self.language.grammars[self.language.startSymbol]) {
     WRItem *item = [WRItem itemWithRule:startRule
                             dotPosition:0
-                        andItemPosition:0];
+                         askingPosition:0];
     [workList addObject:item];
     [workListRecorder setValue:@1 // whatever value here, we only need a set to record the item.description
                         forKey:item.description];
@@ -164,16 +164,17 @@
       if (!itemSet0.completeSet[currentItem.description]) {
         // scan item in complete position, using completed token
         // if the item has been proceeded, skip it
+        currentItem.fromIndex = 0;
         [itemSet0.completeSet setValue:currentItem
                                 forKey:currentItem.description];
-        NSInteger completeSetPos = currentItem.itemPos;
+        NSInteger completeSetPos = currentItem.askPos;
         // can only be itemSet0
         NSMutableArray <WRItem *> *array = [NSMutableArray array];
         for (WRItem *activeItem in itemSet0.askingDict[currentItem.leftToken]) {
           // +1 is OK
           WRItem *scannedItem = [self scanItem:activeItem
                                      withTokon:currentItem.leftToken
-                            andItemSetPosition:activeItem.itemPos];
+                            andItemSetPosition:activeItem.askPos];
           if (scannedItem) {
             [array addObject:scannedItem];
           }
@@ -196,6 +197,7 @@
         // predict
         [itemSet0.activeSet setValue:currentItem
                               forKey:currentItem.description];
+        currentItem.fromIndex = 0;
 
         // set asking dict, for scan use
         NSMutableArray *askingArray = itemSet0.askingDict[currentItem.nextAskingToken];
@@ -245,7 +247,7 @@
       WRItem *scannedItem = nil;
       if (nil != (scannedItem = [self scanItem:item
                                      withTokon:inputToken.symbol
-                            andItemSetPosition:item.itemPos])) {
+                            andItemSetPosition:item.askPos])) {
         [workList addObject:scannedItem];
       }
     }
@@ -255,19 +257,20 @@
     for (NSUInteger i = 0; i < workList.count; i++) {
       WRItem *currentItem = workList[i];
       if ([currentItem isComplete]) {
+        currentItem.fromIndex = self.itemSetList.count - 1;
         // complete item
         if (!currentItemSet.completeSet[currentItem.description]) {
           // scann item in complete position, using completed token
           // if the item has been proceeded, skip it
           [currentItemSet.completeSet setValue:currentItem
                                         forKey:currentItem.description];
-          NSInteger completeSetPos = currentItem.itemPos;
+          NSInteger completeSetPos = currentItem.askPos;
           NSMutableArray <WRItem *> *array = [NSMutableArray array];
           for (WRItem *activeItem in self.itemSetList[completeSetPos].askingDict[currentItem.leftToken]) {
             // simplely add 1 to dotPos is OK
             WRItem *scannedItem = [self scanItem:activeItem
                                        withTokon:currentItem.leftToken
-                              andItemSetPosition:activeItem.itemPos];
+                              andItemSetPosition:activeItem.askPos];
             if (scannedItem) {
               [array addObject:scannedItem];
             }
@@ -289,6 +292,8 @@
           // predict
           [currentItemSet.activeSet setValue:currentItem
                                       forKey:currentItem.description];
+
+          currentItem.fromIndex = self.itemSetList.count - 1;
 
           NSMutableArray *askingArray = currentItemSet.askingDict[currentItem.nextAskingToken];
           if (!askingArray) {
@@ -321,13 +326,13 @@
   for (NSUInteger i = 0; i < self.itemSetList.count; i++) {
     [array addObject:[NSMutableDictionary dictionary]];
   }
-  [self printItemSets];
 }
 
 #pragma mark post construct SPPF
 - (void)constructSPPF {
   // TODO may combine the Item pointer construction with the parsing progress
   [self constructItemPointers];
+  [self printItemSets];
   [self buildSharedPackedParseForest];
   [self printSPPF];
 }
@@ -340,7 +345,7 @@
   for (NSString *completeStr in currentSet.completeSet) {
     WRItem *completeItem = currentSet.completeSet[completeStr];
     NSString *completeToken = completeItem.leftToken;
-    NSInteger askingItemPos = completeItem.itemPos;
+    NSInteger askingItemPos = completeItem.askPos;
     WRItemSet *askingSet = self.itemSetList[askingItemPos];
     for (WRItem *askingItem in askingSet.askingDict[completeToken]) {
       WRItem *successorItem = [self successorItemForItem:askingItem
@@ -380,7 +385,7 @@
     for (NSString *completeStr in currentSet.completeSet) {
       WRItem *completeItem = currentSet.completeSet[completeStr];
       NSString *completeToken = completeItem.leftToken;
-      NSInteger askingItemPos = completeItem.itemPos;
+      NSInteger askingItemPos = completeItem.askPos;
       WRItemSet *askingSet = self.itemSetList[askingItemPos];
       for (WRItem *askingItem in askingSet.askingDict[completeToken]) {
         WRItem *successorItem = [self successorItemForItem:askingItem
@@ -409,7 +414,7 @@
   WRItemSet *set = self.itemSetList[itemSetPos];
   WRItem *nextItem = [self scanItem:item
                           withTokon:token
-                 andItemSetPosition:item.itemPos];
+                 andItemSetPosition:item.askPos];
   NSString *successorStr = nextItem.description;
   WRItem *successorItem = set.activeSet[successorStr];
   if (nil == successorItem) {
@@ -455,7 +460,7 @@
     // A->C·B,j form
     // C node
     WRSPPFNode *v = [WRSPPFNode SPPFNodeWithContent:item.justCompletedToken // j
-                                         leftExtent:item.itemPos // l
+                                         leftExtent:item.askPos // l
                                      andRightExtent:i];
     NSString *vStr = v.description;
     if (self.nodeSet[vStr] == nil) {
@@ -466,7 +471,7 @@
     }
     for (WRPair *p in item.reductionList.allValues) {
       NSInteger j = [p.second integerValue];
-      if (j == item.itemPos) {
+      if (j == item.askPos) {
         WRItem *q = p.first;
         if (!self.processedSetList[i][q.description]) {
           [self buildTreeWith:v
@@ -494,10 +499,10 @@
     // A->A'·aB,j node
     WRItem *preItem = [WRItem itemWithRule:item
                                dotPosition:item.dotPos - 1
-                           andItemPosition:item.itemPos];
+                            askingPosition:item.askPos];
     preItem = self.itemSetList[i - 1].activeSet[preItem.description];
     WRSPPFNode *w = [WRSPPFNode SPPFNodeWithContent:preItem
-                                         leftExtent:preItem.itemPos // j
+                                         leftExtent:preItem.askPos // j
                                      andRightExtent:i - 1];
     NSString *wStr = w.description;
     if (self.nodeSet[wStr] == nil) {
@@ -551,13 +556,13 @@
 
       // A->A'·CB @j item j,l
       WRItem *predecessorItem = [WRItem itemWithRule:item
-                                         dotPosition:item.dotPos - 1 // asking position for C, l
-                                     andItemPosition:item.itemPos]; // asking position for item
+                                         dotPosition:item.dotPos - 1
+                                      askingPosition:item.askPos]; // asking position for item
 
       predecessorItem = self.itemSetList[l].activeSet[predecessorItem.description];
 
       WRSPPFNode *w = [WRSPPFNode SPPFNodeWithContent:predecessorItem
-                                           leftExtent:item.itemPos // j
+                                           leftExtent:item.askPos // j
                                        andRightExtent:l];
 
       NSString *wStr = w.description;
@@ -594,7 +599,7 @@
                                            leftExtent:0
                                        andRightExtent:n];
   for (WRItem *item in [self.itemSetList lastObject].completeSet.allValues) {
-    if ([item.leftToken isEqualToString:self.language.startSymbol] && item.itemPos == 0) {
+    if ([item.leftToken isEqualToString:self.language.startSymbol] && item.askPos == 0) {
       [self buildTreeWith:nodeS
                       and:item
                     inSet:n];
@@ -688,12 +693,91 @@
 #pragma mark Parse Tree Building
 // be sure that the parsing forest is just a tree, or...
 - (void)constructParseTree {
+  // find the start item
+
+  WRItem *startItem = nil;
+  for (WRItem *item in [self.itemSetList lastObject].completeSet.allValues) {
+    if ([item.leftToken isEqualToString:self.language.startSymbol] && item.askPos == 0) {
+      // this must happens
+      // there is only one start item can be found
+      startItem = item;
+      self.parseTree.ruleIndex = item.ruleIndex;
+      break;
+    }
+  }
+
+  self.parseTree = (WRNonterminal *) [self reductionTokenFromItem:startItem
+                                                     andFromIndex:self.itemSetList.count - 1];
+}
+
+//
+- (WRToken *)justCompleteTokenFromItem:(WRItem *)item
+                          andFromIndex:(NSInteger)fromIndex {
+  NSString *token = item.justCompletedToken;
+  if (token == nil) {
+    // the first asking item
+    return nil;
+  }
+
+  if (token.tokenTypeForString == WRTokenTypeTerminal) {
+    // found terminal in scanner
+    // from index can not be 0 here
+    WRTerminal *terminal = self.scanner.tokens[fromIndex - 1];
+    return terminal;
+  } else {
+    // there must be one and just one obj
+    WRPair *pair = [item.reductionList.allValues firstObject];
+    assert(pair);
+    WRItem *reduction = pair.first;
+    NSInteger reductionFrom = reduction.fromIndex;
+    return [self reductionTokenFromItem:reduction
+                           andFromIndex:reductionFrom];
+  }
+}
+
+// entry for reduciton item (completed)
+- (WRToken *)reductionTokenFromItem:(WRItem *)item
+                       andFromIndex:(NSInteger)fromIndex {
+  WRNonterminal *token = [WRNonterminal tokenWithSymbol:item.leftToken];
+  token.ruleIndex = item.ruleIndex;
+  if (item.rightTokens.count == 0) {
+    WRTerminal *epsilonTerminal = [WRTerminal tokenWithSymbol:WREpsilonTokenSymbol];
+    token.children = @[epsilonTerminal];
+  } else {
+    NSMutableArray *children = [NSMutableArray arrayWithCapacity:item.rightTokens.count];
+    token.children = children;
+    // we want child here
+
+    WRToken *child = [self justCompleteTokenFromItem:item
+                                        andFromIndex:fromIndex];
+    [children addObject:child];
+
+    // there may be only one predecessor or not!
+    WRPair *pair = item.predecessorList.allValues.firstObject;
+
+    while (pair) {
+      WRItem *predecessor = pair.first;
+      NSInteger predecessorFrom = predecessor.fromIndex;
+      child = [self justCompleteTokenFromItem:predecessor
+                                 andFromIndex:predecessorFrom];
+
+      [children insertObject:child
+                     atIndex:0];
+      // update pair
+      pair = predecessor.predecessorList.allValues.firstObject;
+    }
+  }
+  return token;
+}
+
+// deprecated
+- (void)constructParseTree_deprecated {
   NSInteger n = self.itemSetList.count - 1;
 
   self.parseTree = [WRNonterminal tokenWithSymbol:self.language.startSymbol];
 
   for (WRItem *item in [self.itemSetList lastObject].completeSet.allValues) {
-    if ([item.leftToken isEqualToString:self.language.startSymbol] && item.itemPos == 0) {
+    if ([item.leftToken isEqualToString:self.language.startSymbol] && item.askPos == 0) {
       // this must happens
       self.parseTree.ruleIndex = item.ruleIndex;
       break;
@@ -718,22 +802,28 @@
 
   // find the terminal in item set, find the item, and label
   WRItem *item = nil;
+  WRItem *epsilonItem = nil;
   for (WRItem *searchItem in self.itemSetList[rightExtent].completeSet.allValues) {
     if ([searchItem.leftToken isEqualToString:nonterminal.description]) {
       // found item
-      item = searchItem;
-      break;
+      if (searchItem.rightTokens.count == 0) {
+        epsilonItem = item;
+      } else {
+        item = searchItem;
+        break;
+      }
     }
   }
-  assert(item);
-  nonterminal.ruleIndex = item.ruleIndex;
-  NSInteger leftExtent = item.itemPos;
 
-  if (item.rightTokens.count == 0) {
+  assert(item || epsilonItem);
+  if (item == nil) {
     WRTerminal *epsilonTerminal = [WRTerminal tokenWithSymbol:WREpsilonTokenSymbol];
     nonterminal.children = @[epsilonTerminal];
     return rightExtent;
   }
+
+  nonterminal.ruleIndex = item.ruleIndex;
+  NSInteger leftExtent = item.askPos;
 
   __block NSInteger tempExtent = rightExtent;
   nonterminal.children = [item getRightTokenArrayUsingOrder:WRArrayOrderNormal];
