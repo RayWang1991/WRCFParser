@@ -67,10 +67,10 @@ void testEarleyParser() {
   WRWordScanner *scanner = [[WRWordScanner alloc] init];
 //    scanner.inputStr = @"abbb";
 //    WRLanguage *language = [WRLanguage CFGrammar_SPFER_3];
-  WRLanguage *language = [WRRELanguage CFGrammar_RE_Basic1];
-//  WRLanguage *language = [WRRELanguage CFGrammar_EAC_3_4_RR];
-  scanner.inputStr = @"char ( char ? char or char char * ) or char";
-//  scanner.inputStr = @"num + ( name ÷ name - num )";
+//  WRLanguage *language = [WRRELanguage CFGrammar_RE_Basic1];
+  WRLanguage *language = [WRRELanguage CFGrammar_EAC_3_4_RR];
+//  scanner.inputStr = @"char ( char ? char or char char * ) or char";
+  scanner.inputStr = @"num + ( name ÷ ( name - num ) )";
 //  language = [WRLanguage CFGrammar7_19];
 //  scanner.inputStr = @"x";
   [scanner startScan];
