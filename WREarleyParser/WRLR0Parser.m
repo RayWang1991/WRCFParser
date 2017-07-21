@@ -152,8 +152,9 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
 @interface WRLR0Parser ()
 // parsing runtime
 @property (nonatomic, strong, readwrite) NSMutableArray <WRToken *> *tokenStack;
-
+@property (nonatomic, strong, readwrite) NSMutableArray <WRLR0DFAState *> *stateStack;
 @end
+
 @implementation WRLR0Parser
 
 #pragma mark - pre construction
@@ -473,6 +474,8 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
   WRToken *token = nil;
   WRLR0DFAState *state = self.DFAStartState;
   // TODO
+  // use one state stack and one token stack ?
+
 //  while((_tokenStack.count == 1 && _tokenStack[0].symbol isEqualToString:self.language.startSymbol)){
 //    switch (state.actionType) {
 //      case WRLR0DFAActionTypeReduce:{

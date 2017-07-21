@@ -68,11 +68,11 @@ void testEarleyParser() {
 //    scanner.inputStr = @"abbb";
 //    WRLanguage *language = [WRLanguage CFGrammar_SPFER_3];
 //  WRLanguage *language = [WRRELanguage CFGrammar_RE_Basic1];
-  WRLanguage *language = [WRRELanguage CFGrammar_EAC_3_4_RR];
+//  WRLanguage *language = [WRRELanguage CFGrammar_EAC_3_4_RR];
 //  scanner.inputStr = @"char ( char ? char or char char * ) or char";
-  scanner.inputStr = @"num + ( name ÷ ( name - num ) )";
-//  language = [WRLanguage CFGrammar7_19];
-//  scanner.inputStr = @"x";
+//  scanner.inputStr = @"num + ( name ÷ ( name - num ) )";
+  WRLanguage *language = [WRLanguage CFGrammar7_19];
+  scanner.inputStr = @"x";
   [scanner startScan];
   parser.language = language;
   parser.scanner = scanner;
@@ -80,9 +80,14 @@ void testEarleyParser() {
   [parser constructSPPF];
   [parser constructParseTree];
 
+  // parse tree
+  WRTreeHorizontalDashStylePrinter *hdPrinter = [[WRTreeHorizontalDashStylePrinter alloc] init];
+  [parser.parseTree accept:hdPrinter];
+  [hdPrinter print];
+
   // ast
   WRAST *ast = [language astNodeForToken:parser.parseTree];
-  WRTreeHorizontalDashStylePrinter *hdPrinter = [[WRTreeHorizontalDashStylePrinter alloc] init];
+  [hdPrinter reset];
   [ast accept:hdPrinter];
   [hdPrinter print];
 }
