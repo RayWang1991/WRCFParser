@@ -24,7 +24,7 @@ void testTreePattern();
 
 int main(int argc, const char *argv[]) {
   @autoreleasepool {
-    testEarleyParser();
+    testLR0Parser();
   }
   return 0;
 }
@@ -90,6 +90,25 @@ void testEarleyParser() {
   [hdPrinter reset];
   [ast accept:hdPrinter];
   [hdPrinter print];
+}
+
+void testLR0Parser() {
+  WRLR0Parser *parser = [[WRLR0Parser alloc]init];
+  WRWordScanner *scanner = [[WRWordScanner alloc]init];
+  WRLanguage *language = [WRLanguage CFGrammar_9_14];
+  scanner.inputStr = @"n - n - n $";
+  parser.language = language;
+  parser.scanner = scanner;
+  [parser prepare];
+  [parser startParsing];
+
+  WRTreeHorizontalDashStylePrinter *hdPrinter = [[WRTreeHorizontalDashStylePrinter alloc] init];
+  WRTreeLispStylePrinter *lispPrinter = [[WRTreeLispStylePrinter alloc] init];
+  [parser.parseTree accept:hdPrinter];
+  [parser.parseTree accept:lispPrinter];
+  [hdPrinter print];
+  [lispPrinter print];
+
 }
 
 void testLexer() {

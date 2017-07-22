@@ -36,9 +36,9 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
                                type:WRLR0NFAStateTypeItem
                          andContent:content];
   } else {
-    assert([content isKindOfClass:[WRToken class]]);
-    WRToken *token = content;
-    return [self NFAStateWithSymbol:token.symbol
+    assert([content isKindOfClass:[NSString class]]);
+    NSString *token = content;
+    return [self NFAStateWithSymbol:token
                                type:WRLR0NFAStateTypeToken
                          andContent:content];
   }
@@ -111,6 +111,10 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
   return _contentStr;
 }
 
+- (NSString *)description {
+  return self.contentStr;
+}
+
 + (NSString *)contentStrForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
   NSArray *array = [nfaStates allObjects];
   array = [array sortedArrayUsingComparator:^NSComparisonResult(WRLR0NFAState *state1, WRLR0NFAState *state2) {
@@ -152,7 +156,9 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
 @interface WRLR0Parser ()
 // parsing runtime
 @property (nonatomic, strong, readwrite) NSMutableArray <WRToken *> *tokenStack;
+@property (nonatomic, strong, readwrite) NSMutableArray <WRToken *> *inputStack;
 @property (nonatomic, strong, readwrite) NSMutableArray <WRLR0DFAState *> *stateStack;
+@property (nonatomic, strong, readwrite) NSMutableArray <NSError *> *errors;
 @end
 
 @implementation WRLR0Parser
@@ -181,12 +187,11 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionError) {
   // 1. add Stations 2. add rule 3. map states to stations
   for (NSString *nontStr in self.language.grammars.allKeys) {
     // add station
-    WRToken *nontToken = [WRToken tokenWithSymbol:nontStr];
-    assert(nontToken.type == WRTokenTypeNonterminal);
+    assert(nontStr.tokenTypeForString == WRTokenTypeNonterminal);
 
-    WRLR0NFAState *station = _NFAStateRecordSet[nontToken.symbol];
+    WRLR0NFAState *station = _NFAStateRecordSet[nontStr];
     if (nil == station) {
-      station = [WRLR0NFAState NFAStateWithContent:nontToken];
+      station = [WRLR0NFAState NFAStateWithContent:nontStr];
 
       [_NFAStateRecordSet setValue:station
                             forKey:station.symbol];
@@ -469,24 +474,118 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
   // construct the parse tree at run time
   [self.scanner reset];
   [self.scanner scanToEnd];
-  _tokenStack = [NSMutableArray arrayWithArray:self.scanner.tokens];
-  assert(_tokenStack.count > 0);
-  WRToken *token = nil;
-  WRLR0DFAState *state = self.DFAStartState;
-  // TODO
-  // use one state stack and one token stack ?
+  [self.scanner reset];
 
-//  while((_tokenStack.count == 1 && _tokenStack[0].symbol isEqualToString:self.language.startSymbol)){
-//    switch (state.actionType) {
-//      case WRLR0DFAActionTypeReduce:{
-//        
-//        break;
-//      }
-//        
-//      default:
-//        break;
-//    }
-//  }
+  _errors = [NSMutableArray array];
+  _tokenStack = [NSMutableArray array];
+  _inputStack = [NSMutableArray arrayWithCapacity:self.scanner.tokens.count * 2];
+  [self.scanner.tokens enumerateObjectsWithOptions:NSEnumerationReverse
+                                        usingBlock:^(WRTerminal * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                          [self.inputStack addObject:obj];
+                                        }];
 
+  _stateStack = [NSMutableArray arrayWithObject:self.DFAStartState];
+  WRLR0DFAState *state = nil;
+
+  WRToken *currentToken = nil;
+  WRToken *nextToken = nil;
+
+  while (true) {
+    state = self.stateStack.lastObject;
+    if (self.inputStack.count == 1 &&
+      [self.inputStack.firstObject.symbol isEqualToString:self.language.startSymbol]) {
+      // check if the reduced state is start
+      // parsing success
+      self.parseTree = self.inputStack.firstObject;
+      break;
+    }
+    // current token is reduced to start symbol, and the scanner runs out of terminal
+    if (state.actionType == WRLR0DFAActionTypeReduce) {
+      // to reduce
+      WRNonterminal *reducedToken = [WRNonterminal tokenWithSymbol:state.reduceTokenSymbol];
+      reducedToken.ruleIndex = state.reduceRuleIndex;
+      WRRule *reduceRule = self.language.grammars[reducedToken.symbol][reducedToken.ruleIndex];
+      NSUInteger length = reduceRule.rightTokens.count;
+      assert(self.tokenStack.count >= length);
+      NSRange childrenRange = NSMakeRange(self.tokenStack.count - length, length);
+      NSArray *children = [self.tokenStack subarrayWithRange:childrenRange];
+      [self.tokenStack removeObjectsInRange:childrenRange];
+      reducedToken.children = children;
+      assert(self.stateStack.count >= length);
+      NSRange stateRange = NSMakeRange(self.stateStack.count - length, length);
+      [self.stateStack removeObjectsInRange:stateRange];
+      [self.inputStack addObject:reducedToken];
+    } else {
+      // shift state
+      // shift the next input token onto the stack
+      currentToken = [self.inputStack lastObject];
+      if (nil == currentToken) {
+        [self.errors addObject:[self errorOnCode:WRLR0ParsingErrorTypeRunOutOfToken
+                                  withInputToken:nil
+                                      onDFAState:state]];
+        [self printLastError];
+        assert(NO);
+        break;
+      } else {
+        state = state.transitionDict[currentToken.symbol];
+        if (nil == state) {
+          // next token must be terminal ?
+          [self.errors addObject:[self errorOnCode:WRLR0ParsingErrorTypeUnsupportedTransition
+                                    withInputToken:(WRTerminal *) currentToken
+                                        onDFAState:state]];
+          [self printLastError];
+          assert(NO);
+          break;
+        } else {
+          [self.stateStack addObject:state];
+          [self.inputStack removeLastObject];
+          [self.tokenStack addObject:currentToken];
+        }
+      }
+    }
+  }
 }
+
+- (NSError *)errorOnCode:(WRLR0ParsingError)type
+          withInputToken:(WRTerminal *)inputToken
+              onDFAState:(WRLR0DFAState *)state {
+  // compute the valid tokens (terminals)
+
+  NSMutableString *availableTokens = [NSMutableString string];
+  // TODO, use index to present the token
+  for (NSString *str in state.transitionDict.allKeys) {
+    if (str.tokenTypeForString == WRTokenTypeTerminal && state.transitionDict[str]) {
+      [availableTokens appendFormat:@" %@",
+                                    str];
+    }
+  }
+
+  NSString *content = @"";
+  switch (type) {
+    case WRLR0ParsingErrorTypeRunOutOfToken: {
+      content = [NSString stringWithFormat:@"run out of token, on expecting:%@\n",
+                                           availableTokens];
+      break;
+    }
+    case WRLR0ParsingErrorTypeUnsupportedTransition: {
+      content =
+        [NSString stringWithFormat:@"unsupported transition on input:%@ at line%ld, column%ld, do you mean:%@ ?\n",
+                                   inputToken.symbol,
+                                   inputToken.contentInfo.line,
+                                   inputToken.contentInfo.column,
+                                   availableTokens];
+      break;
+    }
+    default:break;
+  }
+  NSError *error = [NSError errorWithDomain:kWRLR0ParserErrorDomain
+                                       code:type
+                                   userInfo:@{@"content": content}];
+  return error;
+}
+
+- (void)printLastError {
+  printf("%s", [self.errors.lastObject.userInfo[@"content"] UTF8String]);
+}
+
 @end

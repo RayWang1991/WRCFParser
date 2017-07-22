@@ -71,10 +71,16 @@ typedef NS_ENUM(NSInteger, WRLR0DFAActionType) {
 + (NSString *)contentStrForNFAStates:(NSSet <WRLR0NFAState *> *)nfaStates;
 @end
 
+// parsing error
+typedef NS_ENUM(NSInteger, WRLR0ParsingError) {
+  WRLR0ParsingErrorTypeRunOutOfToken,
+  WRLR0ParsingErrorTypeUnsupportedTransition,
+};
+
 @interface WRLR0Parser : NSObject
 @property (nonatomic, strong, readwrite) WRLanguage *language;
 @property (nonatomic, strong, readwrite) WRWordScanner *scanner; // TODO test use
-@property (nonatomic, strong, readwrite) WRSPPFNode *parseTree; // TODO here is only parse tree, not forest
+@property (nonatomic, strong, readwrite) WRToken *parseTree; // TODO here is only parse tree, not forest
 
 - (void)prepare;
 - (void)startParsing;
