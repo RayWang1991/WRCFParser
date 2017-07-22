@@ -7,54 +7,56 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		024A2956A81890D3589F3CA5C6311CE4 /* WRScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 83A3D7FF10182FD7872A48A695CAE843 /* WRScanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		043827962492DEB3E4042AF5D1E07CAC /* WRTerminal.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6D60A51CACCA417C51A6F8539AB567 /* WRTerminal.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		06922A3A33CE09F44C35D5B47615FA1E /* WRTreePattern.h in Headers */ = {isa = PBXBuildFile; fileRef = 5074CB7D78B1B08EDB99B1B7766A0BD4 /* WRTreePattern.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		169220C371FC682F27FE355BC635EC36 /* WRTreeVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBAD1F880CF5B0E6CBD4FEB7BC27916 /* WRTreeVisitor.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		1AB7ACEB11B73A08B3DF2E6213D8D482 /* WRAST.h in Headers */ = {isa = PBXBuildFile; fileRef = 666424F7BE10CAD2057EFD1E2CA00011 /* WRAST.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		04E642EB361D042278C3D7BEC8E81BB9 /* WRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBF7A8D6E6908C5BE66F895CAC0AC73 /* WRItem.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		0726473395FB327CA553FBEFD9439220 /* WRTreeHorizontalDashStylePrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CD24543A24714AB00C5E8BF738A95A /* WRTreeHorizontalDashStylePrinter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		0E9DC7CA500E1700B787159236BE439B /* WRTerminal.h in Headers */ = {isa = PBXBuildFile; fileRef = BC77EB791B574F9B2092654A91C40153 /* WRTerminal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0ED31C50BDFA14CE2E1385C028DE1EFC /* WRScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 033280151355BF48B1C4AA55E37DB408 /* WRScanner.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		115F8FE90B4462F033672FDDA734022B /* WRWordScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = FA12E268F014823B36DF05B30B3EC620 /* WRWordScanner.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		137C25FF7649914034B93534F7AA394A /* WRLanguageCF_EAC_3_4_RR.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CCA27C6D80C0AF349B570133742AE83 /* WRLanguageCF_EAC_3_4_RR.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		137EB57A4E3CAA3148CAFFEF66FCE97B /* WRItemLA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 2912B61BFAC11C6FA9D78EEC0397B9CC /* WRItemLA1.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		198A4E1C66B49B30F15B8980DF17E1DF /* WRASTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2619D728B15A176C061A0D7B253111 /* WRASTBuilder.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		1BFB7955952A5B6F364DCEFFFCBA2A53 /* WRAST.h in Headers */ = {isa = PBXBuildFile; fileRef = 2806EA537FE8DA8B6FC7D5B1E0BBFE28 /* WRAST.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1DA4D1C88F8E167CADB285182D5221AB /* WRNonterminal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D60BCA6831A678563FD907FE09F9D24 /* WRNonterminal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E9DF9D99BED077D904CA339E95EFAE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E110E3518E2D475577D0E2056C8B05D /* Foundation.framework */; };
-		23CAA5C3D1A2A1C51BB7C208844A7BD5 /* WRVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3448192B961D6AAFCEC3563BE801E0 /* WRVisitor.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		2CB0B93A6DA55DA8C0E7F1DAE861D579 /* WRTreeHorizontalDashStylePrinter.h in Headers */ = {isa = PBXBuildFile; fileRef = 71EF57B0E7D4EBFEF01243294CFB5BB4 /* WRTreeHorizontalDashStylePrinter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2F44CE77F57EBDC4A34E0DD071AECA0C /* WRASTBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800AE6FBA36D5388F688BEF78933414 /* WRASTBuilder.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		2F4DFC7A2950F45C65363FB78A675962 /* WRNonterminal.h in Headers */ = {isa = PBXBuildFile; fileRef = F03AF0DBB853BE30D20DC4C54984E5B2 /* WRNonterminal.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3341929643B5575D809F912E7034ACD1 /* WRTerminal.h in Headers */ = {isa = PBXBuildFile; fileRef = E93DA111EA1A56B147C3F303F227FD33 /* WRTerminal.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		412A5D2DFF10816CAA362FCDAEB1D515 /* NSString + WRToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 21689AD95BF91A4D15F0E4834EEE6D43 /* NSString + WRToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		28C50C4476DB9394241096142516EE6D /* WRAST.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F36A75BCE843EE04BE19DECCA8C1B8 /* WRAST.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2E819388A72BA6CDC19F0B46BB6443E1 /* WRASTBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = D14112CB089704A5668E26586934FD9D /* WRASTBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3121A28E83E1F0C5034FA46A5591D731 /* WRRule.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C2B31EB335470E62A1C59D6AD0B478E /* WRRule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43AB27E45BDA50C9EBBF1896BB95BC21 /* WRItemLA1.h in Headers */ = {isa = PBXBuildFile; fileRef = 6670BDC0BE2A123849E522A07014885A /* WRItemLA1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45C646C2C13FF37AF159EC37340E0FB5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6526E38143AA3C7320583E142AA64538 /* Cocoa.framework */; };
-		4FA7121AD92276FBDFE01A85AAC349BA /* WRTreePatternMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C640A2550835F372A9C5079A6F1540 /* WRTreePatternMatcher.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		51C6C5D92A8583E7F662C9101DD246FE /* WRTreeHorizontalDashStylePrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E1B5A90EAC1B515E7DC92CA58A2B9D /* WRTreeHorizontalDashStylePrinter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		5536A59554A82B2021E6991B5D89D63D /* WRToken.h in Headers */ = {isa = PBXBuildFile; fileRef = D1C40A03836BE4DD75ECB0E7384988B5 /* WRToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		586A747844AB4D2D6A686508254F3537 /* WRUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C1D3493712B661D763F59647FB9E5C2 /* WRUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5AA32B6C541AD1B73544F571AD54D07F /* Pods-WREarleyParser-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D001F28FCCE64BC8A6A338780AABDB80 /* Pods-WREarleyParser-dummy.m */; };
-		5C74213F53ADCEE22448E6D4BBB65658 /* WRRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B6297FD22A7132D448A482CC027100 /* WRRule.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		6B26B3CCEC4D49F552EFE0B0843D95E5 /* WRRule.h in Headers */ = {isa = PBXBuildFile; fileRef = ACE9DB3E7B60C1BDE7A57B8574A410C7 /* WRRule.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		70943C7981B399E6167A3A55DBA3B922 /* WRParsingBasicLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AA91E67FBEDA3858E87B67D0C1B1D1F /* WRParsingBasicLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7DB2C446B6C4CD49969AF133529AE5F1 /* WRLanguageCF_EAC_3_4_RR.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F827870667DD47822E89AEB332EF660 /* WRLanguageCF_EAC_3_4_RR.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		83B7EA926B392E59DA2A3A30C66C6229 /* WRWordScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE639879D97ADB0928963DBB9C598B6 /* WRWordScanner.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		8D0C253686EE17DA726D2474CA9F0763 /* WRParsingBasic-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3213AA47A1E15DE6A86EAABE22FB68E2 /* WRParsingBasic-dummy.m */; };
-		9418932B225E65412C916B1C1D840260 /* WRLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F5AEA8465AB7688D012F0D14593AB97 /* WRLanguage.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		9993CA6612F75AE6F160A5730A6F5B1E /* WRTreePatternMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = EA765E010F656A1395B5639145B107DF /* WRTreePatternMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A6F8AD54D7FE49C8665422A8FED02337 /* WRAST.m in Sources */ = {isa = PBXBuildFile; fileRef = F1140547D47BCD782C0932C8B5232854 /* WRAST.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		C1ED900295FAD9DCD444CB84692AF159 /* WRItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 48778D478D7FEA457CBD83C45CA91F5D /* WRItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C2D321BB861898C90B9F39475EDF9D5E /* WRWordScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = AFEDCB318F1FEE2C0CC47583203A883C /* WRWordScanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C3AB4A84CA8FF3B49CD6C49286797E2F /* WRASTBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 48334661E73768F799E3833FC473B7DF /* WRASTBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CB710F767D34C7055773B0941D4E0F7E /* WRUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E75AAEA2D27C8CE2E06FE1B3C4C79FB2 /* WRUtils.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		CE667F019B47BB2238AB020F6D147C41 /* WRLexer.h in Headers */ = {isa = PBXBuildFile; fileRef = BDE90BEC0EE21A7527BA0EE6236A4567 /* WRLexer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D4325D7F87BA45ED36264644EE4C50F6 /* WRLanguageCF_EAC_3_4_RR.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA3ACB235592CFC06825DD3374524A1 /* WRLanguageCF_EAC_3_4_RR.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D44B6527265EC6AA6A27F0250180E695 /* WRNonterminal.m in Sources */ = {isa = PBXBuildFile; fileRef = 46DDC9A86D0AB23AEDB51AEC871D7381 /* WRNonterminal.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		D9466E0D5AD9410A7674231E5ABD07E8 /* WRLanguage.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B9A3B0E55DAF27CB15F7FE1B0BBDBDF /* WRLanguage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D9A1CA2824CB5D7B57B660CA49F2CE08 /* WRLexer.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F6B01556790F3FC744FDB175AECE2A /* WRLexer.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		DF33A78EA14B67A7BCB6306AFCC5B889 /* NSString + WRToken.m in Sources */ = {isa = PBXBuildFile; fileRef = C153CBF0D8813546477408BB83FD7A71 /* NSString + WRToken.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		DF55497684D2567B2F5588AC09F39445 /* WRScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F608AF0F575762F3081D788F584BFBA4 /* WRScanner.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E1BBA2AE39AFCB18C0E0BDF5A832B3DC /* WRTreePattern.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4B653CD185DE2A214292905A3A155F /* WRTreePattern.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E24258546E8216A50DA40FF74F566F0A /* WRSPPFNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 72879E40B0E20ED86F8FCADE4D7B2BA1 /* WRSPPFNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E2C5A88316385892F1256BE275A31F6C /* WRVisitor.h in Headers */ = {isa = PBXBuildFile; fileRef = BE49C583B5EDACB995A748B112386E69 /* WRVisitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5BF3A043292417BD101E7A8F0FAEC57F /* WRToken.m in Sources */ = {isa = PBXBuildFile; fileRef = B11A7C224CBEAC4433C9522E60A803AC /* WRToken.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		6A6CE2EC6E1FA969FDD80801BF616CAA /* WRNonterminal.m in Sources */ = {isa = PBXBuildFile; fileRef = F2ED6BCF1D539A8087D84B4A7DAEFCFC /* WRNonterminal.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		6FA2CD3DB0219A29DDD4331FDDAF5673 /* WRSPPFNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4F2DEA1AD84E77F598C97B56565DB2 /* WRSPPFNode.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		7317F2A534DBEE837A2F5C1A06F3FA0A /* WRTreeLispStylePrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = BB19E94E861BB4D6BAA9C5779000B1F8 /* WRTreeLispStylePrinter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		764753AA3A5559C98B3638E98AA0F4DC /* WRTreeHorizontalDashStylePrinter.h in Headers */ = {isa = PBXBuildFile; fileRef = 462694515862124F92E2E8E86888F4E4 /* WRTreeHorizontalDashStylePrinter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		764C2167A9D6A816540DCEEE2A4F0FA6 /* WRItem.h in Headers */ = {isa = PBXBuildFile; fileRef = BE133A1BDC6DACF6C5F140BE5910DDF3 /* WRItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		777FD4B47D9DA49FB66DE3E1F5D748B5 /* WRToken.h in Headers */ = {isa = PBXBuildFile; fileRef = CCD37BD5B2343B91623361A93464091F /* WRToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		79E29440666D1F62278879EAD733D831 /* WRTreePatternMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 9052518CF106596B7369557081E67024 /* WRTreePatternMatcher.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		9CB63EB8F8F1021DC80C18F6382409F9 /* WRTreePattern.h in Headers */ = {isa = PBXBuildFile; fileRef = 77306EDA1C3F1286565E2E3C3A6484BB /* WRTreePattern.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9EECB91A9551AEBC29269D9F5AEB61CA /* WRLanguage.h in Headers */ = {isa = PBXBuildFile; fileRef = A4FAEC9A622D6E7B2537CAFEAA064A1E /* WRLanguage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A44CC2B19D2586C457F9FB979037CA35 /* WRScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C5BDED1A46C09E0682588341E628AB8 /* WRScanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A59807A53B3D1A43FA1EE95E5CEB5DAC /* WRVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = A50187E96CEA33A3DBB26DCE55CE4253 /* WRVisitor.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		A9828A9E800BBCF199DB9E22A2569C1D /* NSString + WRToken.h in Headers */ = {isa = PBXBuildFile; fileRef = C95045EA0B5F8FA46C22A35B62BF23D8 /* NSString + WRToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AFBA531C69F5CB7164973415B0B0097E /* WRLexer.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEAD22D1C06E89C4B90624B7186D272 /* WRLexer.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B4B907C4E0CD4CB35BB8B363DF648C1F /* WRUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D0F6DEC648422C04C65DBD1B41151346 /* WRUtils.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B596F0209D201256BF4F20567E348FC3 /* WRTerminal.m in Sources */ = {isa = PBXBuildFile; fileRef = A1534B0F6AC0065F25BAF7FC643FA67C /* WRTerminal.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B7A819F41AA9C59FE7DE828614EDCF83 /* WRLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBD5FE7A7D51AB970285193223CB125 /* WRLanguage.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B834F73248ED7A396AEF8B52868F225D /* WRTreeVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = A92C6A4DF10DE3A3ECAC7D28115C578F /* WRTreeVisitor.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B8F18231B9994A5F1A4081BD91534EF0 /* WRRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 670584DF1924830380E5BF66EA1CD690 /* WRRule.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		BE84CFE509A91C14B85D1B3A5CEE2180 /* WRVisitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B12DFFFD8EBA520DDF04251EF3A2436 /* WRVisitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C00B9FFFD3B6BA38046856408434D05C /* WRUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = D76D2FDAA55FB0890FDECEB69DB93F7C /* WRUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C203285348950486CEC6FD30FD5D753D /* NSString + WRToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 4558450F9903ED4948F4270C2EB76047 /* NSString + WRToken.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		C7478A145B9AC813D9F1BBA8325D669E /* WRTreePattern.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6008BEA78C7C28BFD148FAD915337E /* WRTreePattern.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		C968742B61AD0EFE860E876839941E10 /* WRLanguageCF_EAC_3_4_RR.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAF128DFE935CBE27B82B66C828EE68 /* WRLanguageCF_EAC_3_4_RR.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		D63841575B25C82FCB42F8C9F68C99B8 /* WRSPPFNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 5030DE9C1F29688BA1E0E8DC78AD111B /* WRSPPFNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E34E36B5710FFADFAF4BC80ACE8A0C12 /* WRWordScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = ADA0BD4B10B7579CB9E12BF85D4D9D82 /* WRWordScanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E4600C3476FA84BF0787D5C8EA99B730 /* WRParsingBasicLib.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B756098D5680BDD2311B54C4210A97 /* WRParsingBasicLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E4B3B6770A3736846FCF6F5C84FE4987 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6526E38143AA3C7320583E142AA64538 /* Cocoa.framework */; };
-		E4E65E2F7386B05F8591886F526AAAF2 /* WRTreeLispStylePrinter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7091CD01A3402FD532A0238185233 /* WRTreeLispStylePrinter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ECB2CDC5D73830CC7B3523E3FAFA8953 /* WRTreeLispStylePrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C7DE23DE0D7E799EF5A575BFBB78B2 /* WRTreeLispStylePrinter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		F23CFCD5B626C6056464770E779D884D /* WRSPPFNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F9C38F0619FB55C6EA2F1200D6C21E6 /* WRSPPFNode.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		F46457AA0E1AD955A4AF3F4C07A4C1C0 /* WRTreeVisitor.h in Headers */ = {isa = PBXBuildFile; fileRef = E1221BF0EEB714BA1DE7D5B7EBCD308E /* WRTreeVisitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F53E035A18271B8F87440A247BE64241 /* WRToken.m in Sources */ = {isa = PBXBuildFile; fileRef = FE89945F8151CAFA243B03354CF25CEC /* WRToken.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		FBB1EDD69AF1117DA81BAEB6DEE004BF /* WRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 13396286F3A1EB92A6C102593D5B8A7B /* WRItem.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		E4DCAD37EEA5CD0A58E75AA24010E2F5 /* WRTreeVisitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 07F7A9662914D89CBAAAEEE423D33298 /* WRTreeVisitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E50C23731D4F0AF11BEC988446891F57 /* WRParsingBasic-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3213AA47A1E15DE6A86EAABE22FB68E2 /* WRParsingBasic-dummy.m */; };
+		E7D2756FDF582E7862954C9690282D21 /* WRTreeLispStylePrinter.h in Headers */ = {isa = PBXBuildFile; fileRef = F6B958A375A701CB9750294E3F472BF3 /* WRTreeLispStylePrinter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EE9E1B0BE4065B3C5636B457A18B0654 /* WRLexer.h in Headers */ = {isa = PBXBuildFile; fileRef = 96B78E9CDD743215D23D8DA85EA7F8D1 /* WRLexer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F232B5B0B4D226EAFE820F3A6C82CD49 /* WRTreePatternMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 04FD200F799976D39FEAAC17DA645037 /* WRTreePatternMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,64 +70,66 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0C1D3493712B661D763F59647FB9E5C2 /* WRUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRUtils.h; sourceTree = "<group>"; };
-		13396286F3A1EB92A6C102593D5B8A7B /* WRItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRItem.m; sourceTree = "<group>"; };
+		033280151355BF48B1C4AA55E37DB408 /* WRScanner.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRScanner.m; sourceTree = "<group>"; };
+		04FD200F799976D39FEAAC17DA645037 /* WRTreePatternMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRTreePatternMatcher.h; sourceTree = "<group>"; };
+		07F7A9662914D89CBAAAEEE423D33298 /* WRTreeVisitor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRTreeVisitor.h; sourceTree = "<group>"; };
+		0D60BCA6831A678563FD907FE09F9D24 /* WRNonterminal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRNonterminal.h; sourceTree = "<group>"; };
 		1E110E3518E2D475577D0E2056C8B05D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		1FD7091CD01A3402FD532A0238185233 /* WRTreeLispStylePrinter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRTreeLispStylePrinter.h; sourceTree = "<group>"; };
-		21689AD95BF91A4D15F0E4834EEE6D43 /* NSString + WRToken.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString + WRToken.h"; sourceTree = "<group>"; };
-		2F4B653CD185DE2A214292905A3A155F /* WRTreePattern.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRTreePattern.m; sourceTree = "<group>"; };
+		2806EA537FE8DA8B6FC7D5B1E0BBFE28 /* WRAST.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRAST.h; sourceTree = "<group>"; };
+		2912B61BFAC11C6FA9D78EEC0397B9CC /* WRItemLA1.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRItemLA1.m; sourceTree = "<group>"; };
 		3213AA47A1E15DE6A86EAABE22FB68E2 /* WRParsingBasic-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WRParsingBasic-dummy.m"; sourceTree = "<group>"; };
 		334546D9D0B840ABEE7B2270F1E47264 /* WRParsingBasic.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WRParsingBasic.xcconfig; sourceTree = "<group>"; };
+		3A4F2DEA1AD84E77F598C97B56565DB2 /* WRSPPFNode.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRSPPFNode.m; sourceTree = "<group>"; };
+		3C5BDED1A46C09E0682588341E628AB8 /* WRScanner.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRScanner.h; sourceTree = "<group>"; };
+		3CCA27C6D80C0AF349B570133742AE83 /* WRLanguageCF_EAC_3_4_RR.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRLanguageCF_EAC_3_4_RR.h; sourceTree = "<group>"; };
 		40C8A9667E49FED4C50C3118F8D342F6 /* Pods-WREarleyParser-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WREarleyParser-frameworks.sh"; sourceTree = "<group>"; };
-		46DDC9A86D0AB23AEDB51AEC871D7381 /* WRNonterminal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRNonterminal.m; sourceTree = "<group>"; };
-		4800AE6FBA36D5388F688BEF78933414 /* WRASTBuilder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRASTBuilder.m; sourceTree = "<group>"; };
-		48334661E73768F799E3833FC473B7DF /* WRASTBuilder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRASTBuilder.h; sourceTree = "<group>"; };
-		48778D478D7FEA457CBD83C45CA91F5D /* WRItem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRItem.h; sourceTree = "<group>"; };
-		4AA91E67FBEDA3858E87B67D0C1B1D1F /* WRParsingBasicLib.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRParsingBasicLib.h; sourceTree = "<group>"; };
-		4CE639879D97ADB0928963DBB9C598B6 /* WRWordScanner.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRWordScanner.m; sourceTree = "<group>"; };
-		4F9C38F0619FB55C6EA2F1200D6C21E6 /* WRSPPFNode.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRSPPFNode.m; sourceTree = "<group>"; };
+		4558450F9903ED4948F4270C2EB76047 /* NSString + WRToken.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString + WRToken.m"; sourceTree = "<group>"; };
+		45CD24543A24714AB00C5E8BF738A95A /* WRTreeHorizontalDashStylePrinter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRTreeHorizontalDashStylePrinter.m; sourceTree = "<group>"; };
+		462694515862124F92E2E8E86888F4E4 /* WRTreeHorizontalDashStylePrinter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRTreeHorizontalDashStylePrinter.h; sourceTree = "<group>"; };
 		4FFE21AA8D5B5F45DE2C78C647437ABF /* Pods-WREarleyParser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WREarleyParser.debug.xcconfig"; sourceTree = "<group>"; };
-		5074CB7D78B1B08EDB99B1B7766A0BD4 /* WRTreePattern.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRTreePattern.h; sourceTree = "<group>"; };
-		58B6297FD22A7132D448A482CC027100 /* WRRule.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRRule.m; sourceTree = "<group>"; };
-		5F5AEA8465AB7688D012F0D14593AB97 /* WRLanguage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRLanguage.m; sourceTree = "<group>"; };
+		5030DE9C1F29688BA1E0E8DC78AD111B /* WRSPPFNode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRSPPFNode.h; sourceTree = "<group>"; };
+		5BBF7A8D6E6908C5BE66F895CAC0AC73 /* WRItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRItem.m; sourceTree = "<group>"; };
 		6526E38143AA3C7320583E142AA64538 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		65700A782C4680AAA7D94DEBCC805840 /* Pods-WREarleyParser-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WREarleyParser-acknowledgements.markdown"; sourceTree = "<group>"; };
-		65F6B01556790F3FC744FDB175AECE2A /* WRLexer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRLexer.m; sourceTree = "<group>"; };
-		666424F7BE10CAD2057EFD1E2CA00011 /* WRAST.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRAST.h; sourceTree = "<group>"; };
-		6F827870667DD47822E89AEB332EF660 /* WRLanguageCF_EAC_3_4_RR.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRLanguageCF_EAC_3_4_RR.m; sourceTree = "<group>"; };
-		71EF57B0E7D4EBFEF01243294CFB5BB4 /* WRTreeHorizontalDashStylePrinter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRTreeHorizontalDashStylePrinter.h; sourceTree = "<group>"; };
-		72879E40B0E20ED86F8FCADE4D7B2BA1 /* WRSPPFNode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRSPPFNode.h; sourceTree = "<group>"; };
-		76C640A2550835F372A9C5079A6F1540 /* WRTreePatternMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRTreePatternMatcher.m; sourceTree = "<group>"; };
+		6670BDC0BE2A123849E522A07014885A /* WRItemLA1.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRItemLA1.h; sourceTree = "<group>"; };
+		670584DF1924830380E5BF66EA1CD690 /* WRRule.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRRule.m; sourceTree = "<group>"; };
+		6B12DFFFD8EBA520DDF04251EF3A2436 /* WRVisitor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRVisitor.h; sourceTree = "<group>"; };
+		77306EDA1C3F1286565E2E3C3A6484BB /* WRTreePattern.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRTreePattern.h; sourceTree = "<group>"; };
 		77F05829A797078094480743B1EFBB33 /* WRParsingBasic-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WRParsingBasic-prefix.pch"; sourceTree = "<group>"; };
-		83A3D7FF10182FD7872A48A695CAE843 /* WRScanner.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRScanner.h; sourceTree = "<group>"; };
+		7C2B31EB335470E62A1C59D6AD0B478E /* WRRule.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRRule.h; sourceTree = "<group>"; };
+		8C2619D728B15A176C061A0D7B253111 /* WRASTBuilder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRASTBuilder.m; sourceTree = "<group>"; };
+		9052518CF106596B7369557081E67024 /* WRTreePatternMatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRTreePatternMatcher.m; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9B9A3B0E55DAF27CB15F7FE1B0BBDBDF /* WRLanguage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRLanguage.h; sourceTree = "<group>"; };
+		96B78E9CDD743215D23D8DA85EA7F8D1 /* WRLexer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRLexer.h; sourceTree = "<group>"; };
 		9C3EB291D635889E70B15834CC0CD89F /* Pods-WREarleyParser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WREarleyParser.release.xcconfig"; sourceTree = "<group>"; };
+		A1534B0F6AC0065F25BAF7FC643FA67C /* WRTerminal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRTerminal.m; sourceTree = "<group>"; };
 		A17B77591D812C1213E5D4B3A754F810 /* Pods-WREarleyParser-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WREarleyParser-resources.sh"; sourceTree = "<group>"; };
 		A2CD0D78E1A154E30B23507039801852 /* libWRParsingBasic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libWRParsingBasic.a; path = libWRParsingBasic.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2F36A75BCE843EE04BE19DECCA8C1B8 /* WRAST.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRAST.m; sourceTree = "<group>"; };
 		A3B5E9994C06A018DB4CCCC51A7E339F /* Pods-WREarleyParser-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WREarleyParser-acknowledgements.plist"; sourceTree = "<group>"; };
-		ABA3ACB235592CFC06825DD3374524A1 /* WRLanguageCF_EAC_3_4_RR.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRLanguageCF_EAC_3_4_RR.h; sourceTree = "<group>"; };
-		ACE9DB3E7B60C1BDE7A57B8574A410C7 /* WRRule.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRRule.h; sourceTree = "<group>"; };
-		AFEDCB318F1FEE2C0CC47583203A883C /* WRWordScanner.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRWordScanner.h; sourceTree = "<group>"; };
-		BDE90BEC0EE21A7527BA0EE6236A4567 /* WRLexer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRLexer.h; sourceTree = "<group>"; };
-		BE49C583B5EDACB995A748B112386E69 /* WRVisitor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRVisitor.h; sourceTree = "<group>"; };
-		C153CBF0D8813546477408BB83FD7A71 /* NSString + WRToken.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString + WRToken.m"; sourceTree = "<group>"; };
-		C9C7DE23DE0D7E799EF5A575BFBB78B2 /* WRTreeLispStylePrinter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRTreeLispStylePrinter.m; sourceTree = "<group>"; };
-		CD3448192B961D6AAFCEC3563BE801E0 /* WRVisitor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRVisitor.m; sourceTree = "<group>"; };
+		A4FAEC9A622D6E7B2537CAFEAA064A1E /* WRLanguage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRLanguage.h; sourceTree = "<group>"; };
+		A50187E96CEA33A3DBB26DCE55CE4253 /* WRVisitor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRVisitor.m; sourceTree = "<group>"; };
+		A5B756098D5680BDD2311B54C4210A97 /* WRParsingBasicLib.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRParsingBasicLib.h; sourceTree = "<group>"; };
+		A92C6A4DF10DE3A3ECAC7D28115C578F /* WRTreeVisitor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRTreeVisitor.m; sourceTree = "<group>"; };
+		ADA0BD4B10B7579CB9E12BF85D4D9D82 /* WRWordScanner.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRWordScanner.h; sourceTree = "<group>"; };
+		ADEAD22D1C06E89C4B90624B7186D272 /* WRLexer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRLexer.m; sourceTree = "<group>"; };
+		B11A7C224CBEAC4433C9522E60A803AC /* WRToken.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRToken.m; sourceTree = "<group>"; };
+		BB19E94E861BB4D6BAA9C5779000B1F8 /* WRTreeLispStylePrinter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRTreeLispStylePrinter.m; sourceTree = "<group>"; };
+		BC77EB791B574F9B2092654A91C40153 /* WRTerminal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRTerminal.h; sourceTree = "<group>"; };
+		BE133A1BDC6DACF6C5F140BE5910DDF3 /* WRItem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRItem.h; sourceTree = "<group>"; };
+		C95045EA0B5F8FA46C22A35B62BF23D8 /* NSString + WRToken.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString + WRToken.h"; sourceTree = "<group>"; };
+		CBBD5FE7A7D51AB970285193223CB125 /* WRLanguage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRLanguage.m; sourceTree = "<group>"; };
+		CCD37BD5B2343B91623361A93464091F /* WRToken.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRToken.h; sourceTree = "<group>"; };
 		D001F28FCCE64BC8A6A338780AABDB80 /* Pods-WREarleyParser-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WREarleyParser-dummy.m"; sourceTree = "<group>"; };
-		D1C40A03836BE4DD75ECB0E7384988B5 /* WRToken.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRToken.h; sourceTree = "<group>"; };
+		D0F6DEC648422C04C65DBD1B41151346 /* WRUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRUtils.m; sourceTree = "<group>"; };
+		D14112CB089704A5668E26586934FD9D /* WRASTBuilder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRASTBuilder.h; sourceTree = "<group>"; };
 		D34DE1D6CEAB42800D889AC0D0BB2D78 /* libPods-WREarleyParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-WREarleyParser.a"; path = "libPods-WREarleyParser.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1221BF0EEB714BA1DE7D5B7EBCD308E /* WRTreeVisitor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRTreeVisitor.h; sourceTree = "<group>"; };
-		E5E1B5A90EAC1B515E7DC92CA58A2B9D /* WRTreeHorizontalDashStylePrinter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRTreeHorizontalDashStylePrinter.m; sourceTree = "<group>"; };
-		E75AAEA2D27C8CE2E06FE1B3C4C79FB2 /* WRUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRUtils.m; sourceTree = "<group>"; };
-		E93DA111EA1A56B147C3F303F227FD33 /* WRTerminal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRTerminal.h; sourceTree = "<group>"; };
-		EA6D60A51CACCA417C51A6F8539AB567 /* WRTerminal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRTerminal.m; sourceTree = "<group>"; };
-		EA765E010F656A1395B5639145B107DF /* WRTreePatternMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRTreePatternMatcher.h; sourceTree = "<group>"; };
-		F03AF0DBB853BE30D20DC4C54984E5B2 /* WRNonterminal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRNonterminal.h; sourceTree = "<group>"; };
-		F1140547D47BCD782C0932C8B5232854 /* WRAST.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRAST.m; sourceTree = "<group>"; };
-		F608AF0F575762F3081D788F584BFBA4 /* WRScanner.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRScanner.m; sourceTree = "<group>"; };
-		FCBAD1F880CF5B0E6CBD4FEB7BC27916 /* WRTreeVisitor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRTreeVisitor.m; sourceTree = "<group>"; };
-		FE89945F8151CAFA243B03354CF25CEC /* WRToken.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRToken.m; sourceTree = "<group>"; };
+		D76D2FDAA55FB0890FDECEB69DB93F7C /* WRUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRUtils.h; sourceTree = "<group>"; };
+		EAAF128DFE935CBE27B82B66C828EE68 /* WRLanguageCF_EAC_3_4_RR.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRLanguageCF_EAC_3_4_RR.m; sourceTree = "<group>"; };
+		F2ED6BCF1D539A8087D84B4A7DAEFCFC /* WRNonterminal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRNonterminal.m; sourceTree = "<group>"; };
+		F6B958A375A701CB9750294E3F472BF3 /* WRTreeLispStylePrinter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = WRTreeLispStylePrinter.h; sourceTree = "<group>"; };
+		FA12E268F014823B36DF05B30B3EC620 /* WRWordScanner.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRWordScanner.m; sourceTree = "<group>"; };
+		FA6008BEA78C7C28BFD148FAD915337E /* WRTreePattern.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = WRTreePattern.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,20 +153,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		16FE98220BA2A28705CF19D9D1A21402 /* Scanner */ = {
-			isa = PBXGroup;
-			children = (
-				BDE90BEC0EE21A7527BA0EE6236A4567 /* WRLexer.h */,
-				65F6B01556790F3FC744FDB175AECE2A /* WRLexer.m */,
-				83A3D7FF10182FD7872A48A695CAE843 /* WRScanner.h */,
-				F608AF0F575762F3081D788F584BFBA4 /* WRScanner.m */,
-				AFEDCB318F1FEE2C0CC47583203A883C /* WRWordScanner.h */,
-				4CE639879D97ADB0928963DBB9C598B6 /* WRWordScanner.m */,
-			);
-			name = Scanner;
-			path = Scanner;
-			sourceTree = "<group>";
-		};
 		2F70BDE8DD0CAC5B41CBE3554AF07D11 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,20 +161,44 @@
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		3A14DC595D752B62F9B0CD0C3D954578 /* Token */ = {
+		336F90CC6EB0E34D6AB3EEF60A0791BB /* AST */ = {
 			isa = PBXGroup;
 			children = (
-				21689AD95BF91A4D15F0E4834EEE6D43 /* NSString + WRToken.h */,
-				C153CBF0D8813546477408BB83FD7A71 /* NSString + WRToken.m */,
-				F03AF0DBB853BE30D20DC4C54984E5B2 /* WRNonterminal.h */,
-				46DDC9A86D0AB23AEDB51AEC871D7381 /* WRNonterminal.m */,
-				E93DA111EA1A56B147C3F303F227FD33 /* WRTerminal.h */,
-				EA6D60A51CACCA417C51A6F8539AB567 /* WRTerminal.m */,
-				D1C40A03836BE4DD75ECB0E7384988B5 /* WRToken.h */,
-				FE89945F8151CAFA243B03354CF25CEC /* WRToken.m */,
+				2806EA537FE8DA8B6FC7D5B1E0BBFE28 /* WRAST.h */,
+				A2F36A75BCE843EE04BE19DECCA8C1B8 /* WRAST.m */,
+				D14112CB089704A5668E26586934FD9D /* WRASTBuilder.h */,
+				8C2619D728B15A176C061A0D7B253111 /* WRASTBuilder.m */,
+				77306EDA1C3F1286565E2E3C3A6484BB /* WRTreePattern.h */,
+				FA6008BEA78C7C28BFD148FAD915337E /* WRTreePattern.m */,
+				04FD200F799976D39FEAAC17DA645037 /* WRTreePatternMatcher.h */,
+				9052518CF106596B7369557081E67024 /* WRTreePatternMatcher.m */,
 			);
-			name = Token;
-			path = Token;
+			name = AST;
+			path = AST;
+			sourceTree = "<group>";
+		};
+		34B3367BB832F82C67FCAAB1A3D31D4E /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				A4FAEC9A622D6E7B2537CAFEAA064A1E /* WRLanguage.h */,
+				CBBD5FE7A7D51AB970285193223CB125 /* WRLanguage.m */,
+				3CCA27C6D80C0AF349B570133742AE83 /* WRLanguageCF_EAC_3_4_RR.h */,
+				EAAF128DFE935CBE27B82B66C828EE68 /* WRLanguageCF_EAC_3_4_RR.m */,
+			);
+			name = Language;
+			path = Language;
+			sourceTree = "<group>";
+		};
+		39231EFBC545CBB313246680FF13074B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5030DE9C1F29688BA1E0E8DC78AD111B /* WRSPPFNode.h */,
+				3A4F2DEA1AD84E77F598C97B56565DB2 /* WRSPPFNode.m */,
+				D76D2FDAA55FB0890FDECEB69DB93F7C /* WRUtils.h */,
+				D0F6DEC648422C04C65DBD1B41151346 /* WRUtils.m */,
+			);
+			name = Utils;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		4772DACE1B5EC91379A43569B3E8049E /* Products */ = {
@@ -196,32 +210,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4F3DDED61D04E7D00D6959B3D027308E /* Language */ = {
+		5EEDF4B35158584BE3F503E8006F2F90 /* Scanner */ = {
 			isa = PBXGroup;
 			children = (
-				9B9A3B0E55DAF27CB15F7FE1B0BBDBDF /* WRLanguage.h */,
-				5F5AEA8465AB7688D012F0D14593AB97 /* WRLanguage.m */,
-				ABA3ACB235592CFC06825DD3374524A1 /* WRLanguageCF_EAC_3_4_RR.h */,
-				6F827870667DD47822E89AEB332EF660 /* WRLanguageCF_EAC_3_4_RR.m */,
+				96B78E9CDD743215D23D8DA85EA7F8D1 /* WRLexer.h */,
+				ADEAD22D1C06E89C4B90624B7186D272 /* WRLexer.m */,
+				3C5BDED1A46C09E0682588341E628AB8 /* WRScanner.h */,
+				033280151355BF48B1C4AA55E37DB408 /* WRScanner.m */,
+				ADA0BD4B10B7579CB9E12BF85D4D9D82 /* WRWordScanner.h */,
+				FA12E268F014823B36DF05B30B3EC620 /* WRWordScanner.m */,
 			);
-			name = Language;
-			path = Language;
-			sourceTree = "<group>";
-		};
-		6FF20604DDE948689FA9325E50ADCA50 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				4AA91E67FBEDA3858E87B67D0C1B1D1F /* WRParsingBasicLib.h */,
-				84D74A47AF5AE9F1A1D03DA7C5FD28C7 /* AST */,
-				4F3DDED61D04E7D00D6959B3D027308E /* Language */,
-				96338BC4ECDAAA12F08E058DF6E52380 /* Rule */,
-				16FE98220BA2A28705CF19D9D1A21402 /* Scanner */,
-				3A14DC595D752B62F9B0CD0C3D954578 /* Token */,
-				FFEBB46C6F724B250238B9F0C022F6BC /* Utils */,
-				BBDFFB8A1FD49FC756218E271E5C4F7D /* Visitor */,
-			);
-			name = Classes;
-			path = Classes;
+			name = Scanner;
+			path = Scanner;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -233,22 +233,6 @@
 				4772DACE1B5EC91379A43569B3E8049E /* Products */,
 				AE1A6F783BAC8DD1AB4B644074E5988C /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		84D74A47AF5AE9F1A1D03DA7C5FD28C7 /* AST */ = {
-			isa = PBXGroup;
-			children = (
-				666424F7BE10CAD2057EFD1E2CA00011 /* WRAST.h */,
-				F1140547D47BCD782C0932C8B5232854 /* WRAST.m */,
-				48334661E73768F799E3833FC473B7DF /* WRASTBuilder.h */,
-				4800AE6FBA36D5388F688BEF78933414 /* WRASTBuilder.m */,
-				5074CB7D78B1B08EDB99B1B7766A0BD4 /* WRTreePattern.h */,
-				2F4B653CD185DE2A214292905A3A155F /* WRTreePattern.m */,
-				EA765E010F656A1395B5639145B107DF /* WRTreePatternMatcher.h */,
-				76C640A2550835F372A9C5079A6F1540 /* WRTreePatternMatcher.m */,
-			);
-			name = AST;
-			path = AST;
 			sourceTree = "<group>";
 		};
 		8A726FBD32CD7684C654FD7F242B2B11 /* Pods-WREarleyParser */ = {
@@ -275,26 +259,30 @@
 			name = "OS X";
 			sourceTree = "<group>";
 		};
-		96338BC4ECDAAA12F08E058DF6E52380 /* Rule */ = {
-			isa = PBXGroup;
-			children = (
-				48778D478D7FEA457CBD83C45CA91F5D /* WRItem.h */,
-				13396286F3A1EB92A6C102593D5B8A7B /* WRItem.m */,
-				ACE9DB3E7B60C1BDE7A57B8574A410C7 /* WRRule.h */,
-				58B6297FD22A7132D448A482CC027100 /* WRRule.m */,
-			);
-			name = Rule;
-			path = Rule;
-			sourceTree = "<group>";
-		};
 		A6177F619CEB7D26A8B1CF813EB7191D /* WRParsingBasic */ = {
 			isa = PBXGroup;
 			children = (
-				6FF20604DDE948689FA9325E50ADCA50 /* Classes */,
+				C71E70AB95212134E06D7DACEE64E662 /* Classes */,
 				DC8D1C5CEC6210931A34C0A9D5AF054F /* Support Files */,
 			);
 			name = WRParsingBasic;
 			path = ../../../../WRParsingComponent/WRParsingBasic;
+			sourceTree = "<group>";
+		};
+		A8BC4D289CF9C05509D1929973B032AB /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				C95045EA0B5F8FA46C22A35B62BF23D8 /* NSString + WRToken.h */,
+				4558450F9903ED4948F4270C2EB76047 /* NSString + WRToken.m */,
+				0D60BCA6831A678563FD907FE09F9D24 /* WRNonterminal.h */,
+				F2ED6BCF1D539A8087D84B4A7DAEFCFC /* WRNonterminal.m */,
+				BC77EB791B574F9B2092654A91C40153 /* WRTerminal.h */,
+				A1534B0F6AC0065F25BAF7FC643FA67C /* WRTerminal.m */,
+				CCD37BD5B2343B91623361A93464091F /* WRToken.h */,
+				B11A7C224CBEAC4433C9522E60A803AC /* WRToken.m */,
+			);
+			name = Token;
+			path = Token;
 			sourceTree = "<group>";
 		};
 		AE1A6F783BAC8DD1AB4B644074E5988C /* Targets Support Files */ = {
@@ -305,20 +293,20 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		BBDFFB8A1FD49FC756218E271E5C4F7D /* Visitor */ = {
+		C71E70AB95212134E06D7DACEE64E662 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				71EF57B0E7D4EBFEF01243294CFB5BB4 /* WRTreeHorizontalDashStylePrinter.h */,
-				E5E1B5A90EAC1B515E7DC92CA58A2B9D /* WRTreeHorizontalDashStylePrinter.m */,
-				1FD7091CD01A3402FD532A0238185233 /* WRTreeLispStylePrinter.h */,
-				C9C7DE23DE0D7E799EF5A575BFBB78B2 /* WRTreeLispStylePrinter.m */,
-				E1221BF0EEB714BA1DE7D5B7EBCD308E /* WRTreeVisitor.h */,
-				FCBAD1F880CF5B0E6CBD4FEB7BC27916 /* WRTreeVisitor.m */,
-				BE49C583B5EDACB995A748B112386E69 /* WRVisitor.h */,
-				CD3448192B961D6AAFCEC3563BE801E0 /* WRVisitor.m */,
+				A5B756098D5680BDD2311B54C4210A97 /* WRParsingBasicLib.h */,
+				336F90CC6EB0E34D6AB3EEF60A0791BB /* AST */,
+				34B3367BB832F82C67FCAAB1A3D31D4E /* Language */,
+				E9D5483AF64D81642632898666AF2526 /* Rule */,
+				5EEDF4B35158584BE3F503E8006F2F90 /* Scanner */,
+				A8BC4D289CF9C05509D1929973B032AB /* Token */,
+				39231EFBC545CBB313246680FF13074B /* Utils */,
+				EDB0A181EB4665F5B02F9E6E58A3EB8C /* Visitor */,
 			);
-			name = Visitor;
-			path = Visitor;
+			name = Classes;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		D648CE86F139C7CCFD55D5B8A03BE74B /* Frameworks */ = {
@@ -340,47 +328,66 @@
 			path = "../../EarleyParser/EarleyOC/WREarleyParser/Pods/Target Support Files/WRParsingBasic";
 			sourceTree = "<group>";
 		};
-		FFEBB46C6F724B250238B9F0C022F6BC /* Utils */ = {
+		E9D5483AF64D81642632898666AF2526 /* Rule */ = {
 			isa = PBXGroup;
 			children = (
-				72879E40B0E20ED86F8FCADE4D7B2BA1 /* WRSPPFNode.h */,
-				4F9C38F0619FB55C6EA2F1200D6C21E6 /* WRSPPFNode.m */,
-				0C1D3493712B661D763F59647FB9E5C2 /* WRUtils.h */,
-				E75AAEA2D27C8CE2E06FE1B3C4C79FB2 /* WRUtils.m */,
+				BE133A1BDC6DACF6C5F140BE5910DDF3 /* WRItem.h */,
+				5BBF7A8D6E6908C5BE66F895CAC0AC73 /* WRItem.m */,
+				6670BDC0BE2A123849E522A07014885A /* WRItemLA1.h */,
+				2912B61BFAC11C6FA9D78EEC0397B9CC /* WRItemLA1.m */,
+				7C2B31EB335470E62A1C59D6AD0B478E /* WRRule.h */,
+				670584DF1924830380E5BF66EA1CD690 /* WRRule.m */,
 			);
-			name = Utils;
-			path = Utils;
+			name = Rule;
+			path = Rule;
+			sourceTree = "<group>";
+		};
+		EDB0A181EB4665F5B02F9E6E58A3EB8C /* Visitor */ = {
+			isa = PBXGroup;
+			children = (
+				462694515862124F92E2E8E86888F4E4 /* WRTreeHorizontalDashStylePrinter.h */,
+				45CD24543A24714AB00C5E8BF738A95A /* WRTreeHorizontalDashStylePrinter.m */,
+				F6B958A375A701CB9750294E3F472BF3 /* WRTreeLispStylePrinter.h */,
+				BB19E94E861BB4D6BAA9C5779000B1F8 /* WRTreeLispStylePrinter.m */,
+				07F7A9662914D89CBAAAEEE423D33298 /* WRTreeVisitor.h */,
+				A92C6A4DF10DE3A3ECAC7D28115C578F /* WRTreeVisitor.m */,
+				6B12DFFFD8EBA520DDF04251EF3A2436 /* WRVisitor.h */,
+				A50187E96CEA33A3DBB26DCE55CE4253 /* WRVisitor.m */,
+			);
+			name = Visitor;
+			path = Visitor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		52103EE6F1952AC0456A8113E353AA53 /* Headers */ = {
+		15BFDA88AD76BB1CAD40FC1223E853AF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				412A5D2DFF10816CAA362FCDAEB1D515 /* NSString + WRToken.h in Headers */,
-				1AB7ACEB11B73A08B3DF2E6213D8D482 /* WRAST.h in Headers */,
-				C3AB4A84CA8FF3B49CD6C49286797E2F /* WRASTBuilder.h in Headers */,
-				C1ED900295FAD9DCD444CB84692AF159 /* WRItem.h in Headers */,
-				D9466E0D5AD9410A7674231E5ABD07E8 /* WRLanguage.h in Headers */,
-				D4325D7F87BA45ED36264644EE4C50F6 /* WRLanguageCF_EAC_3_4_RR.h in Headers */,
-				CE667F019B47BB2238AB020F6D147C41 /* WRLexer.h in Headers */,
-				2F4DFC7A2950F45C65363FB78A675962 /* WRNonterminal.h in Headers */,
-				70943C7981B399E6167A3A55DBA3B922 /* WRParsingBasicLib.h in Headers */,
-				6B26B3CCEC4D49F552EFE0B0843D95E5 /* WRRule.h in Headers */,
-				024A2956A81890D3589F3CA5C6311CE4 /* WRScanner.h in Headers */,
-				E24258546E8216A50DA40FF74F566F0A /* WRSPPFNode.h in Headers */,
-				3341929643B5575D809F912E7034ACD1 /* WRTerminal.h in Headers */,
-				5536A59554A82B2021E6991B5D89D63D /* WRToken.h in Headers */,
-				2CB0B93A6DA55DA8C0E7F1DAE861D579 /* WRTreeHorizontalDashStylePrinter.h in Headers */,
-				E4E65E2F7386B05F8591886F526AAAF2 /* WRTreeLispStylePrinter.h in Headers */,
-				06922A3A33CE09F44C35D5B47615FA1E /* WRTreePattern.h in Headers */,
-				9993CA6612F75AE6F160A5730A6F5B1E /* WRTreePatternMatcher.h in Headers */,
-				F46457AA0E1AD955A4AF3F4C07A4C1C0 /* WRTreeVisitor.h in Headers */,
-				586A747844AB4D2D6A686508254F3537 /* WRUtils.h in Headers */,
-				E2C5A88316385892F1256BE275A31F6C /* WRVisitor.h in Headers */,
-				C2D321BB861898C90B9F39475EDF9D5E /* WRWordScanner.h in Headers */,
+				A9828A9E800BBCF199DB9E22A2569C1D /* NSString + WRToken.h in Headers */,
+				1BFB7955952A5B6F364DCEFFFCBA2A53 /* WRAST.h in Headers */,
+				2E819388A72BA6CDC19F0B46BB6443E1 /* WRASTBuilder.h in Headers */,
+				764C2167A9D6A816540DCEEE2A4F0FA6 /* WRItem.h in Headers */,
+				43AB27E45BDA50C9EBBF1896BB95BC21 /* WRItemLA1.h in Headers */,
+				9EECB91A9551AEBC29269D9F5AEB61CA /* WRLanguage.h in Headers */,
+				137C25FF7649914034B93534F7AA394A /* WRLanguageCF_EAC_3_4_RR.h in Headers */,
+				EE9E1B0BE4065B3C5636B457A18B0654 /* WRLexer.h in Headers */,
+				1DA4D1C88F8E167CADB285182D5221AB /* WRNonterminal.h in Headers */,
+				E4600C3476FA84BF0787D5C8EA99B730 /* WRParsingBasicLib.h in Headers */,
+				3121A28E83E1F0C5034FA46A5591D731 /* WRRule.h in Headers */,
+				A44CC2B19D2586C457F9FB979037CA35 /* WRScanner.h in Headers */,
+				D63841575B25C82FCB42F8C9F68C99B8 /* WRSPPFNode.h in Headers */,
+				0E9DC7CA500E1700B787159236BE439B /* WRTerminal.h in Headers */,
+				777FD4B47D9DA49FB66DE3E1F5D748B5 /* WRToken.h in Headers */,
+				764753AA3A5559C98B3638E98AA0F4DC /* WRTreeHorizontalDashStylePrinter.h in Headers */,
+				E7D2756FDF582E7862954C9690282D21 /* WRTreeLispStylePrinter.h in Headers */,
+				9CB63EB8F8F1021DC80C18F6382409F9 /* WRTreePattern.h in Headers */,
+				F232B5B0B4D226EAFE820F3A6C82CD49 /* WRTreePatternMatcher.h in Headers */,
+				E4DCAD37EEA5CD0A58E75AA24010E2F5 /* WRTreeVisitor.h in Headers */,
+				C00B9FFFD3B6BA38046856408434D05C /* WRUtils.h in Headers */,
+				BE84CFE509A91C14B85D1B3A5CEE2180 /* WRVisitor.h in Headers */,
+				E34E36B5710FFADFAF4BC80ACE8A0C12 /* WRWordScanner.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,9 +398,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FB32DF152CF5F7A8A37E327A55E77A0F /* Build configuration list for PBXNativeTarget "WRParsingBasic" */;
 			buildPhases = (
-				AC7F34C4C2AFCA7850D5165B689A70E2 /* Sources */,
+				F7F2AF47E34A9EEAC10DE26D914A4054 /* Sources */,
 				296A3D20E040899F763282CA43542CAD /* Frameworks */,
-				52103EE6F1952AC0456A8113E353AA53 /* Headers */,
+				15BFDA88AD76BB1CAD40FC1223E853AF /* Headers */,
 			);
 			buildRules = (
 			);
@@ -457,32 +464,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AC7F34C4C2AFCA7850D5165B689A70E2 /* Sources */ = {
+		F7F2AF47E34A9EEAC10DE26D914A4054 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF33A78EA14B67A7BCB6306AFCC5B889 /* NSString + WRToken.m in Sources */,
-				A6F8AD54D7FE49C8665422A8FED02337 /* WRAST.m in Sources */,
-				2F44CE77F57EBDC4A34E0DD071AECA0C /* WRASTBuilder.m in Sources */,
-				FBB1EDD69AF1117DA81BAEB6DEE004BF /* WRItem.m in Sources */,
-				9418932B225E65412C916B1C1D840260 /* WRLanguage.m in Sources */,
-				7DB2C446B6C4CD49969AF133529AE5F1 /* WRLanguageCF_EAC_3_4_RR.m in Sources */,
-				D9A1CA2824CB5D7B57B660CA49F2CE08 /* WRLexer.m in Sources */,
-				D44B6527265EC6AA6A27F0250180E695 /* WRNonterminal.m in Sources */,
-				8D0C253686EE17DA726D2474CA9F0763 /* WRParsingBasic-dummy.m in Sources */,
-				5C74213F53ADCEE22448E6D4BBB65658 /* WRRule.m in Sources */,
-				DF55497684D2567B2F5588AC09F39445 /* WRScanner.m in Sources */,
-				F23CFCD5B626C6056464770E779D884D /* WRSPPFNode.m in Sources */,
-				043827962492DEB3E4042AF5D1E07CAC /* WRTerminal.m in Sources */,
-				F53E035A18271B8F87440A247BE64241 /* WRToken.m in Sources */,
-				51C6C5D92A8583E7F662C9101DD246FE /* WRTreeHorizontalDashStylePrinter.m in Sources */,
-				ECB2CDC5D73830CC7B3523E3FAFA8953 /* WRTreeLispStylePrinter.m in Sources */,
-				E1BBA2AE39AFCB18C0E0BDF5A832B3DC /* WRTreePattern.m in Sources */,
-				4FA7121AD92276FBDFE01A85AAC349BA /* WRTreePatternMatcher.m in Sources */,
-				169220C371FC682F27FE355BC635EC36 /* WRTreeVisitor.m in Sources */,
-				CB710F767D34C7055773B0941D4E0F7E /* WRUtils.m in Sources */,
-				23CAA5C3D1A2A1C51BB7C208844A7BD5 /* WRVisitor.m in Sources */,
-				83B7EA926B392E59DA2A3A30C66C6229 /* WRWordScanner.m in Sources */,
+				C203285348950486CEC6FD30FD5D753D /* NSString + WRToken.m in Sources */,
+				28C50C4476DB9394241096142516EE6D /* WRAST.m in Sources */,
+				198A4E1C66B49B30F15B8980DF17E1DF /* WRASTBuilder.m in Sources */,
+				04E642EB361D042278C3D7BEC8E81BB9 /* WRItem.m in Sources */,
+				137EB57A4E3CAA3148CAFFEF66FCE97B /* WRItemLA1.m in Sources */,
+				B7A819F41AA9C59FE7DE828614EDCF83 /* WRLanguage.m in Sources */,
+				C968742B61AD0EFE860E876839941E10 /* WRLanguageCF_EAC_3_4_RR.m in Sources */,
+				AFBA531C69F5CB7164973415B0B0097E /* WRLexer.m in Sources */,
+				6A6CE2EC6E1FA969FDD80801BF616CAA /* WRNonterminal.m in Sources */,
+				E50C23731D4F0AF11BEC988446891F57 /* WRParsingBasic-dummy.m in Sources */,
+				B8F18231B9994A5F1A4081BD91534EF0 /* WRRule.m in Sources */,
+				0ED31C50BDFA14CE2E1385C028DE1EFC /* WRScanner.m in Sources */,
+				6FA2CD3DB0219A29DDD4331FDDAF5673 /* WRSPPFNode.m in Sources */,
+				B596F0209D201256BF4F20567E348FC3 /* WRTerminal.m in Sources */,
+				5BF3A043292417BD101E7A8F0FAEC57F /* WRToken.m in Sources */,
+				0726473395FB327CA553FBEFD9439220 /* WRTreeHorizontalDashStylePrinter.m in Sources */,
+				7317F2A534DBEE837A2F5C1A06F3FA0A /* WRTreeLispStylePrinter.m in Sources */,
+				C7478A145B9AC813D9F1BBA8325D669E /* WRTreePattern.m in Sources */,
+				79E29440666D1F62278879EAD733D831 /* WRTreePatternMatcher.m in Sources */,
+				B834F73248ED7A396AEF8B52868F225D /* WRTreeVisitor.m in Sources */,
+				B4B907C4E0CD4CB35BB8B363DF648C1F /* WRUtils.m in Sources */,
+				A59807A53B3D1A43FA1EE95E5CEB5DAC /* WRVisitor.m in Sources */,
+				115F8FE90B4462F033672FDDA734022B /* WRWordScanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
