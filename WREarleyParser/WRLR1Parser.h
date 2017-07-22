@@ -1,13 +1,54 @@
-//
-//  WRLR1Parser.h
-//  WREarleyParser
-//
-//  Created by ray wang on 2017/7/22.
-//  Copyright © 2017年 ray wang. All rights reserved.
-//
+/* Basic LR(1) Parser Generator
+ * Ref 'Parsing Techniques' Chap 9.6 'Engineering a Compiler' Chap 3.4
+ * Author: Ray Wang
+ * Date: 2017.7.22
+ */
 
-#import <Foundation/Foundation.h>
+#import "WRParsingBasicLib.h"
+
+@class WRLR1NFAState;
+@class WRLR1NFATransition;
+
+@interface WRLR1Station
+@property (nonatomic, strong, readwrite) NSMutableArray <WRLR1NFAState *> *states;
+@end
+
+@interface WRLR1NFAState
+@property (nonatomic, strong, readwrite) WRItemLA1 *item;
+@property (nonatomic, strong, readwrite) NSMutableArray <WRLR1NFATransition *> *transitions;
+- (instancetype)initWithItem:(WRItem *)item; // copy
++ (instancetype)NFAStateWithItem:(WRItem *)item;
+- (void)addTransition:(WRLR1NFATransition *)transition;
+- (void)setLookAhead:(NSString *)lookAhead;
+@end
+
+@interface WRLR1NFATransition
+@property (nonatomic, strong, readwrite) NSString *consumption;
+@property (nonatomic, strong, readwrite) WRLR1NFAState *to;
+
+- (instancetype)initNFATransitionWithToState:(WRLR1NFAState *)to
+                              andConsumption:(NSString *)consumption;
+
++ (instancetype)NFATransitionWithToState:(WRLR1NFAState *)to
+                          andConsumption:(NSString *)consumption;
+@end
+
+@interface WRLR1DFAState
+@property (nonatomic, assign, readwrite) NSInteger stateId;
+@property (nonatomic, strong, readwrite) NSString *contentStr;
+@property (nonatomic, strong, readwrite) NSString *reduceTokenSymbol; // nil for shift
+@property (nonatomic, assign, readwrite) NSInteger reduceRuleIndex;
+- (instancetype)initWithContentString:(NSString *)contentString; // use string indicate nfa set
++ (instancetype)DFAStateWithNFAStates:(NSMutableSet <WRLR1NFAState *> *)nfaStates;
+// helper methods for DFA construction
++ (NSString *)contentStrForNFAStates:(NSSet <WRLR1NFAState *> *)nfaStates;
+@end
 
 @interface WRLR1Parser : NSObject
+@property (nonatomic, strong, readwrite) WRLanguage *language;
+@property (nonatomic, strong, readwrite) WRWordScanner *scanner;
+@property (nonatomic, strong, readwrite) WRToken *parseTree;
 
+- (void)prepare;
+- (void)startParsing;
 @end

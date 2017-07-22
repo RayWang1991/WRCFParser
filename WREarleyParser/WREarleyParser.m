@@ -1,4 +1,4 @@
-/* Basic Earley Parser Generator
+/* Earley Parser Generator
  * Ref 'Parsing Techniques' Chap 7.2,
  * Elizabeth Scott, 'SPPF-Style Parsing From Earley Recognisers',
  * Electronic Notes in Theoretical Computer Science 203 (2008) 53–67

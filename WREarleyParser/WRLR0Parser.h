@@ -1,4 +1,4 @@
-/* Basic LR(0) Parser Generator
+/* LR(0) Parser Generator
  * Ref: 'Parsing Techniques' Chap 9.5
  * Author: Ray Wang
  * Date: 2017.6.30
@@ -79,8 +79,8 @@ typedef NS_ENUM(NSInteger, WRLR0ParsingError) {
 
 @interface WRLR0Parser : NSObject
 @property (nonatomic, strong, readwrite) WRLanguage *language;
-@property (nonatomic, strong, readwrite) WRWordScanner *scanner; // TODO test use
-@property (nonatomic, strong, readwrite) WRToken *parseTree; // TODO here is only parse tree, not forest
+@property (nonatomic, strong, readwrite) WRWordScanner *scanner;
+@property (nonatomic, strong, readwrite) WRToken *parseTree;
 
 - (void)prepare;
 - (void)startParsing;

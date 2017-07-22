@@ -1,4 +1,4 @@
-/* Basic LL(1) Parser Generator
+/* LL(1) Parser Generator
  * Ref 'Parsing Techniques' Chap 8.2 'Engineering a Compiler' Chap 3.3
  * Author: Ray Wang
  * Date: 2017.7.9
