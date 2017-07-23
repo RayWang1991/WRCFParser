@@ -17,6 +17,8 @@
 - (instancetype)initWithToken:(NSString *)token;
 + (instancetype)stationWthToken:(NSString *)token;
 - (void)addState:(WRLR1NFAState *)state;
++ (NSString *)descriptionForToken:(NSString *)token
+                     andLookAhead:(NSString *)lookAhead;
 @end
 
 @interface WRLR1NFAState : NSObject

@@ -22,7 +22,9 @@ NSString *const kWRLL1ParserErrorDomain = @"erorr.Parser.LL1";
 @end
 
 @implementation WRLL1Parser
-#pragma mark - construct preditction table
+
+#pragma mark - construct prediction table
+
 - (instancetype)init {
   if (self = [super init]) {
     _conflicts = [NSMutableArray array];
