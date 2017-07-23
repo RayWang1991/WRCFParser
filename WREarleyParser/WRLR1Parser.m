@@ -10,6 +10,7 @@
 - (instancetype)initWithToken:(NSString *)token {
   if (self = [super init]) {
     _token = token;
+    _lookAhead = @"";
   }
   return self;
 }
@@ -79,7 +80,7 @@
   if (nil == _transitions) {
     _transitions = [NSMutableArray array];
   }
-  return nil;
+  return _transitions;
 }
 
 @end
@@ -183,9 +184,9 @@
   // start from S eof
   WRLR1Station *S_EOF = [self stationFamilyWithAskingToken:self.language.startSymbol
                                               andLookAhead:WREndOfFileTokenSymbol];
-  NSMutableArray <WRLR1Station *>* workList = [NSMutableArray arrayWithObject:S_EOF];
+  NSMutableArray <WRLR1Station *> *workList = [NSMutableArray arrayWithObject:S_EOF];
 
-  while(workList.count){
+  while (workList.count) {
     WRLR1Station *station = workList.lastObject;
     [workList removeLastObject];
 
@@ -195,7 +196,7 @@
 
       while (currentState) {
         [array addObject:currentState];
-        currentState = state.transitions.firstObject.to;
+        currentState = currentState.transitions.firstObject.to;
       }
 
       [array removeLastObject];
@@ -208,14 +209,14 @@
       [array enumerateObjectsWithOptions:NSEnumerationReverse
                               usingBlock:^(WRLR1NFAState *nfaState, NSUInteger index, BOOL *stop) {
                                 NSString *askingToken = nfaState.item.nextAskingToken;
-                                if (askingToken.tokenTypeForString == WRNonterminal) {
+                                if (askingToken.tokenTypeForString == WRTokenTypeNonterminal) {
                                   for (NSString *lookAhead in firstSet) {
                                     NSString *askingStateDes = [WRLR1Station descriptionForToken:askingToken
                                                                                     andLookAhead:lookAhead];
                                     WRLR1Station *askingStation = self.stationSet[askingStateDes];
-                                    if(nil == askingStation) {
-                                      [self stationFamilyWithAskingToken:askingToken
-                                                            andLookAhead:lookAhead];
+                                    if (nil == askingStation) {
+                                      askingStation = [self stationFamilyWithAskingToken:askingToken
+                                                                            andLookAhead:lookAhead];
                                       [workList addObject:askingStation];
                                     }
                                     for (WRLR1NFAState *nextNFAState in askingStation.states) {
@@ -224,7 +225,7 @@
                                     }
                                   }
                                 }
-                                if(index > 0) {
+                                if (index > 0) {
                                   if ([self.language isTokenNullable:askingToken]) {
                                     [firstSet unionSet:[self.language firstSetForToken:askingToken]];
                                   } else {
@@ -242,15 +243,12 @@
     WRLR1Station *baseStation = [WRLR1Station stationWthToken:nonterminal];
     [self.stationSet setValue:baseStation
                        forKey:baseStation.description];
-    baseStation.lookAhead = @"";
     for (WRRule *rule in self.language.grammars[nonterminal]) {
       WRItemLA1 *item = [WRItemLA1 itemWithRule:rule
                                     dotPosition:0
                                  askingPosition:-1];
-      item.lookAhead = @"";
       WRLR1NFAState *baseState = [WRLR1NFAState NFAStateWithItem:item];
-      [baseState addTransition:[WRLR1NFATransition NFATransitionWithToState:baseState
-                                                             andConsumption:nil]];
+      [baseStation addState:baseState];
       while (!item.isComplete) {
         WRItemLA1 *nextItem = [WRItemLA1 itemWithRule:item
                                           dotPosition:item.dotPos + 1
@@ -285,7 +283,7 @@
     [newState setLookAhead:lookAhead];
     [self.NFAStateRecordSet setValue:newState
                               forKey:newState.description];
-    [newStation addState:state];
+    [newStation addState:newState];
     WRLR1NFATransition *transition = state.transitions.firstObject;
     while (transition) {
       WRLR1NFAState *nextState = transition.to;
@@ -304,7 +302,29 @@
 }
 
 - (void)printAllNFAStatesAndTransitions {
-
+  for (WRLR1Station *station in self.stationSet.allValues) {
+    if(station.lookAhead.length == 0){
+      continue;
+    }
+    for (WRLR1NFAState *state in station.states) {
+      WRLR1NFAState *currentState = state;
+      while (currentState) {
+        printf("%s\n", currentState.description.UTF8String);
+        WRLR1NFAState *nextState = nil;
+        for (WRLR1NFATransition *transition in currentState.transitions) {
+          NSString *consumption;
+          if (transition.consumption) {
+            consumption = transition.consumption;
+            nextState = transition.to;
+          } else {
+            consumption = @"epsilon";
+          }
+          printf("  --%s-->%s\n", consumption.UTF8String, transition.to.description.UTF8String);
+        }
+        currentState = nextState;
+      }
+    }
+  }
 }
 
 #pragma mark DFA construction

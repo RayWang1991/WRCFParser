@@ -8,6 +8,7 @@
 #import "WRParsingBasicLib.h"
 #import "WREarleyParser.h"
 #import "WRLR0Parser.h"
+#import "WRLR1Parser.h"
 #import "WRLL1Parser.h"
 
 #import "WRRELanguage.h"
@@ -16,6 +17,7 @@ void test();
 void ruleTest();
 void testEarleyParser();
 void testLR0Parser();
+void testLR1Parser();
 void testLL1Parser();
 void testWordScanner();
 void testLexer();
@@ -24,7 +26,7 @@ void testTreePattern();
 
 int main(int argc, const char *argv[]) {
   @autoreleasepool {
-    testLR0Parser();
+    testLR1Parser();
   }
   return 0;
 }
@@ -109,6 +111,16 @@ void testLR0Parser() {
   [hdPrinter print];
   [lispPrinter print];
 
+}
+
+void testLR1Parser(){
+  WRLR1Parser *parser = [[WRLR1Parser alloc]init];
+  WRWordScanner *scanner = [[WRWordScanner alloc]init];
+  WRLanguage *language = [WRLanguage CFGrammar_9_23];
+  scanner.inputStr = @"n - n - n";
+  parser.language = language;
+  parser.scanner = scanner;
+  [parser prepare];
 }
 
 void testLexer() {
