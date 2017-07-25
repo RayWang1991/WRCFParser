@@ -53,13 +53,13 @@ typedef NS_ENUM(NSInteger, WRLR1DFAActionConflict) {
 @interface WRLR1DFAState : NSObject
 @property (nonatomic, assign, readwrite) NSInteger stateId;
 @property (nonatomic, strong, readwrite) NSString *contentStr;
-@property (nonatomic, strong, readwrite) NSString *reduceTokenSymbol; // nil for shift
-@property (nonatomic, assign, readwrite) NSInteger reduceRuleIndex;
-@property (nonatomic, strong, readwrite) NSMutableDictionary *transitionDict;
-// the transition dictionary is a union. when state is a shift state, the transition dict records the available shifts
-// when state is a reduction state, it records the available lookAheads.
+@property (nonatomic, strong, readwrite) NSMutableDictionary *actionDict;
+// the action dictionary is a union.
+// when action[lookAhead] is a number, it represents a rule index
+// when action[lookAhead] is a dfaState, it represents a shift
+// to be mentioned, during DFA construction, we use actionDict to record the available shifts to NFA states
 
-- (instancetype)initWithContentString:(NSString *)contentString; // use string indicate nfa set
+- (instancetype)initWithContentString:(NSString *)contentString; // use string to represent nfa set
 + (instancetype)DFAStateWithContentString:(NSString *)contentString;
 + (instancetype)DFAStateWithNFAStates:(NSMutableSet <WRLR1NFAState *> *)nfaStates;
 // helper methods for DFA construction

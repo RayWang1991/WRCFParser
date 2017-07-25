@@ -140,11 +140,11 @@ NSString *const kWRLR1ParserErrorDomain = @"erorr.Parser.LR1";
   return self.contentStr;
 }
 
-- (NSMutableDictionary <NSString *, WRLR1DFAState *> *)transitionDict {
-  if (nil == _transitionDict) {
-    _transitionDict = [NSMutableDictionary dictionary];
+- (NSMutableDictionary <NSString *, WRLR1DFAState *> *)actionDict {
+  if (nil == _actionDict) {
+    _actionDict = [NSMutableDictionary dictionary];
   }
-  return _transitionDict;
+  return _actionDict;
 }
 @end
 
@@ -369,20 +369,22 @@ NSString *const kWRLR1ParserErrorDomain = @"erorr.Parser.LR1";
     WRLR1DFAState *todoState = workList.lastObject;
     todoState.stateId = stateId++;
     [workList removeLastObject];
-    for (NSString *shiftToken in todoState.transitionDict.allKeys) {
-      NSArray <WRLR1NFAState *> *shiftArray = todoState.transitionDict[shiftToken];
-      NSSet <WRLR1NFAState *> *nfaSet = [self epsilonClosureForNFAContainer:shiftArray];
-      NSString *contentString = [WRLR1DFAState contentStrForNFAStates:nfaSet];
-      WRLR1DFAState *dfaState = self.DFARecordSet[contentString];
-      if (!dfaState) {
-        dfaState = [self DFAStateWithNFAStateSet:nfaSet
-                                andContentString:contentString];
-        [self.DFARecordSet setValue:dfaState
-                             forKey:contentString];
-        [workList addObject:dfaState];
+    for (NSString *shiftToken in todoState.actionDict.allKeys) {
+      if ([todoState.actionDict[shiftToken] isKindOfClass:[NSArray class]]) {
+        NSArray <WRLR1NFAState *> *shiftArray = todoState.actionDict[shiftToken];
+        NSSet <WRLR1NFAState *> *nfaSet = [self epsilonClosureForNFAContainer:shiftArray];
+        NSString *contentString = [WRLR1DFAState contentStrForNFAStates:nfaSet];
+        WRLR1DFAState *dfaState = self.DFARecordSet[contentString];
+        if (!dfaState) {
+          dfaState = [self DFAStateWithNFAStateSet:nfaSet
+                                  andContentString:contentString];
+          [self.DFARecordSet setValue:dfaState
+                               forKey:contentString];
+          [workList addObject:dfaState];
+        }
+        [todoState.actionDict setValue:dfaState
+                                forKey:shiftToken];
       }
-      [todoState.transitionDict setValue:dfaState
-                                  forKey:shiftToken];
     }
   }
 }
@@ -421,72 +423,56 @@ NSString *const kWRLR1ParserErrorDomain = @"erorr.Parser.LR1";
 - (WRLR1DFAState *)DFAStateWithNFAStateSet:(NSSet <WRLR1NFAState *> *)set
                           andContentString:(NSString *)contentString {
   WRLR1DFAState *dfaState = [WRLR1DFAState DFAStateWithContentString:contentString];
-  BOOL foundShift = NO;
   // dispose the action / goto meaning
   for (WRLR1NFAState *nfaState in set) {
     WRItemLA1 *item = nfaState.item;
     if ([item isComplete]) {
       // indicating a reduce action
       NSString *reduceToken = item.leftToken;
-      if (foundShift) {
+      NSString *lookAhead = item.lookAhead;
+      id action = dfaState.actionDict[lookAhead];
+      if (!action) {
+        // valid
+        [dfaState.actionDict setValue:self.language.rule2IdMapper[item.originalDescription]
+                               forKey:lookAhead];
+      } else if ([action isKindOfClass:[NSNumber class]]) {
+        WRRule *rule = self.language.grammarsInARow[[action integerValue]];
+        if (![rule.description isEqualToString:item.originalDescription]) {
+          // reduce/reduce conflict
+          NSString *message =
+            [self conflictMessageOnType:WRLR1DFAActionConflictReduceReduce
+                           withDFAState:dfaState
+                             reduction1:rule
+                             reduction2:self.language.grammars[reduceToken][item.ruleIndex]
+                                  shift:nil];
+          NSError *conflict = [NSError errorWithDomain:kWRLR1ParserErrorDomain
+                                                  code:WRLR1DFAActionConflictReduceReduce
+                                              userInfo:@{@"content": message}];
+          [self.conflicts addObject:conflict];
+          assert(NO);
+        }
+      } else {
+        // shift/reduce conflict
         NSString *message =
           [self conflictMessageOnType:WRLR1DFAActionConflictShiftReduce
-                         withDFAState:dfaState
-                           reduction1:self.language.grammars[dfaState.reduceTokenSymbol][dfaState.reduceRuleIndex]
-                           reduction2:nil
-                                shift:dfaState.transitionDict.allKeys.firstObject];
-        NSError *conflict = [NSError errorWithDomain:kWRLR1ParserErrorDomain
-                                                code:WRLR1DFAActionConflictShiftReduce
-                                            userInfo:@{@"content": message}];
-        [self.conflicts addObject:conflict];
-        assert(NO);
-      } else if (dfaState.reduceTokenSymbol &&
-        (![dfaState.reduceTokenSymbol isEqualToString:reduceToken] || dfaState.reduceRuleIndex != item.ruleIndex)) {
-        // error
-        NSString *message =
-          [self conflictMessageOnType:WRLR1DFAActionConflictReduceReduce
                          withDFAState:dfaState
                            reduction1:self.language.grammars[reduceToken][item.ruleIndex]
-                           reduction2:self.language.grammars[dfaState.reduceTokenSymbol][dfaState.reduceRuleIndex]
-                                shift:nil];
-        NSError *conflict = [NSError errorWithDomain:kWRLR1ParserErrorDomain
-                                                code:WRLR1DFAActionConflictReduceReduce
-                                            userInfo:@{@"content": message}];
-        [self.conflicts addObject:conflict];
-        assert(NO);
-      } else {
-        // available reduce on look ahead
-        dfaState.reduceTokenSymbol = reduceToken;
-        dfaState.reduceRuleIndex = item.ruleIndex;
-        [dfaState.transitionDict setValue:@(1)
-                                   forKey:item.lookAhead];
-      }
-    } else {
-      foundShift = YES;
-      NSString *shiftToken = item.nextAskingToken;
-      if (dfaState.reduceTokenSymbol) {
-        // error
-        NSString *message =
-          [self conflictMessageOnType:WRLR1DFAActionConflictShiftReduce
-                         withDFAState:dfaState
-                           reduction1:self.language.grammars[dfaState.reduceTokenSymbol][dfaState.reduceRuleIndex]
                            reduction2:nil
-                                shift:shiftToken];
+                                shift:lookAhead];
         NSError *conflict = [NSError errorWithDomain:kWRLR1ParserErrorDomain
                                                 code:WRLR1DFAActionConflictShiftReduce
                                             userInfo:@{@"content": message}];
         [self.conflicts addObject:conflict];
         assert(NO);
-      } else {
+      }
+    } else {
+      // indicating a shift action
+      NSString *shiftToken = item.nextAskingToken;
+      id action = dfaState.actionDict[shiftToken];
+      if (!action) {
         // available shift on look ahead
         // record it for further processing
         // array is OK, cauz the next item can not be the same
-        NSMutableArray *array = dfaState.transitionDict[shiftToken];
-        if (!array) {
-          array = [NSMutableArray array];
-          [dfaState.transitionDict setValue:array
-                                     forKey:shiftToken];
-        }
 
         // This is fast, cauz the first transition is always the nonepsilon one
         WRLR1NFATransition *transitionShift = nil;
@@ -497,7 +483,32 @@ NSString *const kWRLR1ParserErrorDomain = @"erorr.Parser.LR1";
           }
         }
         assert([transitionShift.consumption isEqualToString:shiftToken]);
-        [array addObject:transitionShift.to];
+
+        [dfaState.actionDict setValue:[NSMutableArray arrayWithObject:transitionShift.to]
+                               forKey:shiftToken];
+      } else if ([action isKindOfClass:[NSNumber class]]) {
+        // shift/reduce conflict
+        NSString *message =
+          [self conflictMessageOnType:WRLR1DFAActionConflictShiftReduce
+                         withDFAState:dfaState
+                           reduction1:self.language.grammarsInARow[[action integerValue]]
+                           reduction2:nil
+                                shift:shiftToken];
+        NSError *conflict = [NSError errorWithDomain:kWRLR1ParserErrorDomain
+                                                code:WRLR1DFAActionConflictShiftReduce
+                                            userInfo:@{@"content": message}];
+        [self.conflicts addObject:conflict];
+        assert(NO);
+      } else {
+        WRLR1NFATransition *transitionShift = nil;
+        for (WRLR1NFATransition *transition in nfaState.transitions) {
+          if (transition.consumption) {
+            transitionShift = transition;
+            break;
+          }
+        }
+        assert([transitionShift.consumption isEqualToString:shiftToken]);
+        [((NSMutableArray *) action) addObject:transitionShift.to];
       }
     }
   }
@@ -510,17 +521,15 @@ NSString *const kWRLR1ParserErrorDomain = @"erorr.Parser.LR1";
     NSString *stateStr = [WRUtils debugStrWithTabs:2
                                          forString:dfaState.contentStr];
     printf("state ID: %ld ", (long) dfaState.stateId);
-    if (dfaState.reduceTokenSymbol == nil) {
-      printf("shift state\n");
-      printf("%s", stateStr.UTF8String);
-      for (NSString *transitionTokenStr in dfaState.transitionDict) {
-        printf("    --\'%s\'--> %ld\n", transitionTokenStr.UTF8String,
-               (long) ((WRLR1DFAState *)dfaState.transitionDict[transitionTokenStr]).stateId);
+    printf("%s", stateStr.UTF8String);
+    for (NSString *transitionTokenStr in dfaState.actionDict) {
+      if ([dfaState.actionDict[transitionTokenStr] isKindOfClass:[WRLR1DFAState class]]) {
+        printf("shift  --\'%s\'--> %ld\n", transitionTokenStr.UTF8String,
+               (long) ((WRLR1DFAState *) dfaState.actionDict[transitionTokenStr]).stateId);
+      } else {
+        WRRule *reduceRule = self.language.grammarsInARow[[dfaState.actionDict[transitionTokenStr] integerValue]];
+        printf("reduce , using %s\n", reduceRule.description.UTF8String);
       }
-    } else {
-      WRRule *reduceRule = self.language.grammars[dfaState.reduceTokenSymbol][dfaState.reduceRuleIndex];
-      printf("reduce state, using %s\n", reduceRule.description.UTF8String);
-      printf("%s", stateStr.UTF8String);
     }
   }
 }
