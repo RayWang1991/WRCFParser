@@ -5,6 +5,9 @@
  */
 
 #import "WRLR1Parser.h"
+
+NSString *const kWRLR1ParserErrorDomain = @"erorr.Parser.LR1";
+
 @implementation WRLR1Station
 
 - (instancetype)initWithToken:(NSString *)token {
@@ -132,6 +135,17 @@
 + (instancetype)DFAStateWithNFAStates:(NSMutableSet <WRLR1NFAState *> *)nfaStates {
   return [[self alloc] initWithContentString:[self contentStrForNFAStates:nfaStates]];
 }
+
+- (NSString *)description {
+  return self.contentStr;
+}
+
+- (NSMutableDictionary <NSString *, WRLR1DFAState *> *)transitionDict {
+  if (nil == _transitionDict) {
+    _transitionDict = [NSMutableDictionary dictionary];
+  }
+  return _transitionDict;
+}
 @end
 
 @interface WRLR1Parser ()
@@ -181,7 +195,7 @@
   _NFATransitionRecordSet = [NSMutableDictionary dictionary];
   [self constructBaseStationSet];
 
-  // start from S eof
+  // start from S, eof
   WRLR1Station *S_EOF = [self stationFamilyWithAskingToken:self.language.startSymbol
                                               andLookAhead:WREndOfFileTokenSymbol];
   NSMutableArray <WRLR1Station *> *workList = [NSMutableArray arrayWithObject:S_EOF];
@@ -238,7 +252,6 @@
 }
 
 - (void)constructBaseStationSet {
-//  WRLR1Station *baseStartStation = [WRLR1Station stationWthToken:self.language.startSymbol];
   for (NSString *nonterminal in self.language.nonterminalList) {
     WRLR1Station *baseStation = [WRLR1Station stationWthToken:nonterminal];
     [self.stationSet setValue:baseStation
@@ -303,7 +316,7 @@
 
 - (void)printAllNFAStatesAndTransitions {
   for (WRLR1Station *station in self.stationSet.allValues) {
-    if(station.lookAhead.length == 0){
+    if (station.lookAhead.length == 0) {
       continue;
     }
     for (WRLR1NFAState *state in station.states) {
@@ -330,11 +343,212 @@
 #pragma mark DFA construction
 
 - (void)constructDFA {
+  // initiation
+  _conflicts = [NSMutableArray array];
 
+  _DFARecordSet = [NSMutableDictionary dictionary];
+  NSString *S_EOF = [WRLR1Station descriptionForToken:self.language.startSymbol
+                                         andLookAhead:WREndOfFileTokenSymbol];
+  WRLR1Station *startStation = self.stationSet[S_EOF];
+  NSMutableSet *startSet = [NSMutableSet set];
+
+  for (WRLR1NFAState *state in startStation.states) {
+    [startSet unionSet:[self epsilonClosureForNFAState:state]];
+  }
+
+  NSInteger stateId = 0;
+  self.DFAStartState =
+    [self DFAStateWithNFAStateSet:startSet
+                 andContentString:[WRLR1DFAState contentStrForNFAStates:startSet]];
+  [self.DFARecordSet setValue:self.DFAStartState
+                       forKey:self.DFAStartState.contentStr];
+
+  // work loop
+  NSMutableArray <WRLR1DFAState *> *workList = [NSMutableArray arrayWithObject:self.DFAStartState];
+  while (workList.count) {
+    WRLR1DFAState *todoState = workList.lastObject;
+    todoState.stateId = stateId++;
+    [workList removeLastObject];
+    for (NSString *shiftToken in todoState.transitionDict.allKeys) {
+      NSArray <WRLR1NFAState *> *shiftArray = todoState.transitionDict[shiftToken];
+      NSSet <WRLR1NFAState *> *nfaSet = [self epsilonClosureForNFAContainer:shiftArray];
+      NSString *contentString = [WRLR1DFAState contentStrForNFAStates:nfaSet];
+      WRLR1DFAState *dfaState = self.DFARecordSet[contentString];
+      if (!dfaState) {
+        dfaState = [self DFAStateWithNFAStateSet:nfaSet
+                                andContentString:contentString];
+        [self.DFARecordSet setValue:dfaState
+                             forKey:contentString];
+        [workList addObject:dfaState];
+      }
+      [todoState.transitionDict setValue:dfaState
+                                  forKey:shiftToken];
+    }
+  }
+}
+
+- (NSSet <WRLR1NFAState *> *)epsilonClosureForNFAContainer:(id<NSFastEnumeration>)container {
+  NSMutableSet *set = nil;
+  for (WRLR1NFAState *state in container) {
+    if (set) {
+      [set unionSet:[self epsilonClosureForNFAState:state]];
+    } else {
+      set = [self epsilonClosureForNFAState:state];
+    }
+  }
+  return set;
+}
+
+- (NSMutableSet <WRLR1NFAState *> *)epsilonClosureForNFAState:(WRLR1NFAState *)state {
+  NSMutableSet <WRLR1NFAState *> *set = [NSMutableSet setWithObject:state];
+  NSMutableArray *workList = [NSMutableArray arrayWithObject:state];
+  while (workList.count) {
+    WRLR1NFAState *todoState = workList.lastObject;
+    [workList removeLastObject];
+    for (WRLR1NFATransition *transition in todoState.transitions) {
+      if (transition.consumption == nil) {
+        WRLR1NFAState *nextState = transition.to;
+        if (![set containsObject:nextState]) {
+          [workList addObject:nextState];
+        }
+        [set addObject:nextState];
+      }
+    }
+  }
+  return set;
+}
+
+- (WRLR1DFAState *)DFAStateWithNFAStateSet:(NSSet <WRLR1NFAState *> *)set
+                          andContentString:(NSString *)contentString {
+  WRLR1DFAState *dfaState = [WRLR1DFAState DFAStateWithContentString:contentString];
+  BOOL foundShift = NO;
+  // dispose the action / goto meaning
+  for (WRLR1NFAState *nfaState in set) {
+    WRItemLA1 *item = nfaState.item;
+    if ([item isComplete]) {
+      // indicating a reduce action
+      NSString *reduceToken = item.leftToken;
+      if (foundShift) {
+        NSString *message =
+          [self conflictMessageOnType:WRLR1DFAActionConflictShiftReduce
+                         withDFAState:dfaState
+                           reduction1:self.language.grammars[dfaState.reduceTokenSymbol][dfaState.reduceRuleIndex]
+                           reduction2:nil
+                                shift:dfaState.transitionDict.allKeys.firstObject];
+        NSError *conflict = [NSError errorWithDomain:kWRLR1ParserErrorDomain
+                                                code:WRLR1DFAActionConflictShiftReduce
+                                            userInfo:@{@"content": message}];
+        [self.conflicts addObject:conflict];
+        assert(NO);
+      } else if (dfaState.reduceTokenSymbol &&
+        (![dfaState.reduceTokenSymbol isEqualToString:reduceToken] || dfaState.reduceRuleIndex != item.ruleIndex)) {
+        // error
+        NSString *message =
+          [self conflictMessageOnType:WRLR1DFAActionConflictReduceReduce
+                         withDFAState:dfaState
+                           reduction1:self.language.grammars[reduceToken][item.ruleIndex]
+                           reduction2:self.language.grammars[dfaState.reduceTokenSymbol][dfaState.reduceRuleIndex]
+                                shift:nil];
+        NSError *conflict = [NSError errorWithDomain:kWRLR1ParserErrorDomain
+                                                code:WRLR1DFAActionConflictReduceReduce
+                                            userInfo:@{@"content": message}];
+        [self.conflicts addObject:conflict];
+        assert(NO);
+      } else {
+        // available reduce on look ahead
+        dfaState.reduceTokenSymbol = reduceToken;
+        dfaState.reduceRuleIndex = item.ruleIndex;
+        [dfaState.transitionDict setValue:@(1)
+                                   forKey:item.lookAhead];
+      }
+    } else {
+      foundShift = YES;
+      NSString *shiftToken = item.nextAskingToken;
+      if (dfaState.reduceTokenSymbol) {
+        // error
+        NSString *message =
+          [self conflictMessageOnType:WRLR1DFAActionConflictShiftReduce
+                         withDFAState:dfaState
+                           reduction1:self.language.grammars[dfaState.reduceTokenSymbol][dfaState.reduceRuleIndex]
+                           reduction2:nil
+                                shift:shiftToken];
+        NSError *conflict = [NSError errorWithDomain:kWRLR1ParserErrorDomain
+                                                code:WRLR1DFAActionConflictShiftReduce
+                                            userInfo:@{@"content": message}];
+        [self.conflicts addObject:conflict];
+        assert(NO);
+      } else {
+        // available shift on look ahead
+        // record it for further processing
+        // array is OK, cauz the next item can not be the same
+        NSMutableArray *array = dfaState.transitionDict[shiftToken];
+        if (!array) {
+          array = [NSMutableArray array];
+          [dfaState.transitionDict setValue:array
+                                     forKey:shiftToken];
+        }
+
+        // This is fast, cauz the first transition is always the nonepsilon one
+        WRLR1NFATransition *transitionShift = nil;
+        for (WRLR1NFATransition *transition in nfaState.transitions) {
+          if (transition.consumption) {
+            transitionShift = transition;
+            break;
+          }
+        }
+        assert([transitionShift.consumption isEqualToString:shiftToken]);
+        [array addObject:transitionShift.to];
+      }
+    }
+  }
+  return dfaState;
 }
 
 - (void)printAllDFAStatesAndTransitions {
+  printf("All DFA States and Transitions:\n");
+  for (WRLR1DFAState *dfaState in self.DFARecordSet.allValues) {
+    NSString *stateStr = [WRUtils debugStrWithTabs:2
+                                         forString:dfaState.contentStr];
+    printf("state ID: %ld ", (long) dfaState.stateId);
+    if (dfaState.reduceTokenSymbol == nil) {
+      printf("shift state\n");
+      printf("%s", stateStr.UTF8String);
+      for (NSString *transitionTokenStr in dfaState.transitionDict) {
+        printf("    --\'%s\'--> %ld\n", transitionTokenStr.UTF8String,
+               (long) ((WRLR1DFAState *)dfaState.transitionDict[transitionTokenStr]).stateId);
+      }
+    } else {
+      WRRule *reduceRule = self.language.grammars[dfaState.reduceTokenSymbol][dfaState.reduceRuleIndex];
+      printf("reduce state, using %s\n", reduceRule.description.UTF8String);
+      printf("%s", stateStr.UTF8String);
+    }
+  }
+}
 
+- (NSString *)conflictMessageOnType:(WRLR1DFAActionConflict)type
+                       withDFAState:(WRLR1DFAState *)dfaState
+                         reduction1:(WRRule *)rule1
+                         reduction2:(WRRule *)rule2
+                              shift:(NSString *)shift {
+  switch (type) {
+    case WRLR1DFAActionConflictReduceReduce: {
+      return [NSString stringWithFormat:@"A REDUCE/REDUCE conflict is found in DFA state:\n%@ "
+                                          "reduction1:%@\n"
+                                          "reduction2:%@\n",
+                                        dfaState,
+                                        rule1,
+                                        rule2];
+    }
+    case WRLR1DFAActionConflictShiftReduce: {
+      return [NSString stringWithFormat:@"A SHIFT/REDUCE conflict is found in DFA state:\n%@ "
+                                          "shift:%@\n "
+                                          "reduce:%@\n",
+                                        dfaState,
+                                        shift,
+                                        rule1];
+    }
+    default:return @"";
+  }
 }
 
 @end

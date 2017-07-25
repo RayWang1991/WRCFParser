@@ -480,7 +480,7 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
   _tokenStack = [NSMutableArray array];
   _inputStack = [NSMutableArray arrayWithCapacity:self.scanner.tokens.count * 2];
   [self.scanner.tokens enumerateObjectsWithOptions:NSEnumerationReverse
-                                        usingBlock:^(WRTerminal * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                        usingBlock:^(WRTerminal *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
                                           [self.inputStack addObject:obj];
                                         }];
 

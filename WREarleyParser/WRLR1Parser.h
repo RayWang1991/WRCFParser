@@ -6,6 +6,8 @@
 
 #import "WRParsingBasicLib.h"
 
+extern NSString *const kWRLR1ParserErrorDomain;
+
 @class WRLR1NFAState;
 @class WRLR1NFATransition;
 
@@ -43,11 +45,19 @@
                           andConsumption:(NSString *)consumption;
 @end
 
+typedef NS_ENUM(NSInteger, WRLR1DFAActionConflict) {
+  WRLR1DFAActionConflictShiftReduce,
+  WRLR1DFAActionConflictReduceReduce,
+};
+
 @interface WRLR1DFAState : NSObject
 @property (nonatomic, assign, readwrite) NSInteger stateId;
 @property (nonatomic, strong, readwrite) NSString *contentStr;
 @property (nonatomic, strong, readwrite) NSString *reduceTokenSymbol; // nil for shift
 @property (nonatomic, assign, readwrite) NSInteger reduceRuleIndex;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *transitionDict;
+// the transition dictionary is a union. when state is a shift state, the transition dict records the available shifts
+// when state is a reduction state, it records the available lookAheads.
 
 - (instancetype)initWithContentString:(NSString *)contentString; // use string indicate nfa set
 + (instancetype)DFAStateWithContentString:(NSString *)contentString;
