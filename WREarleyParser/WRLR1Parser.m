@@ -520,7 +520,7 @@ NSString *const kWRLR1ParserErrorDomain = @"erorr.Parser.LR1";
   for (WRLR1DFAState *dfaState in self.DFARecordSet.allValues) {
     NSString *stateStr = [WRUtils debugStrWithTabs:2
                                          forString:dfaState.contentStr];
-    printf("state ID: %ld ", (long) dfaState.stateId);
+    printf("state ID: %ld \n", (long) dfaState.stateId);
     printf("%s", stateStr.UTF8String);
     for (NSString *transitionTokenStr in dfaState.actionDict) {
       if ([dfaState.actionDict[transitionTokenStr] isKindOfClass:[WRLR1DFAState class]]) {
@@ -560,4 +560,107 @@ NSString *const kWRLR1ParserErrorDomain = @"erorr.Parser.LR1";
   }
 }
 
+#pragma mark - run parser
+- (void)startParsing {
+  [self.scanner setNumOfEof:1];
+  [self.scanner reset];
+  [self.scanner scanToEnd];
+
+  _tokenStack = [NSMutableArray array];
+  _inputStack = [NSMutableArray arrayWithCapacity:self.scanner.tokens.count * 2];
+  _errors = [NSMutableArray array];
+  _stateStack = [NSMutableArray arrayWithObject:self.DFAStartState];
+
+  WRLR1DFAState *currentState = nil;
+  WRToken *lookAheadToken = self.scanner.nextToken;
+
+  while (true) {
+    currentState = _stateStack.lastObject;
+    NSDictionary *actionDict = currentState.actionDict;
+
+    id action = actionDict[lookAheadToken.symbol];
+    if (nil == action) {
+      [self.errors addObject:[self errorOnCode:WRLR1DFAParsingErrorUnsuportAction
+                                withInputToken:(WRTerminal *) lookAheadToken
+                                    onDFAState:currentState]];
+      [self printLastError];
+      assert(NO);
+    } else {
+      if ([action isKindOfClass:[WRLR1DFAState class]]) {
+        // shift
+        currentState = (WRLR1DFAState *) action;
+        [self.tokenStack addObject:lookAheadToken];
+        [self.stateStack addObject:currentState];
+        lookAheadToken = self.scanner.nextToken;
+      } else {
+        // reduce
+        NSInteger globalRuleIndex = [action integerValue];
+        WRRule *reducingRule = self.language.grammarsInARow[globalRuleIndex];
+        WRNonterminal *reducedToken = [WRNonterminal tokenWithSymbol:reducingRule.leftToken];
+        NSUInteger length = reducingRule.rightTokens.count;
+        if (length) {
+          NSUInteger stateLength = self.stateStack.count;
+          NSUInteger tokenLength = self.tokenStack.count;
+          assert(stateLength >= length);
+          assert(tokenLength >= length);
+          NSRange range = NSMakeRange(tokenLength - length, length);
+          NSArray <WRToken *> *childrenArray = [self.tokenStack subarrayWithRange:range];
+          [self.tokenStack removeObjectsInRange:range];
+          [self.stateStack removeObjectsInRange:NSMakeRange(stateLength - length, length)];
+          reducedToken.children = childrenArray;
+          reducedToken.ruleIndex = reducingRule.ruleIndex;
+        }
+        [self.tokenStack addObject:reducedToken];
+        // may be reduced to S
+        if ([reducedToken.symbol isEqualToString:self.language.startSymbol] &&
+          [lookAheadToken.symbol isEqualToString:WREndOfFileTokenSymbol] && self.tokenStack.count == 1) {
+          // parse found
+          self.parseTree = reducedToken;
+          break;
+        }
+        // next must be a shift on reducedToken
+        currentState = _stateStack.lastObject;
+        action = currentState.actionDict[reducedToken.symbol];
+        assert([action isKindOfClass:[WRLR1DFAState class]]);
+        currentState = (WRLR1DFAState *) action;
+        [self.stateStack addObject:currentState];
+      }
+    }
+  }
+}
+
+- (void)printLastError {
+  printf("%s", [self.errors.lastObject.userInfo[@"content"] UTF8String]);
+}
+
+- (NSError *)errorOnCode:(WRLR1ParsingError)type
+          withInputToken:(WRTerminal *)inputToken
+              onDFAState:(WRLR1DFAState *)state {
+  NSMutableString *availableTokens = [NSMutableString string];
+  // TODO, use index to present the token
+  for (NSString *str in state.actionDict.allKeys) {
+    if (str.tokenTypeForString == WRTokenTypeTerminal) {
+      [availableTokens appendFormat:@" %@",
+                                    str];
+    }
+  }
+
+  NSString *content = @"";
+  switch (type) {
+    case WRLR1DFAParsingErrorUnsuportAction: {
+      content =
+        [NSString stringWithFormat:@"unsupported terminal on input:%@ at line%ld, column%ld, do you mean:%@ ?\n",
+                                   inputToken.symbol,
+                                   inputToken.contentInfo.line,
+                                   inputToken.contentInfo.column,
+                                   availableTokens];
+      break;
+    }
+    default:break;
+  }
+  NSError *error = [NSError errorWithDomain:kWRLR1ParserErrorDomain
+                                       code:type
+                                   userInfo:@{@"content": content}];
+  return error;
+}
 @end

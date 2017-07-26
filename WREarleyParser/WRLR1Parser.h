@@ -50,6 +50,10 @@ typedef NS_ENUM(NSInteger, WRLR1DFAActionConflict) {
   WRLR1DFAActionConflictReduceReduce,
 };
 
+typedef NS_ENUM(NSInteger, WRLR1ParsingError) {
+  WRLR1DFAParsingErrorUnsuportAction,
+};
+
 @interface WRLR1DFAState : NSObject
 @property (nonatomic, assign, readwrite) NSInteger stateId;
 @property (nonatomic, strong, readwrite) NSString *contentStr;

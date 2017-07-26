@@ -486,7 +486,6 @@ transitionTokenDictForNFAStates:(NSSet<WRLR0NFAState *> *)nfaStates {
 
   _stateStack = [NSMutableArray arrayWithObject:self.DFAStartState];
   WRLR0DFAState *state = nil;
-
   WRToken *currentToken = nil;
   WRToken *nextToken = nil;
 
